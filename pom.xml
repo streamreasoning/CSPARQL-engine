@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>CSPARQL-engine</artifactId>
+	<version>0.9</version>
+	<packaging>pom</packaging>
+	<name>Multi Module CSPARQL Parent Project</name>
+	<description>This is a mult module project called CSparql: handles continuous streaming data</description>
+	<url>http://streamreasoning.org</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<properties>
+		<maven.release.skip>false</maven.release.skip>
+	</properties>
+	<modules>
+		<module>csparql-cep-api</module>
+		<module>csparql-cep-esper</module>
+		<module>csparql-common</module>
+		<module>csparql-core</module>
+		<module>csparql-sparql-api</module>
+		<module>csparql-sparql-jena</module>
+		<module>csparql-sparql-sesame</module>
+		<module>csparql-ui</module>
+	</modules>
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-compiler-plugin</artifactId>
+							<configuration>
+								<source>1.5</source>
+								<target>1.5</target>
+							</configuration>
+						</plugin>
+						<!-- maven gpg plugin -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-gpg-plugin</artifactId>
+							<executions>
+								<execution>
+									<id>sign-artifacts</id>
+									<phase>verify</phase>
+									<goals>
+										<goal>sign</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-source-plugin</artifactId>
+							<version>2.1.2</version>
+							<!-- <executions> <execution> <id>attach-sources</id> <goals> <goal>jar</goal> 
+								</goals> </execution> </executions> -->
+						</plugin>
+						<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-source-plugin</artifactId> 
+							<version>2.1.2</version> <configuration> <outputDirectory>https://oss.sonatype.org/content/repositories/snapshots/</outputDirectory> 
+							<finalName>filename-of-generated-jar-file</finalName> <attach>false</attach> 
+							</configuration> <executions> <execution> <id>attach-javadoc</id> <goals> 
+							<goal>jar</goal> </goals> </execution> </executions> </plugin> -->
+
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-release-plugin</artifactId>
+							<version>2.2.2</version>
+							<configuration>
+								<mavenExecutorId>forked-path</mavenExecutorId>
+								<useReleaseProfile>false</useReleaseProfile>
+								<arguments>-Psonatype-oss-release</arguments>
+							</configuration>
+						</plugin>
+
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>axistools-maven-plugin</artifactId>
+							<version>1.4</version>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.sun.jmx</groupId>
+						<artifactId>jmxri</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.jdmk</groupId>
+						<artifactId>jmxtools</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.jms</groupId>
+						<artifactId>jms</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.5</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>1.7.5</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>3.8.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.release</groupId>
+				<artifactId>maven-release</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.2</version>
+			</dependency>
+			<!-- No error, without this, using this gives 1 error -->
+
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<classifier>javadoc</classifier>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<classifier>sources</classifier>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<!-- AVOID RELEASE REPOSITORY/PLUGINREPOSITORY: in POM <repositories></repositories> 
+		<pluginRepositories></pluginRepositories> -->
+	<!-- to solve " PluginVersionResolutionException"> -->
+
+	<developers>
+		<developer>
+			<name>Davide Barbieri</name>
+			<email>dbarbieri@elet.polimi.it</email>
+			<url />
+			<organization>Politecnico Di Milano - Dipartimento di Elettronica e Informazione</organization>
+			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone />
+			<properties>
+				<picUrl />
+			</properties>
+		</developer>
+		<developer>
+			<name>Emanuele Della Valle</name>
+			<email>emanuele.dellavalle@polimi.it</email>
+			<url>http://emanueledellavalle.org/</url>
+			<organization>Politecnico di Milano - Dipartimento di Elettronica e Informazione</organization>
+			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<roles>
+				<role>Assistant Professor</role>
+				<role>developer</role>
+			</roles>
+			<timezone />
+			<properties>
+				<picUrl />
+			</properties>
+		</developer>
+		<developer>
+			<name>Marco Balduini</name>
+			<email>balduini@elet.polimi.it</email>
+			<organization>Politecnico di Milano - Dipartimento di Elettronica e Informazione</organization>
+			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone />
+			<properties>
+				<picUrl />
+			</properties>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Chan Naseeb</name>
+			<email>chan.naseeb@mail.polimi.it</email>
+			<url />
+			<organization />
+			<organizationUrl />
+			<roles>
+				<role>contributor</role>
+			</roles>
+			<timezone />
+			<properties>
+				<gtalk />
+			</properties>
+		</contributor>
+	</contributors>
+	<groupId>eu.larkc.csparql</groupId>
+</project>

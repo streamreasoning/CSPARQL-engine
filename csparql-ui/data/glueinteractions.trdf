@@ -1,0 +1,241 @@
+
+#  Interaction number 2009-12-11T09%3A59%3A36Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A36Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A36Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A36Z> <http://purl.org/dc/elements/1.1/title> "Consider the Lobster: And Other Essays" "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/funK> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/funK> <http://www.w3.org/2000/01/rdf-schema#label> "funK" "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A36Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A36Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A36Z> <http://rdfs.org/sioc/ns#content> "Consider the Lobster: And Other Essays on " "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A36Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:36Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A34Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A34Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A34Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A34Z> <http://purl.org/dc/elements/1.1/title> "The Turn of the Screw" "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/TomRaisedACain> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/TomRaisedACain> <http://www.w3.org/2000/01/rdf-schema#label> "TomRaisedACain" "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A34Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A34Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A34Z> <http://rdfs.org/sioc/ns#content> "The Turn of the Screw on " "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A34Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A32Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A32Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A32Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A32Z> <http://purl.org/dc/elements/1.1/title> "Lilith's Brood" "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dN> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dN> <http://www.w3.org/2000/01/rdf-schema#label> "dN" "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A32Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A32Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A32Z> <http://rdfs.org/sioc/ns#content> "Lilith's Brood on " "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A32Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A31Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A31Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A31Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A31Z> <http://purl.org/dc/elements/1.1/title> "Kill Bill: Vol. 1" "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/mekalamanohar> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/mekalamanohar> <http://www.w3.org/2000/01/rdf-schema#label> "mekalamanohar" "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A31Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A31Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A31Z> <http://rdfs.org/sioc/ns#content> "Kill Bill: Vol. 1 on " "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A31Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:31Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A27Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A27Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A27Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A27Z> <http://purl.org/dc/elements/1.1/title> "Lego Star Wars: The Complete Saga" "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/2000/01/rdf-schema#label> "dancingjester" "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A27Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A27Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A27Z> <http://rdfs.org/sioc/ns#content> "Lego Star Wars: The Complete Saga on " "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A27Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:27Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A24Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A24Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A24Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A24Z> <http://purl.org/dc/elements/1.1/title> "SSX Tricky" "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/2000/01/rdf-schema#label> "dancingjester" "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A24Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A24Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A24Z> <http://rdfs.org/sioc/ns#content> "SSX Tricky on " "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A24Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:24Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A23Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A23Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A23Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A23Z> <http://purl.org/dc/elements/1.1/title> "SSX 3" "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/2000/01/rdf-schema#label> "dancingjester" "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A23Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A23Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A23Z> <http://rdfs.org/sioc/ns#content> "SSX 3 on " "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A23Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:23Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A14Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A14Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A14Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A14Z> <http://purl.org/dc/elements/1.1/title> "Killzone" "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/2000/01/rdf-schema#label> "dancingjester" "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A14Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A14Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A14Z> <http://rdfs.org/sioc/ns#content> "Killzone on " "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A14Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:14Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A12Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A12Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A12Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A12Z> <http://purl.org/dc/elements/1.1/title> "Welcome to the Dollhouse" "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/rorqualmaru> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/rorqualmaru> <http://www.w3.org/2000/01/rdf-schema#label> "rorqualmaru" "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A12Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A12Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A12Z> <http://rdfs.org/sioc/ns#content> "Welcome to the Dollhouse on " "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A12Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A11Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://purl.org/dc/elements/1.1/title> "Iron Man" "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/mekalamanohar> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/mekalamanohar> <http://www.w3.org/2000/01/rdf-schema#label> "mekalamanohar" "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://rdfs.org/sioc/ns#content> "Iron Man on " "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A59%3A11Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://purl.org/dc/elements/1.1/title> "Infinite Jest" "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/funK> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/funK> <http://www.w3.org/2000/01/rdf-schema#label> "funK" "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://purl.org/dc/terms/created> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://rdfs.org/sioc/ns#content> "Infinite Jest on " "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A59%3A11Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:59:11Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A56Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A56Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A56Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A56Z> <http://purl.org/dc/elements/1.1/title> "Gears of War 2" "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/dancingjester> <http://www.w3.org/2000/01/rdf-schema#label> "dancingjester" "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A56Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A56Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A56Z> <http://rdfs.org/sioc/ns#content> "Gears of War 2 on " "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A56Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:56Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A53Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A53Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A53Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A53Z> <http://purl.org/dc/elements/1.1/title> "Star Wars: Episode VI: Return of the Jedi" "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/mekalamanohar> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/mekalamanohar> <http://www.w3.org/2000/01/rdf-schema#label> "mekalamanohar" "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A53Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A53Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A53Z> <http://rdfs.org/sioc/ns#content> "Star Wars: Episode VI: Return of the Jedi on " "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A53Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:53Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A50Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A50Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A50Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A50Z> <http://purl.org/dc/elements/1.1/title> "Kill Bill: Vol. 1" "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/zdravko100> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/zdravko100> <http://www.w3.org/2000/01/rdf-schema#label> "zdravko100" "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A50Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A50Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A50Z> <http://rdfs.org/sioc/ns#content> "Kill Bill: Vol. 1 on " "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A50Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:50Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A45Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A45Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A45Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A45Z> <http://purl.org/dc/elements/1.1/title> "Bob Roberts" "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/rorqualmaru> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/rorqualmaru> <http://www.w3.org/2000/01/rdf-schema#label> "rorqualmaru" "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A45Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A45Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A45Z> <http://rdfs.org/sioc/ns#content> "Bob Roberts on " "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A45Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:45Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A42Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://purl.org/dc/elements/1.1/title> "Croupier" "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/rorqualmaru> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/rorqualmaru> <http://www.w3.org/2000/01/rdf-schema#label> "rorqualmaru" "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://rdfs.org/sioc/ns#content> "Croupier on " "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A42Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://purl.org/dc/elements/1.1/title> "Shrek 2" "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/mekalamanohar> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/mekalamanohar> <http://www.w3.org/2000/01/rdf-schema#label> "mekalamanohar" "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://rdfs.org/sioc/ns#content> "Shrek 2 on " "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A42Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:42Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A38Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A38Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A38Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A38Z> <http://purl.org/dc/elements/1.1/title> "Mother Night" "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/rorqualmaru> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/rorqualmaru> <http://www.w3.org/2000/01/rdf-schema#label> "rorqualmaru" "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A38Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A38Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A38Z> <http://rdfs.org/sioc/ns#content> "Mother Night on " "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A38Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:38Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A34Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A34Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A34Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A34Z> <http://purl.org/dc/elements/1.1/title> "The Matrix" "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/stormpayne> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/stormpayne> <http://www.w3.org/2000/01/rdf-schema#label> "stormpayne" "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A34Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A34Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A34Z> <http://rdfs.org/sioc/ns#content> "The Matrix on " "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A34Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:34Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+#  Interaction number 2009-12-11T09%3A58%3A32Z
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A32Z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#Post> "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A32Z> <http://rdfs.org/sioc/ns#has_container> <http://www.getglue.com> "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A32Z> <http://purl.org/dc/elements/1.1/title> "WALL-E" "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/zdravko100> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/sioc/ns#User> "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/user/zdravko100> <http://www.w3.org/2000/01/rdf-schema#label> "zdravko100" "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A32Z> <http://rdfs.org/sioc/ns#has_creator> <http://c-sparql.cefriel.it/sdow2009-demo/user/withe> "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A32Z> <http://purl.org/dc/terms/created> "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A32Z> <http://rdfs.org/sioc/ns#content> "WALL-E on " "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/category/> <http://www.w3.org/2000/01/rdf-schema#label> "" "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://c-sparql.cefriel.it/sdow2009-demo/2009-12-11T09%3A58%3A32Z> <http://rdfs.org/sioc/ns#topic> <http://c-sparql.cefriel.it/sdow2009-demo/category/> "2009-12-11T09:58:32Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  

@@ -1,0 +1,177 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>eu.larkc.csparql</groupId>
+		<artifactId>CSPARQL-engine</artifactId>
+		<version>0.9</version>
+	</parent>
+
+	<groupId>csparql-sparql-jena</groupId>
+	<artifactId>csparql-sparql-jena</artifactId>
+	<packaging>jar</packaging>
+
+	<name>csparql-sparql-jena</name>
+
+	<url>http://streamreasoning.org</url>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.bluestemsoftware.open.maven.tparty</groupId>
+			<artifactId>xerces-impl</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.woodstox</groupId>
+			<artifactId>wstx-asl</artifactId>
+			<version>4.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax-api</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-repository-sail</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-sail-memory</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>4.8.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.espertech</groupId>
+			<artifactId>esper</artifactId>
+			<version>4.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlrworks</artifactId>
+			<version>1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-core</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-arq</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-tdb</artifactId>
+			<version>0.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-iri</artifactId>
+			<version>0.9.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<developers>
+		<developer>
+			<name>Davide Barbieri</name>
+			<email>dbarbieri@elet.polimi.it</email>
+			<url />
+			<organization>Politecnico Di Milano - Dipartimento di Elettronica e
+			Informazione</organization>
+			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone />
+			<properties>
+				<picUrl />
+			</properties>
+		</developer>
+		<developer>
+			<name>Emanuele Della Valle</name>
+			<email>emanuele.dellavalle@polimi.it</email>
+			<url>http://emanueledellavalle.org/</url>
+			<organization>Politecnico di Milano - Dipartimento di Elettronica e
+			Informazione</organization>
+			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<roles>
+				<role>Assistant Professor</role>
+				<role>developer</role>
+			</roles>
+			<timezone />
+			<properties>
+				<picUrl />
+			</properties>
+		</developer>
+		<developer>
+			<name>Marco Balduini</name>
+			<email>balduini@elet.polimi.it</email>
+			<organization>Politecnico di Milano - Dipartimento di Elettronica e
+			Informazione</organization>
+			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone />
+			<properties>
+				<picUrl />
+			</properties>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Chan Naseeb</name>
+			<email>chan.naseeb@mail.polimi.it</email>
+			<url />
+			<organization />
+			<organizationUrl />
+			<roles>
+				<role>contributor</role>
+			</roles>
+			<timezone />
+			<properties>
+				<gtalk />
+			</properties>
+		</contributor>
+	</contributors>
+</project>
