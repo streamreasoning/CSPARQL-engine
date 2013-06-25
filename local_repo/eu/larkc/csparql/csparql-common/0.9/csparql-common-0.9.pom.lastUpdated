@@ -1,0 +1,32 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Tue Jun 25 15:45:33 CEST 2013
+file\:..//Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.error=
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-sparql-api/local_repo/.lastUpdated=1372165954178
+file\:${project.parent.basedir}/local_repo/.lastUpdated=1372166313457
+file\:.//Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.error=
+default-file\://${project.parent.basedir}/local_repo/.lastUpdated=1372167895863
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-sparql-jena/local_repo/.lastUpdated=1372165954258
+file\:${project.parent.basedir}/local_repo/.error=
+file\://.//Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.lastUpdated=1372167024630
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-esper/local_repo/.error=
+default-file\://${project.parent.parent.basedir}/local_repo/.lastUpdated=1372167933912
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-sparql-jena/local_repo/.error=
+file\:///Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.error=
+file\:///Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.lastUpdated=1372166797457
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-core/local_repo/.lastUpdated=1372165952684
+http\://repo.maven.apache.org/maven2/.lastUpdated=1372165749702
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.lastUpdated=1372165753684
+http\://repo.maven.apache.org/maven2/.error=
+file\://..//Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.error=
+file\:.//Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.lastUpdated=1372166719501
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-sparql-sesame/local_repo/.lastUpdated=1372165954568
+file\://${project.parent.basedir}/local_repo/.error=Could not transfer artifact eu.larkc.csparql\:csparql-common\:pom\:0.9 from/to csparql-repo (file\://${project.parent.basedir}/local_repo)\: Repository path /local_repo does not exist, and cannot be created.
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.error=
+file\://..//Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.lastUpdated=1372167015169
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-core/local_repo/.error=
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-esper/local_repo/.lastUpdated=1372165952249
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-sparql-api/local_repo/.error=
+file\:..//Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.lastUpdated=1372165748842
+file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-sparql-sesame/local_repo/.error=
+file\://.//Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-cep-api/local_repo/.error=
+file\://${project.parent.parent.basedir}/local_repo/.error=Could not transfer artifact eu.larkc.csparql\:csparql-common\:pom\:0.9 from/to csparql-repo (file\://${project.parent.parent.basedir}/local_repo)\: Repository path /local_repo does not exist, and cannot be created.

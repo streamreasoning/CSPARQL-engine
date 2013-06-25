@@ -29,6 +29,31 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-common</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-sparql-api</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-cep-api</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-cep-esper</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-sparql-jena</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
 			<groupId>com.espertech</groupId>
 			<artifactId>esper</artifactId>
 			<version>4.9.0</version>

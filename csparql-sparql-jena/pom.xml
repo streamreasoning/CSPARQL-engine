@@ -29,6 +29,16 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-common</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-sparql-api</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
 			<groupId>org.bluestemsoftware.open.maven.tparty</groupId>
 			<artifactId>xerces-impl</artifactId>
 			<version>2.9.0</version>

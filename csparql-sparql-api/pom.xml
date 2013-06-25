@@ -29,6 +29,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-common</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
 			<groupId>com.espertech</groupId>
 			<artifactId>esper</artifactId>
 			<version>4.9.0</version>
@@ -58,7 +63,7 @@
 			<artifactId>jena-iri</artifactId>
 			<version>0.9.6</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 		</dependency>

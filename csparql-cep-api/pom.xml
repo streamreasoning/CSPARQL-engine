@@ -6,6 +6,7 @@
 		<groupId>eu.larkc.csparql</groupId>
 		<artifactId>CSPARQL-engine</artifactId>
 		<version>0.9</version>
+		<relativePath></relativePath>
 	</parent>
 
 	<groupId>csparql-cep-api</groupId>
@@ -23,11 +24,12 @@
 		</license>
 	</licenses>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
 	<dependencies>
+		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-common</artifactId>
+			<version>0.9</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -129,4 +131,5 @@
 			</properties>
 		</contributor>
 	</contributors>
+
 </project>
