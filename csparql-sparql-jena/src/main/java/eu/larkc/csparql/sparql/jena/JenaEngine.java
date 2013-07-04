@@ -11,6 +11,8 @@
 
 package eu.larkc.csparql.sparql.jena;
 
+import java.io.ByteArrayOutputStream;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +24,7 @@ import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -159,7 +162,11 @@ public class JenaEngine implements SparqlEngine {
 		{
 			final ResultSet resultSet = qexec.execSelect();
 			table = new RDFTable(resultSet.getResultVars());
-
+			
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			ResultSetFormatter.outputAsJSON(bos, resultSet);
+			table.setJsonSerialization(bos.toString());
+			
 			for (; resultSet.hasNext();) {
 				final RDFTuple tuple = new RDFTuple();
 				QuerySolution soln = resultSet.nextSolution();
@@ -191,6 +198,10 @@ public class JenaEngine implements SparqlEngine {
 				m = qexec.execConstruct();
 
 			table = new RDFTable("Subject", "Predicate", "Object", "Timestamp");
+			
+			StringWriter w = new StringWriter();
+			m.write(w,"RDF/JSON");
+			table.setJsonSerialization(w.toString());
 
 			StmtIterator it = m.listStatements();
 			while (it.hasNext())

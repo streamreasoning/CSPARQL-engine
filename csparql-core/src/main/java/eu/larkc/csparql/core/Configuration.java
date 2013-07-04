@@ -26,13 +26,13 @@ public class Configuration {
 
    // Singleton pattern implementation
    private static Configuration instance;
-
+   
    private final String cepEngineName = "eu.larkc.csparql.cep.esper.EsperEngine";
-   private final String reasonerName = "eu.larkc.csparql.engine.TransparentReasoner";
+   private final String reasonerName = "eu.larkc.csparql.core.engine.TransparentReasoner";
    private final String sparqlEngineName = "eu.larkc.csparql.sparql.jena.JenaEngine";
    private final String cepQueryName = "eu.larkc.csparql.cep.esper.EsperQuery";
    private final String sparqlQueryName = "eu.larkc.csparql.sparql.sesame.SesameQuery";
-   private final String translatorName = "eu.larkc.csparql.parser.CSparqlTranslator";
+   private final String translatorName = "eu.larkc.csparql.core.parser.CSparqlTranslator";
 
    public static Configuration getCurrentConfiguration() {
       if (Configuration.instance == null) {

@@ -57,7 +57,7 @@ public class CsparqlEngineImpl implements GenericObserver<List<RdfQuadruple>>, C
 
 	public void initialize() {
 
-		this.configuration = new Configuration();
+		this.configuration = Configuration.getCurrentConfiguration();
 		this.queries = new ArrayList<CSparqlQuery>();
 		this.streams = new HashMap<String, RdfStream>();
 		this.snapshots = new HashMap<CSparqlQuery, RdfSnapshot>();
@@ -73,7 +73,7 @@ public class CsparqlEngineImpl implements GenericObserver<List<RdfQuadruple>>, C
 	}
 	
 	public void initialize(int queueDimension) {
-		this.configuration = new Configuration();
+		this.configuration = Configuration.getCurrentConfiguration();
 		this.queries = new ArrayList<CSparqlQuery>();
 		this.streams = new HashMap<String, RdfStream>();
 		this.snapshots = new HashMap<CSparqlQuery, RdfSnapshot>();
@@ -88,7 +88,7 @@ public class CsparqlEngineImpl implements GenericObserver<List<RdfQuadruple>>, C
 	}
 
 	public void initialize(boolean performTimestampFunction) {
-		this.configuration = new Configuration();
+		this.configuration = Configuration.getCurrentConfiguration();
 		this.queries = new ArrayList<CSparqlQuery>();
 		this.streams = new HashMap<String, RdfStream>();
 		this.snapshots = new HashMap<CSparqlQuery, RdfSnapshot>();
@@ -103,7 +103,7 @@ public class CsparqlEngineImpl implements GenericObserver<List<RdfQuadruple>>, C
 	}
 
 	public void initialize(int queueDimension, boolean performTimestampFunction) {
-		this.configuration = new Configuration();
+		this.configuration = Configuration.getCurrentConfiguration();
 		this.queries = new ArrayList<CSparqlQuery>();
 		this.streams = new HashMap<String, RdfStream>();
 		this.snapshots = new HashMap<CSparqlQuery, RdfSnapshot>();

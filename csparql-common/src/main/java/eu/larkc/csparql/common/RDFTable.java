@@ -19,6 +19,15 @@ public class RDFTable implements Collection<RDFTuple> {
 
 	private final List<String> names = new ArrayList<String>();
 	private final List<RDFTuple> tuples = new ArrayList<RDFTuple>();
+	private String jsonSerialization = new String();
+	
+	public String getJsonSerialization() {
+		return jsonSerialization;
+	}
+
+	public void setJsonSerialization(String jsonSerialization) {
+		this.jsonSerialization = jsonSerialization;
+	}
 
 	public boolean isGraph() {
 		// TODO: fix this fake implementation

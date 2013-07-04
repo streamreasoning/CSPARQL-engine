@@ -9,7 +9,16 @@
 	<name>Multi Module CSPARQL Parent Project</name>
 	<description>This is a mult module project called CSparql: handles continuous streaming data</description>
 	<url>http://streamreasoning.org</url>
-
+	
+	<repositories>
+		<repository>
+			<id>csparql-engine</id>
+			<name>csparql engine repository</name>
+			<url>file://${project.basedir}/csparql_local_repository</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -104,6 +113,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.4</version>
+			</dependency>
+			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>1.2.17</version>
@@ -136,11 +150,6 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>1.7.5</version>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>

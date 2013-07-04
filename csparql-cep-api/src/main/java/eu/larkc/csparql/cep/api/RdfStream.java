@@ -14,33 +14,33 @@ import eu.larkc.csparql.common.streams.format.GenericObservable;
 
 public class RdfStream extends GenericObservable<RdfQuadruple> {
 
-   private long lastUpdated = 0;
-	
-   private String iri = "";
+	private long lastUpdated = 0;
 
-   public String getIRI() {
-      return this.iri;
-   }
+	private String iri = "";
 
-   public String uniqueName() {
-	  long hashCode = this.iri.hashCode();
-	  hashCode = hashCode + Integer.MAX_VALUE + 1000;
-      return "STREAM" + String.valueOf(hashCode);
-   }
+	public String getIRI() {
+		return this.iri;
+	}
 
-   public RdfStream(final String iri) {
-      this.iri = iri;
-   }
+	public String uniqueName() {
+		long hashCode = this.iri.hashCode();
+		hashCode = hashCode + Integer.MAX_VALUE + 1000;
+		return "STREAM" + String.valueOf(hashCode);
+	}
 
-   public void put(final RdfQuadruple q) {
-	   
-	  lastUpdated = System.nanoTime();
-      this.notifyObservers(q);
-   }
+	public RdfStream(final String iri) {
+		this.iri = iri;
+	}
 
-private long getLastUpdated() {
-	return lastUpdated;
-}
+	public void put(final RdfQuadruple q) {
+
+		lastUpdated = System.nanoTime();
+		this.notifyObservers(q);
+	}
+
+	private long getLastUpdated() {
+		return lastUpdated;
+	}
 
 }
 
