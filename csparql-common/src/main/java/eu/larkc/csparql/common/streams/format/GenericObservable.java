@@ -22,6 +22,12 @@ public class GenericObservable<T> {
          this.observers.add(o);
       }
    }
+   
+   public void removeObserver(final GenericObserver<T> o) {
+	      if (this.observers.contains(o)) {
+	         this.observers.remove(o);
+	      }
+	   }
 
    public void notifyObservers(final T quads) {
 
