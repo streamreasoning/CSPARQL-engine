@@ -3,22 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>eu.larkc.csparql</groupId>
 	<artifactId>CSPARQL-engine</artifactId>
 	<version>0.9</version>
 	<packaging>pom</packaging>
 	<name>Multi Module CSPARQL Parent Project</name>
 	<description>This is a mult module project called CSparql: handles continuous streaming data</description>
 	<url>http://streamreasoning.org</url>
-	
-	<repositories>
-		<repository>
-			<id>csparql-engine</id>
-			<name>csparql engine repository</name>
-			<url>file://${project.basedir}/csparql_local_repository</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
-	
+
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -31,15 +23,16 @@
 		<maven.release.skip>false</maven.release.skip>
 	</properties>
 	<modules>
+		<module>csparql-common</module>
+		<module>csparql-ui</module>
 		<module>csparql-cep-api</module>
 		<module>csparql-cep-esper</module>
-		<module>csparql-common</module>
-		<module>csparql-core</module>
 		<module>csparql-sparql-api</module>
 		<module>csparql-sparql-jena</module>
 		<module>csparql-sparql-sesame</module>
-		<module>csparql-ui</module>
+		<module>csparql-core</module>
 	</modules>
+
 	<profiles>
 		<profile>
 			<id>release-sign-artifacts</id>
@@ -112,45 +105,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-				<exclusions>
-					<exclusion>
-						<groupId>com.sun.jmx</groupId>
-						<artifactId>jmxri</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.sun.jdmk</groupId>
-						<artifactId>jmxtools</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>javax.jms</groupId>
-						<artifactId>jms</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>1.1.3</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.7.5</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jcl-over-slf4j</artifactId>
-				<version>1.7.5</version>
-			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -229,7 +183,7 @@
 		</developer>
 		<developer>
 			<name>Marco Balduini</name>
-			<email>balduini@elet.polimi.it</email>
+			<email>marco.balduini@polimi.it</email>
 			<organization>Politecnico di Milano - Dipartimento di Elettronica e Informazione</organization>
 			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
 			<roles>
@@ -257,5 +211,4 @@
 			</properties>
 		</contributor>
 	</contributors>
-	<groupId>eu.larkc.csparql</groupId>
 </project>

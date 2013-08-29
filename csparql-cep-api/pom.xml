@@ -1,22 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
+	<parent>
+		<groupId>eu.larkc.csparql</groupId>
+		<artifactId>CSPARQL-engine</artifactId>
+		<version>0.9</version>
+	</parent>
 	<groupId>csparql-cep-api</groupId>
 	<artifactId>csparql-cep-api</artifactId>
-	<version>0.9</version>
 	<packaging>jar</packaging>
 
 	<name>csparql-cep-api</name>
 
 	<url>http://streamreasoning.org</url>
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
 
 	<dependencies>
 
@@ -62,89 +58,16 @@
 		</dependency>
 	</dependencies>
 
-	<developers>
-		<developer>
-			<name>Davide Barbieri</name>
-			<email>dbarbieri@elet.polimi.it</email>
-			<url />
-			<organization>Politecnico Di Milano - Dipartimento di Elettronica e
-			Informazione</organization>
-			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone />
-			<properties>
-				<picUrl />
-			</properties>
-		</developer>
-		<developer>
-			<name>Emanuele Della Valle</name>
-			<email>emanuele.dellavalle@polimi.it</email>
-			<url>http://emanueledellavalle.org/</url>
-			<organization>Politecnico di Milano - Dipartimento di Elettronica e
-			Informazione</organization>
-			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
-			<roles>
-				<role>Assistant Professor</role>
-				<role>developer</role>
-			</roles>
-			<timezone />
-			<properties>
-				<picUrl />
-			</properties>
-		</developer>
-		<developer>
-			<name>Marco Balduini</name>
-			<email>balduini@elet.polimi.it</email>
-			<organization>Politecnico di Milano - Dipartimento di Elettronica e
-			Informazione</organization>
-			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone />
-			<properties>
-				<picUrl />
-			</properties>
-		</developer>
-	</developers>
-	<contributors>
-		<contributor>
-			<name>Chan Naseeb</name>
-			<email>chan.naseeb@mail.polimi.it</email>
-			<url />
-			<organization />
-			<organizationUrl />
-			<roles>
-				<role>contributor</role>
-			</roles>
-			<timezone />
-			<properties>
-				<gtalk />
-			</properties>
-		</contributor>
-	</contributors>
-
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
 				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
-				<executions>
-					<execution>
-						<id>build-package</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
