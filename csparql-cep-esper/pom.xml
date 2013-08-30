@@ -6,7 +6,6 @@
 		<artifactId>CSPARQL-engine</artifactId>
 		<version>0.9</version>
 	</parent>
-	<groupId>csparql-cep-esper</groupId>
 	<artifactId>csparql-cep-esper</artifactId>
 	<packaging>jar</packaging>
 

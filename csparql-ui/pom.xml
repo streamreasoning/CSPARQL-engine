@@ -7,7 +7,6 @@
 		<artifactId>CSPARQL-engine</artifactId>
 		<version>0.9</version>
 	</parent>
-	<groupId>csparql-ui</groupId>
 	<artifactId>csparql-ui</artifactId>
 	<packaging>jar</packaging>
 
@@ -20,6 +19,17 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-cep-api</artifactId>
+			<version>0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.larkc.csparql</groupId>
+			<artifactId>csparql-core</artifactId>
+			<version>0.9</version>
+		</dependency>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>

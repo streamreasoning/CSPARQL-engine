@@ -24,84 +24,14 @@
 	</properties>
 	<modules>
 		<module>csparql-common</module>
-		<module>csparql-ui</module>
 		<module>csparql-cep-api</module>
 		<module>csparql-cep-esper</module>
 		<module>csparql-sparql-api</module>
 		<module>csparql-sparql-jena</module>
 		<module>csparql-sparql-sesame</module>
 		<module>csparql-core</module>
+		<module>csparql-ui</module>
 	</modules>
-
-	<profiles>
-		<profile>
-			<id>release-sign-artifacts</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-compiler-plugin</artifactId>
-							<configuration>
-								<source>1.5</source>
-								<target>1.5</target>
-							</configuration>
-						</plugin>
-						<!-- maven gpg plugin -->
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-gpg-plugin</artifactId>
-							<executions>
-								<execution>
-									<id>sign-artifacts</id>
-									<phase>verify</phase>
-									<goals>
-										<goal>sign</goal>
-									</goals>
-								</execution>
-							</executions>
-						</plugin>
-
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-source-plugin</artifactId>
-							<version>2.1.2</version>
-							<!-- <executions> <execution> <id>attach-sources</id> <goals> <goal>jar</goal> 
-								</goals> </execution> </executions> -->
-						</plugin>
-						<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-source-plugin</artifactId> 
-							<version>2.1.2</version> <configuration> <outputDirectory>https://oss.sonatype.org/content/repositories/snapshots/</outputDirectory> 
-							<finalName>filename-of-generated-jar-file</finalName> <attach>false</attach> 
-							</configuration> <executions> <execution> <id>attach-javadoc</id> <goals> 
-							<goal>jar</goal> </goals> </execution> </executions> </plugin> -->
-
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-release-plugin</artifactId>
-							<version>2.2.2</version>
-							<configuration>
-								<mavenExecutorId>forked-path</mavenExecutorId>
-								<useReleaseProfile>false</useReleaseProfile>
-								<arguments>-Psonatype-oss-release</arguments>
-							</configuration>
-						</plugin>
-
-						<plugin>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>axistools-maven-plugin</artifactId>
-							<version>1.4</version>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-	</profiles>
 
 	<dependencyManagement>
 		<dependencies>

@@ -6,14 +6,13 @@
 		<artifactId>CSPARQL-engine</artifactId>
 		<version>0.9</version>
 	</parent>
-	<groupId>csparql-sparql-api</groupId>
 	<artifactId>csparql-sparql-api</artifactId>
 	<packaging>jar</packaging>
 
 	<name>csparql-sparql-api</name>
 
 	<url>http://streamreasoning.org</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -24,7 +23,7 @@
 			<artifactId>csparql-common</artifactId>
 			<version>0.9</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>

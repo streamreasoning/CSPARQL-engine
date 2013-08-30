@@ -6,7 +6,6 @@
 		<artifactId>CSPARQL-engine</artifactId>
 		<version>0.9</version>
 	</parent>
-	<groupId>csparql-sparql-sesame</groupId>
 	<artifactId>csparql-sparql-sesame</artifactId>
 	<packaging>jar</packaging>
 
@@ -29,7 +28,7 @@
 			<artifactId>csparql-sparql-api</artifactId>
 			<version>0.9</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.openrdf.sesame</groupId>
 			<artifactId>sesame-repository-sail</artifactId>
@@ -78,6 +77,7 @@
 
 	<build>
 		<plugins>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

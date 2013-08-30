@@ -1,8 +1,0 @@
-#NOTE: This is an internal implementation file, its format can be changed without prior notice.
-#Tue Jun 25 15:47:07 CEST 2013
-file\://${project.parent.parent.basedir}/local_repo/.error=Could not transfer artifact eu.larkc.csparql\:csparql-cep-esper\:pom\:0.9 from/to csparql-repo (file\://${project.parent.parent.basedir}/local_repo)\: Repository path /local_repo does not exist, and cannot be created.
-http\://repo.maven.apache.org/maven2/.lastUpdated=1372165953266
-file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-core/local_repo/.error=
-file\:/Users/baldo/Documents/Work/git/CSPARQL-engine/csparql-core/local_repo/.lastUpdated=1372165952990
-default-file\://${project.parent.parent.basedir}/local_repo/.lastUpdated=1372168027154
-http\://repo.maven.apache.org/maven2/.error=
