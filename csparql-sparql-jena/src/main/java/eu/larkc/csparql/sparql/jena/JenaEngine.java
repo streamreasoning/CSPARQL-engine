@@ -24,7 +24,9 @@ import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFactory;
 import com.hp.hpl.jena.query.ResultSetFormatter;
+import com.hp.hpl.jena.query.ResultSetRewindable;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -60,7 +62,7 @@ public class JenaEngine implements SparqlEngine {
 	public void setPerformTimestampFunctionVariable(boolean value){
 		performTimestampFunction = value;
 	}
-	
+
 	public String getEngineType(){
 		return "jena";
 	}
@@ -71,14 +73,14 @@ public class JenaEngine implements SparqlEngine {
 		timestamp.timestamps = timestamps;
 	}
 
-	
+
 	public void addStatement(final String subject, final String predicate, final String object) {
 
 		this.addStatement(subject, predicate, object, 0);
 
 	}
 
-	
+
 	public void addStatement(final String subject, final String predicate, final String object, final long timestamp) {
 
 		final Statement s;
@@ -93,6 +95,7 @@ public class JenaEngine implements SparqlEngine {
 			s = new StatementImpl(new ResourceImpl(subject), new PropertyImpl(predicate), lObject); 
 
 		} else {
+
 			s = new StatementImpl(new ResourceImpl(subject), new PropertyImpl(predicate), new ResourceImpl(object));    	 
 		}
 
@@ -117,20 +120,20 @@ public class JenaEngine implements SparqlEngine {
 
 
 
-	
+
 	public void clean() {
 		// TODO implement SparqlEngine.clean
 		this.model.remove(this.model);
 		timestamps.clear();
 	}
 
-	
+
 	public void destroy() {
 		this.model.close();
 		timestamps.clear();
 	}
 
-	
+
 	public RDFTable evaluateQuery(final SparqlQuery query) {
 
 		// remove ambiguous resources from the timestamps hash map
@@ -160,20 +163,26 @@ public class JenaEngine implements SparqlEngine {
 
 		if (q.isSelectType())
 		{
+
 			final ResultSet resultSet = qexec.execSelect();
+
 			table = new RDFTable(resultSet.getResultVars());
-			
+
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			ResultSetFormatter.outputAsJSON(bos, resultSet);
+
+			ResultSetRewindable tempResultSet = ResultSetFactory.makeRewindable(resultSet);
+
+			ResultSetFormatter.outputAsJSON(bos, tempResultSet);
 			table.setJsonSerialization(bos.toString());
-			
-			for (; resultSet.hasNext();) {
+
+			tempResultSet.reset();
+
+			for (; tempResultSet.hasNext();) {
 				final RDFTuple tuple = new RDFTuple();
-				QuerySolution soln = resultSet.nextSolution();
+				QuerySolution soln = tempResultSet.nextSolution();
 
 				for (String s : table.getNames()) {
 					RDFNode n = soln.get(s);
-
 					if (n == null)
 						tuple.addFields("");
 					else
@@ -198,7 +207,7 @@ public class JenaEngine implements SparqlEngine {
 				m = qexec.execConstruct();
 
 			table = new RDFTable("Subject", "Predicate", "Object", "Timestamp");
-			
+
 			StringWriter w = new StringWriter();
 			m.write(w,"RDF/JSON");
 			table.setJsonSerialization(w.toString());
@@ -213,7 +222,7 @@ public class JenaEngine implements SparqlEngine {
 			}
 		}
 
-//		System.out.println("Query Result: " + System.currentTimeMillis());
+		//		System.out.println("Query Result: " + System.currentTimeMillis());
 
 		return table;
 	}
