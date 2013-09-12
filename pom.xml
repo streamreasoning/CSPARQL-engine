@@ -31,6 +31,7 @@
 		<module>csparql-sparql-sesame</module>
 		<module>csparql-core</module>
 		<module>csparql-ui</module>
+		<module>CSPARQL-ReadyToGoPack</module>
 	</modules>
 
 	<dependencyManagement>
