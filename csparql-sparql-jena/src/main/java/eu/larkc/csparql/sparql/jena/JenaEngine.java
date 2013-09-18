@@ -40,6 +40,7 @@ import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
 import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
 import com.hp.hpl.jena.sparql.function.FunctionRegistry;
+import com.hp.hpl.jena.tdb.solver.SolverLib;
 
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
@@ -143,16 +144,40 @@ public class JenaEngine implements SparqlEngine {
 		// clears the temporary list of ambiguous resources
 		//		ambiguousResources.clear();
 
+
 		final Query q = QueryFactory.create(query.getQueryCommand(), Syntax.syntaxARQ);
 
 		for(String s: q.getGraphURIs())
 		{
-			if (!graphs.containsKey(s))
-			{
-				Model m = ModelFactory.createDefaultModel();
-				m.read(s);
-				graphs.put(s, m);
-			}
+			//			if (!graphs.containsKey(s))
+			//			{
+			//				Model m = ModelFactory.createDefaultModel();
+			//				m.read(s);
+			//				graphs.put(s, m);
+			//			}
+
+			//			m.read(s);
+			//			graphs.put(s, m);
+
+			//			Model m = ModelFactory.createDefaultModel();
+			//			String q2Str = "CONSTRUCT {?s ?p ?o} FROM <" + s + "> WHERE {?s ?p ?o}";
+			//			Query q2 = QueryFactory.create(q2Str, Syntax.syntaxSPARQL_11);
+			//			QueryExecution qexec2 = QueryExecutionFactory.sparqlService("http://localhost:3030/ds/query", q2);
+			//			m.add(qexec2.execConstruct());
+			//			while(rs.hasNext()){
+			//				QuerySolution qs = rs.next();
+			//				StatementImpl sImpl = null;
+			//				if(qs.get("o").isResource())
+			//					sImpl = new StatementImpl(new ResourceImpl(qs.get("s").toString()), new PropertyImpl(qs.get("p").toString()), new ResourceImpl(qs.get("o").toString()));
+			//				else if(qs.get("o").isLiteral())
+			//					sImpl = new StatementImpl(new ResourceImpl(qs.get("s").toString()), new PropertyImpl(qs.get("p").toString()), m.createTypedLiteral(qs.getLiteral("o").getLexicalForm(), qs.getLiteral("o").getDatatype()));
+			//				m.add(sImpl);
+			//			}
+			//			m.read(s);
+
+			Model m = ModelFactory.createDefaultModel();
+			m.read(s);
+			graphs.put(s, m);
 
 			this.model.add(graphs.get(s));
 		}
