@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>eu.larkc.csparql</groupId>
 		<artifactId>CSPARQL-engine</artifactId>
-		<version>0.9</version>
+		<version>0.9.1</version>
 	</parent>
 	<artifactId>csparql-core</artifactId>
 	<packaging>jar</packaging>
@@ -21,32 +21,32 @@
 		<dependency>
 			<groupId>eu.larkc.csparql</groupId>
 			<artifactId>csparql-common</artifactId>
-			<version>0.9</version>
+			<version>0.9.1</version>
 		</dependency>
 		<dependency>
 			<groupId>eu.larkc.csparql</groupId>
 			<artifactId>csparql-sparql-api</artifactId>
-			<version>0.9</version>
+			<version>0.9.1</version>
 		</dependency>
 		<dependency>
 			<groupId>eu.larkc.csparql</groupId>
 			<artifactId>csparql-cep-api</artifactId>
-			<version>0.9</version>
+			<version>0.9.1</version>
 		</dependency>
 		<dependency>
 			<groupId>eu.larkc.csparql</groupId>
 			<artifactId>csparql-cep-esper</artifactId>
-			<version>0.9</version>
+			<version>0.9.1</version>
 		</dependency>
 		<dependency>
 			<groupId>eu.larkc.csparql</groupId>
 			<artifactId>csparql-sparql-jena</artifactId>
-			<version>0.9</version>
+			<version>0.9.1</version>
 		</dependency>
 		<dependency>
 			<groupId>eu.larkc.csparql</groupId>
 			<artifactId>csparql-sparql-sesame</artifactId>
-			<version>0.9</version>
+			<version>0.9.1</version>
 		</dependency>
 
 

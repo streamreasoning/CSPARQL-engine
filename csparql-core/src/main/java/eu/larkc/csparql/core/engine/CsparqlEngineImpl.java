@@ -130,6 +130,22 @@ public class CsparqlEngineImpl implements GenericObserver<List<RdfQuadruple>>, C
 			ee.setUpInjecter(queueDimension);
 		}
 	}
+	
+	@Override
+	public void activateInference() {
+		sparqlEngine.activateInference();		
+	}
+	
+	@Override
+	public void setInferenceRulesFilePath(String path){
+		sparqlEngine.setInferenceRulesFilePath(path);
+	}
+	
+	@Override
+	public void execUpdateQueryOverDatasource(String queryBody){
+		JenaEngine je = (JenaEngine) sparqlEngine;
+		je.execUpdateQueryOverDatasource(queryBody);
+	}
 
 	private CSparqlQuery getQueryByID(final String id) {
 		for (final CSparqlQuery q : this.queries) {

@@ -26,6 +26,12 @@ public interface SparqlEngine {
 
 	void clean();
 	
+	void execUpdateQueryOverDatasource(String queryBody);
+	
 	String getEngineType();
+	
+	void activateInference();
+	
+	void setInferenceRulesFilePath(String path);
 
 }

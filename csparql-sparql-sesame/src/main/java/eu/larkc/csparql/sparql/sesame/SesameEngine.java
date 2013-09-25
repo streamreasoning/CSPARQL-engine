@@ -252,4 +252,20 @@ public class SesameEngine implements SparqlEngine {
 	public String getEngineType() {
 		return "sesame";
 	}
+
+	@Override
+	public void execUpdateQueryOverDatasource(String queryBody) {
+		
+	}
+
+	@Override
+	public void activateInference() {
+		
+	}
+
+	@Override
+	public void setInferenceRulesFilePath(String path) {
+		// TODO Auto-generated method stub
+		
+	}
 }

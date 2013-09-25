@@ -38,7 +38,7 @@ public class Static_data_management {
 		
 //		String query = "REGISTER QUERY test AS " +
 //				"PREFIX ex:<http://streamreasoning.org#> " +
-//				"SELECT ?s ?p ?o " +
+//				"SELECT ?s ?p ?o  " +
 //				"FROM STREAM <http://myexample.org/stream> [RANGE 5s STEP 5s] "	+ 
 //				"WHERE { " +
 //				"?s ?p ?o . " +
@@ -58,6 +58,15 @@ public class Static_data_management {
 		}
 
 		new Thread((Runnable) stream).start();
+		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		String updateQuery = "PREFIX sr:<http://streamreasoning.org#> INSERT DATA { GRAPH <http://127.0.0.1/~baldo/StaticKnowledgeTest.rdf> { sr:r3  sr:contiguous  sr:r4 } }";
+		engine.execUpdateQueryOverDatasource(updateQuery);
 		
 //		String query = "SELECT ?s ?p ?o WHERE { ?s ?p ?o }";
 //		

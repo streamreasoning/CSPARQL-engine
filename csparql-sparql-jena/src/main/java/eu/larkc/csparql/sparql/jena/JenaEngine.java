@@ -13,8 +13,13 @@ package eu.larkc.csparql.sparql.jena;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.hp.hpl.jena.datatypes.RDFDatatype;
 import com.hp.hpl.jena.datatypes.TypeMapper;
@@ -28,6 +33,7 @@ import com.hp.hpl.jena.query.ResultSetFactory;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.query.ResultSetRewindable;
 import com.hp.hpl.jena.query.Syntax;
+import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -39,16 +45,26 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
 import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
+import com.hp.hpl.jena.reasoner.Reasoner;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
 import com.hp.hpl.jena.sparql.function.FunctionRegistry;
-import com.hp.hpl.jena.tdb.solver.SolverLib;
+import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.api.SparqlQuery;
+import eu.larkc.csparql.sparql.jena.data_source.JenaDatasource;
 import eu.larkc.csparql.sparql.jena.ext.timestamp;
 
 public class JenaEngine implements SparqlEngine {
+
+	private JenaDatasource jds = new JenaDatasource();
+
+	private Map<String, Reasoner> reasonerMap = new HashMap<String, Reasoner>();
+
+	private boolean activateInference = false;
+	private String inferenceRulesFilePath = null;
 
 	private Model model = null;
 
@@ -57,6 +73,8 @@ public class JenaEngine implements SparqlEngine {
 	Map<Statement,Long> timestamps = new HashMap<Statement,Long>();
 
 	private boolean performTimestampFunction = false;
+
+	private Logger logger = LoggerFactory.getLogger(JenaEngine.class.getName());
 
 	//	List<Statement> ambiguousResources = new LinkedList<Statement>();
 
@@ -80,8 +98,7 @@ public class JenaEngine implements SparqlEngine {
 		this.addStatement(subject, predicate, object, 0);
 
 	}
-
-
+	
 	public void addStatement(final String subject, final String predicate, final String object, final long timestamp) {
 
 		final Statement s;
@@ -147,42 +164,123 @@ public class JenaEngine implements SparqlEngine {
 
 		final Query q = QueryFactory.create(query.getQueryCommand(), Syntax.syntaxARQ);
 
-		for(String s: q.getGraphURIs())
-		{
-			//			if (!graphs.containsKey(s))
-			//			{
-			//				Model m = ModelFactory.createDefaultModel();
-			//				m.read(s);
-			//				graphs.put(s, m);
-			//			}
+		//		long actualTs = System.currentTimeMillis();
+		//
+		//change URI in something better
+		//		jds.putNamedModel("http://streamreasoning.org/" + query.getId() + "_" + actualTs, modelToTupleList(model));
+		//		q.addNamedGraphURI("http://streamreasoning.org/" + query.getId() + "_" + actualTs);
 
-			//			m.read(s);
-			//			graphs.put(s, m);
+		for(String s: q.getGraphURIs()){
+			if(!jds.containsNamedModel(s)){
+				Model m = ModelFactory.createDefaultModel();
+				m.read(s);
+				jds.putNamedModel(s, modelToTupleList(m));
+				this.model.add(m);
+			} else {
+				List<RDFTuple> list = jds.getNamedModel(s);
+				for(RDFTuple t : list)
+					addStatement(t.get(0), t.get(1), t.get(2));
 
-			//			Model m = ModelFactory.createDefaultModel();
-			//			String q2Str = "CONSTRUCT {?s ?p ?o} FROM <" + s + "> WHERE {?s ?p ?o}";
-			//			Query q2 = QueryFactory.create(q2Str, Syntax.syntaxSPARQL_11);
-			//			QueryExecution qexec2 = QueryExecutionFactory.sparqlService("http://localhost:3030/ds/query", q2);
-			//			m.add(qexec2.execConstruct());
-			//			while(rs.hasNext()){
-			//				QuerySolution qs = rs.next();
-			//				StatementImpl sImpl = null;
-			//				if(qs.get("o").isResource())
-			//					sImpl = new StatementImpl(new ResourceImpl(qs.get("s").toString()), new PropertyImpl(qs.get("p").toString()), new ResourceImpl(qs.get("o").toString()));
-			//				else if(qs.get("o").isLiteral())
-			//					sImpl = new StatementImpl(new ResourceImpl(qs.get("s").toString()), new PropertyImpl(qs.get("p").toString()), m.createTypedLiteral(qs.getLiteral("o").getLexicalForm(), qs.getLiteral("o").getDatatype()));
-			//				m.add(sImpl);
-			//			}
-			//			m.read(s);
+			}
 
-			Model m = ModelFactory.createDefaultModel();
-			m.read(s);
-			graphs.put(s, m);
 
-			this.model.add(graphs.get(s));
 		}
 
-		final QueryExecution qexec = QueryExecutionFactory.create(q, this.model);
+
+		//		for(String s: q.getGraphURIs())
+		//		{
+		//			//			if (!graphs.containsKey(s))
+		//			//			{
+		//			//				Model m = ModelFactory.createDefaultModel();
+		//			//				m.read(s);
+		//			//				graphs.put(s, m);
+		//			//			}
+		//
+		//			//			m.read(s);
+		//			//			graphs.put(s, m);
+		//
+		//			//			Model m = ModelFactory.createDefaultModel();
+		//			//			String q2Str = "CONSTRUCT {?s ?p ?o} FROM <" + s + "> WHERE {?s ?p ?o}";
+		//			//			Query q2 = QueryFactory.create(q2Str, Syntax.syntaxSPARQL_11);
+		//			//			QueryExecution qexec2 = QueryExecutionFactory.sparqlService("http://localhost:3030/ds/query", q2);
+		//			//			m.add(qexec2.execConstruct());
+		//			//			while(rs.hasNext()){
+		//			//				QuerySolution qs = rs.next();
+		//			//				StatementImpl sImpl = null;
+		//			//				if(qs.get("o").isResource())
+		//			//					sImpl = new StatementImpl(new ResourceImpl(qs.get("s").toString()), new PropertyImpl(qs.get("p").toString()), new ResourceImpl(qs.get("o").toString()));
+		//			//				else if(qs.get("o").isLiteral())
+		//			//					sImpl = new StatementImpl(new ResourceImpl(qs.get("s").toString()), new PropertyImpl(qs.get("p").toString()), m.createTypedLiteral(qs.getLiteral("o").getLexicalForm(), qs.getLiteral("o").getDatatype()));
+		//			//				m.add(sImpl);
+		//			//			}
+		//			//			m.read(s);
+		//
+		//			Model m = ModelFactory.createDefaultModel();
+		//			m.read(s);
+		//			graphs.put(s, m);
+		//
+		//			this.model.add(graphs.get(s));
+		//		}
+
+		//		String sq = "PREFIX ex:<http://streamreasoning.org#> " +
+		//				"SELECT ?s ?p ?o  " +
+		//				"FROM NAMED <" + "http://streamreasoning.org/" + query.getId() + "_" + actualTs + ">" +
+		//				"WHERE { " +
+		//				"GRAPH ?g { ?s ?p ?o . }" +
+		//				"}";
+
+		//		String sq = "PREFIX ex:<http://streamreasoning.org#> " +
+		//				"SELECT * " +
+		//				"FROM NAMED <" + "http://streamreasoning.org/" + query.getId() + "_" + actualTs + ">" +
+		//				"FROM <http://127.0.0.1/~baldo/StaticKnowledgeTest.rdf> " +
+		//				"WHERE { " +
+		//				"GRAPH ?g {?w1 ex:isIn ?r1 . " +
+		//				"?w2 ex:isIn ?r2 . " +
+		//				"?r1 ex:contiguous ?r2 . " +
+		//				"FILTER(?w1 != ?w2 && ?r1 != ?r2) " +
+		//				"} " +
+		//				"}";
+		//
+		//
+		//		Query q1 = QueryFactory.create(sq, Syntax.syntaxARQ);
+
+		QueryExecution qexec;
+		System.out.println(activateInference);
+		System.out.println(inferenceRulesFilePath);
+		if(activateInference){
+			if(inferenceRulesFilePath == null || inferenceRulesFilePath.isEmpty()){
+				logger.debug("RDFS reasoner");
+				System.out.println("RDFS reasoner");
+				InfModel infmodel = ModelFactory.createRDFSModel(this.model);
+				qexec = QueryExecutionFactory.create(q, infmodel);
+			} else {
+				try{
+					logger.debug("Custom Reasoner. Loading inference rule from {}", inferenceRulesFilePath);
+					System.out.println("Custom Reasoner. Loading inference rule from " + inferenceRulesFilePath);
+					Reasoner reasoner;
+					if(reasonerMap.containsKey(query.getId())){
+						reasoner = reasonerMap.get(query.getId());
+					} else{
+						Model m = ModelFactory.createDefaultModel();
+						Resource configuration =  m.createResource();
+						configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
+						configuration.addProperty(ReasonerVocabulary.PROPruleSet, inferenceRulesFilePath);
+						reasoner = GenericRuleReasonerFactory.theInstance().create(configuration);
+						reasonerMap.put(query.getId(), reasoner);
+					}
+					InfModel infmodel = ModelFactory.createInfModel(reasoner, this.model);
+					qexec = QueryExecutionFactory.create(q, infmodel);
+				} catch(Exception e){
+					e.printStackTrace();
+					logger.debug("RDFS reasoner");
+					System.out.println("RDFS reasoner");
+					InfModel infmodel = ModelFactory.createRDFSModel(this.model);
+					qexec = QueryExecutionFactory.create(q, infmodel);
+				}
+			}
+		} else{
+			qexec = QueryExecutionFactory.create(q, model);
+		}
 
 		RDFTable table = null;
 
@@ -234,7 +332,7 @@ public class JenaEngine implements SparqlEngine {
 			table = new RDFTable("Subject", "Predicate", "Object", "Timestamp");
 
 			StringWriter w = new StringWriter();
-			m.write(w,"RDF/JSON");
+			m.write(w);
 			table.setJsonSerialization(w.toString());
 
 			StmtIterator it = m.listStatements();
@@ -247,7 +345,7 @@ public class JenaEngine implements SparqlEngine {
 			}
 		}
 
-		//		System.out.println("Query Result: " + System.currentTimeMillis());
+		//		jds.removeNamedModel("http://streamreasoning.org/" + query.getId() + "_" + actualTs);
 
 		return table;
 	}
@@ -271,7 +369,33 @@ public class JenaEngine implements SparqlEngine {
 		this.model = ModelFactory.createDefaultModel();
 	}
 
+	private List<RDFTuple> modelToTupleList(Model m){
+		List<RDFTuple> list = new ArrayList<RDFTuple>();
+		StmtIterator it = m.listStatements();
+		while (it.hasNext())
+		{
+			final RDFTuple tuple = new RDFTuple();
+			Statement stm = it.next();
+			tuple.addFields(formatSubject(stm.getSubject()),formatPredicate(stm.getPredicate()), format(stm.getObject())); 
+			list.add(tuple);
+		}
+		return list;
+	}
 
+	@Override
+	public void execUpdateQueryOverDatasource(String queryBody){
+		jds.execUpdateQuery(queryBody);
+	}
+
+	@Override
+	public void activateInference() {
+		this.activateInference = true;		
+	}
+
+	@Override
+	public void setInferenceRulesFilePath(String path) {
+		inferenceRulesFilePath = path;		
+	}
 
 
 }

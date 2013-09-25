@@ -32,6 +32,7 @@ public interface CsparqlEngine {
 
    void initialize(int queueDimension, boolean performTimestampFunction);
 
+   void execUpdateQueryOverDatasource(String queryBody);
 
    void destroy();
 
@@ -56,4 +57,8 @@ public interface CsparqlEngine {
    void stopQuery(final String id);
 
    RdfStream getStreamByIri(String iri);
+   
+   void activateInference();
+   
+   void setInferenceRulesFilePath(String path);
 }
