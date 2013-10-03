@@ -52,6 +52,7 @@ import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
+import eu.larkc.csparql.common.hardware_resource.Memory;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.api.SparqlQuery;
 import eu.larkc.csparql.sparql.jena.data_source.JenaDatasource;
@@ -153,6 +154,8 @@ public class JenaEngine implements SparqlEngine {
 
 
 	public RDFTable evaluateQuery(final SparqlQuery query) {
+		
+		long startTS = System.currentTimeMillis();
 
 		// remove ambiguous resources from the timestamps hash map
 		//		for (Statement s : ambiguousResources) {
@@ -346,6 +349,20 @@ public class JenaEngine implements SparqlEngine {
 		}
 
 		//		jds.removeNamedModel("http://streamreasoning.org/" + query.getId() + "_" + actualTs);
+		
+		long endTS = System.currentTimeMillis();
+		
+		Object[] object = new Object[6];
+		
+		object[0] = query.getId();
+		object[1] = (endTS - startTS);
+		object[2] = table.size();
+		object[3] = Memory.getTotalMemory();
+		object[4] = Memory.getFreeMemory();
+		object[5] = Memory.getMemoryUsage();
+
+		logger.debug("Information about execution of query {} \n Execution Time : {} \n Results Number : {} \n Total Memory : {} mb \n " +
+				"Free Memory : {} mb \n Memory Usage : {} mb", object);
 
 		return table;
 	}
