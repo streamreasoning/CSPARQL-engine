@@ -248,8 +248,6 @@ public class JenaEngine implements SparqlEngine {
 		//		Query q1 = QueryFactory.create(sq, Syntax.syntaxARQ);
 
 		QueryExecution qexec;
-		System.out.println(activateInference);
-		System.out.println(inferenceRulesFilePath);
 		if(activateInference){
 			if(inferenceRulesFilePath == null || inferenceRulesFilePath.isEmpty()){
 				logger.debug("RDFS reasoner");
