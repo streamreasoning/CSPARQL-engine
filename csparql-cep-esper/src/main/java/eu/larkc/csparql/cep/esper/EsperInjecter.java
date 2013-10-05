@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright 2013 DEIB - Politecnico di Milano
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package eu.larkc.csparql.cep.esper;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -47,9 +62,9 @@ public class EsperInjecter implements Runnable {
 					firstElement = false;
 				} else {
 					
-					/*Dalla seconda quadrupla in il sistema deve capire se la sleep tra una quadrupla e l'altra � stata gi� effettuata a monte per evitare di farla
+					/*Dalla seconda quadrupla in il sistema deve capire se la sleep tra una quadrupla e l'altra ??? stata gi??? effettuata a monte per evitare di farla
 					 * due volte. 
-					 * Controllo se il TS della quadrupla attuale coincide, o � di poco precedente, al tempo attuale di sistema.
+					 * Controllo se il TS della quadrupla attuale coincide, o ??? di poco precedente, al tempo attuale di sistema.
 					 * Se risulta in linea con il tempo attuale di sistema la inserisco subito, altrimenti faccio il controllo con la quadrupla precendente e inserisco
 					 * l'eventuale tempo di attesa
 					*/

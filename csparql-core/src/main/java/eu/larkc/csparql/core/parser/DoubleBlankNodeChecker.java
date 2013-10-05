@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright 2013 DEIB - Politecnico di Milano
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package eu.larkc.csparql.core.parser;
 
 import java.util.ArrayList;
@@ -30,7 +45,7 @@ public class DoubleBlankNodeChecker implements TreeCheckerInterface {
        * System.out.println(parent.toStringTree()); setTriplesBlockTreeRoot(parent); if
        * (triplesBlockTreeRoot == null) return; //Fase 1 -> creazione albero
        * groupGraphPattern -> triplesBlock -> BlankNodes -> etichette //Fase 2 -> visita
-       * albero e per ogni nodo blankNode fare la ricerca se ne è presente un altro con
+       * albero e per ogni nodo blankNode fare la ricerca se ne ?? presente un altro con
        * stessa label ma appartenente a triplesBlock diverso //Problemi : creare etichetta
        * multipla da padre: posso fare una lista di etichette incrementale ad ogni nodo
        * aggiungendo quella dei padri. //Problema 2: Come creare albero minimale. //Call
