@@ -1,4 +1,5 @@
 *.class
+mvn-install-csparql
 
 # Package Files #
 *.jar
