@@ -28,9 +28,9 @@
 
 	<repositories>
 		<repository>
-			<id>test_repo</id>
+			<id>streamreasoning_repository</id>
 			<name>Csparql server repository</name>
-			<url>http://www.balduini.org/maven/</url>
+			<url>http://streamreasoning.org/maven/</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
