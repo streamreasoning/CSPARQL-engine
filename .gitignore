@@ -5,5 +5,3 @@ mvn-install-csparql
 *.jar
 *.war
 *.ear
-*.settings
-/target
