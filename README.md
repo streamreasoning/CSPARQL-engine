@@ -1,4 +1,6 @@
 CSPARQL-engine
 ==============
 
-reasoning over RDF stream made easy
+Reasoning over RDF stream made easy.
+The project contains parent pom in the root and a number of module that inherit from parent pom.
+To install the csparql-core jar, run mvn intall on parent pom.
