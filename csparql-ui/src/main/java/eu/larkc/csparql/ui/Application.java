@@ -19,17 +19,6 @@
  ******************************************************************************/
 package eu.larkc.csparql.ui;
 
-/*
- * @(#)Application.java   1.0   Oct 02, 2009
- *
- * Copyright 2009-2009 Politecnico di Milano. All Rights Reserved.
- *
- * This software is the proprietary information of Politecnico di Milano.
- * Use is subject to license terms.
- *
- * @(#) $Id: Application.java 243 2010-05-13 14:26:54Z dbarbieri $
- */
-
 import java.text.ParseException;
 
 import eu.larkc.csparql.cep.api.RDFStreamAggregationTestGenerator;

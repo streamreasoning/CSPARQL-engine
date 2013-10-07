@@ -19,17 +19,6 @@
  ******************************************************************************/
 package eu.larkc.csparql.common;
 
-/*
- * @(#)RDFTuple.java   1.0   02/ott/2009
- *
- * Copyright 2009-2009 Politecnico di Milano. All Rights Reserved.
- *
- * This software is the proprietary information of Politecnico di Milano.
- * Use is subject to license terms.
- *
- * @(#) $Id$
- */
-
 import java.util.ArrayList;
 import java.util.List;
 

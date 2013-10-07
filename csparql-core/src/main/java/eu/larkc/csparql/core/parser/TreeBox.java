@@ -17,14 +17,13 @@
  * 
  * This work was partially supported by the European project LarKC (FP7-215535)
  ******************************************************************************/
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package eu.larkc.csparql.core.parser;
 
-//Importazioni manuali aggiuntive
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

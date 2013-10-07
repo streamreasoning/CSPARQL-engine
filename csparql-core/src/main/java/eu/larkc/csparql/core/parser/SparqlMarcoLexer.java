@@ -24,8 +24,6 @@
 
 package eu.larkc.csparql.core.parser;
 
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /Users/Marco/Desktop/Tesi Davide/Antlr-doc/SparqlMarco.g 2009-11-12 15:33:30
-
 import org.antlr.runtime.BaseRecognizer;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.DFA;

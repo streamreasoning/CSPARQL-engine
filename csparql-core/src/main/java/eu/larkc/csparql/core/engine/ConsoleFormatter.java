@@ -18,17 +18,6 @@
  * This work was partially supported by the European project LarKC (FP7-215535)
  ******************************************************************************/
 package eu.larkc.csparql.core.engine;
-/*
- * @(#)CounterFormatter.java   1.0   01/ott/2009
- *
- * Copyright 2009-2009 Politecnico di Milano. All Rights Reserved.
- *
- * This software is the proprietary information of Politecnico di Milano.
- * Use is subject to license terms.
- *
- * @(#) $Id$
- */
-
 
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;

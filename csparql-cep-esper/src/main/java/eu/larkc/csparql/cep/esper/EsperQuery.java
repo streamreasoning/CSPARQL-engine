@@ -17,16 +17,6 @@
  * 
  * This work was partially supported by the European project LarKC (FP7-215535)
  ******************************************************************************/
-/*
- * @(#)EsperQuery.java   1.0   15/set/2009
- *
- * Copyright 2009-2009 Politecnico di Milano. All Rights Reserved.
- *
- * This software is the proprietary information of Politecnico di Milano.
- * Use is subject to license terms.
- *
- * @(#) $Id: EsperQuery.java 107 2009-09-16 15:05:49Z dbarbieri $
- */
 package eu.larkc.csparql.cep.esper;
 
 import java.util.UUID;

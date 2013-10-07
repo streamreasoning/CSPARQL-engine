@@ -17,7 +17,6 @@
  * 
  * This work was partially supported by the European project LarKC (FP7-215535)
  ******************************************************************************/
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /Users/Marco/Desktop/Tesi Davide/Antlr-doc/SparqlMarco.g 2009-11-12 15:33:30
 
 package eu.larkc.csparql.core.parser;
 

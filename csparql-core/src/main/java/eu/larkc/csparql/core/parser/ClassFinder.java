@@ -17,17 +17,6 @@
  * 
  * This work was partially supported by the European project LarKC (FP7-215535)
  ******************************************************************************/
-/*
- * @(#)Configuration.java   1.0   Sep 14, 2009
- *
- * Copyright 2009-2009 Politecnico di Milano. All Rights Reserved.
- *
- * This software is the proprietary information of Politecnico di Milano.
- * Use is subject to license terms.
- *
- * @(#) $Id: Configuration.java 232 2010-04-20 09:11:07Z dbarbieri $
- */
-
 package eu.larkc.csparql.core.parser;
 
 import java.io.File;
