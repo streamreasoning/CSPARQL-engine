@@ -19,9 +19,10 @@
  ******************************************************************************/
 package eu.larkc.csparql.core;
 
-import eu.larkc.csparql.common.RDFTable;
-import eu.larkc.csparql.common.streams.format.GenericObserver;
+import java.util.Observer;
 
-public abstract class ResultFormatter implements GenericObserver<RDFTable> {
+import eu.larkc.csparql.common.RDFTable;
+
+public abstract class ResultFormatter implements Observer {
 
 }

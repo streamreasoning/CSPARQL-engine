@@ -62,6 +62,7 @@ class QueryListener extends RdfSnapshot implements UpdateListener {
          quads.add(q);
       }
       
+      setChanged();
       this.notifyObservers(quads);
    }
 }

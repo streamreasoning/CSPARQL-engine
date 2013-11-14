@@ -20,26 +20,27 @@
 package eu.larkc.csparql.cep.api;
 
 import java.util.List;
+import java.util.Observable;
 
 import eu.larkc.csparql.common.NamedObject;
-import eu.larkc.csparql.common.streams.format.GenericObservable;
 
-public class RdfSnapshot extends GenericObservable<List<RdfQuadruple>> implements
-      NamedObject {
+public class RdfSnapshot extends Observable implements
+NamedObject {
 
-   private String id = "";
+	private String id = "";
 
-   public String getId() {
-      return this.id;
-   }
+	public String getId() {
+		return this.id;
+	}
 
-   public RdfSnapshot(final String id) {
-      this.id = id;
-   }
+	public RdfSnapshot(final String id) {
+		this.id = id;
+	}
 
-   public void put(final List<RdfQuadruple> q) {
+	public void put(final List<RdfQuadruple> q) {
 
-      this.notifyObservers(q);
-   }
+		setChanged();
+		this.notifyObservers(q);
+	}
 
 }

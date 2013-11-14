@@ -19,36 +19,59 @@
  ******************************************************************************/
 package eu.larkc.csparql.ui;
 
+import java.util.Observable;
+
 import eu.larkc.csparql.common.RDFTable;
-import eu.larkc.csparql.common.streams.format.GenericObservable;
 import eu.larkc.csparql.core.ResultFormatter;
 
 public class CounterFormatter extends ResultFormatter {
 
-   private int count = 0;
-   private long start = 0;
+	private int count = 0;
+	private long start = 0;
 
-   
-   public void update(final GenericObservable<RDFTable> observed, final RDFTable q) {
 
-      if (this.start == 0) {
-         this.start = System.nanoTime();
-      }
+	//   public void update(final GenericObservable<RDFTable> observed, final RDFTable q) {
+	//
+	//      if (this.start == 0) {
+	//         this.start = System.nanoTime();
+	//      }
+	//
+	//      this.count += q.size();
+	//      float timePast = (float) (System.nanoTime() - this.start);
+	//      final float freq = (float) this.count / timePast * 1000000000;
+	//      
+	//      if (timePast>10000000000f) {
+	//       this.start = System.nanoTime();
+	//       this.count = 0;
+	//       System.out.println(freq);
+	//      }
+	//
+	////      if (this.count % 1000 == 0) 
+	////    	  System.out.println(freq + " CSPARQL Results/sec");
+	//    	  
+	//    	  
+	//      
+	//   }
 
-      this.count += q.size();
-      float timePast = (float) (System.nanoTime() - this.start);
-      final float freq = (float) this.count / timePast * 1000000000;
-      
-      if (timePast>10000000000f) {
-       this.start = System.nanoTime();
-       this.count = 0;
-       System.out.println(freq);
-      }
 
-//      if (this.count % 1000 == 0) 
-//    	  System.out.println(freq + " CSPARQL Results/sec");
-    	  
-    	  
-      
-   }
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		RDFTable q = (RDFTable) arg;
+		
+		if (this.start == 0) {
+			this.start = System.nanoTime();
+		}
+
+		this.count += q.size();
+		float timePast = (float) (System.nanoTime() - this.start);
+		final float freq = (float) this.count / timePast * 1000000000;
+
+		if (timePast>10000000000f) {
+			this.start = System.nanoTime();
+			this.count = 0;
+			System.out.println(freq);
+		}
+
+	}
 }

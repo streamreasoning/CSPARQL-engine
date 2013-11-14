@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import com.espertech.esper.client.Configuration;
@@ -36,7 +37,6 @@ import eu.larkc.csparql.cep.api.CepQuery;
 import eu.larkc.csparql.cep.api.RdfQuadruple;
 import eu.larkc.csparql.cep.api.RdfSnapshot;
 import eu.larkc.csparql.cep.api.RdfStream;
-import eu.larkc.csparql.common.streams.format.GenericObservable;
 
 public class EsperEngine implements CepEngine {
 
@@ -128,22 +128,22 @@ public class EsperEngine implements CepEngine {
 		this.epService.destroy();
 	}
 
-	public void update(final GenericObservable<RdfQuadruple> observed, final RdfQuadruple q) {
-		RdfStream s = (RdfStream) observed;
-		q.setStreamName(s.getIRI());
-
-		if(!enableInjecter){
-			this.epService.getEPRuntime().sendEvent(q);
-		} else {
-			synchronized(queue){
-				try{
-					queue.add(q);
-				} catch(IllegalStateException e){
-					System.out.println("Queue Full");
-				}
-			}
-		}
-	}
+//	public void update(final GenericObservable<RdfQuadruple> observed, final RdfQuadruple q) {
+//		RdfStream s = (RdfStream) observed;
+//		q.setStreamName(s.getIRI());
+//
+//		if(!enableInjecter){
+//			this.epService.getEPRuntime().sendEvent(q);
+//		} else {
+//			synchronized(queue){
+//				try{
+//					queue.add(q);
+//				} catch(IllegalStateException e){
+//					System.out.println("Queue Full");
+//				}
+//			}
+//		}
+//	}
 
 	public void startQuery(final String id) {
 		final EPStatement s = this.getStatementById(id);
@@ -177,5 +177,26 @@ public class EsperEngine implements CepEngine {
 
 	public String getCepEngineType() {
 		return "esper";
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		RdfStream s = (RdfStream) o;
+		RdfQuadruple q = (RdfQuadruple) arg;
+		q.setStreamName(s.getIRI());
+
+		if(!enableInjecter){
+			this.epService.getEPRuntime().sendEvent(q);
+		} else {
+			synchronized(queue){
+				try{
+					queue.add(q);
+				} catch(IllegalStateException e){
+					System.out.println("Queue Full");
+				}
+			}
+		}
+		
 	}
 }

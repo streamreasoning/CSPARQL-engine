@@ -19,21 +19,32 @@
  ******************************************************************************/
 package eu.larkc.csparql.core.engine;
 
+import java.util.Observable;
+
 import eu.larkc.csparql.common.NamedObject;
 import eu.larkc.csparql.common.RDFTable;
-import eu.larkc.csparql.common.streams.format.GenericObservable;
 
-public class CsparqlQueryResultProxy extends GenericObservable<RDFTable> implements
-      NamedObject {
+public class CsparqlQueryResultProxy extends Observable implements NamedObject {
 
-   private final String id;
+	private final String id;
 
-   public String getId() {
-      return this.id;
-   }
+	public String getId() {
+		return this.id;
+	}
 
-   public CsparqlQueryResultProxy(final String id) {
-      this.id = id;
-   }
+	public CsparqlQueryResultProxy(final String id) {
+		this.id = id;
+	}
+
+	public void notify(Object result) {
+		
+		RDFTable quads = (RDFTable) result;
+		
+		setChanged();
+		this.notifyObservers(quads);
+
+	}
+
+
 
 }

@@ -112,6 +112,7 @@
 			<version>1.7.5</version>
 
 		</dependency>
+		
 	</dependencies>
 
 	<build>

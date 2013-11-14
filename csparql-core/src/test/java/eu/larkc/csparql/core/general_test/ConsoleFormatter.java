@@ -15,38 +15,45 @@
  * 
  * Acknowledgements:
  * 
- * This work was partially supported by the European project LarKC (FP7-215535)
+ * This work was partially supported by the European project LarKC (FP7-215535) 
+ * and by the European project MODAClouds (FP7-318484)
  ******************************************************************************/
 package eu.larkc.csparql.core.general_test;
-/*
- * @(#)CounterFormatter.java   1.0   01/ott/2009
- *
- * Copyright 2009-2009 Politecnico di Milano. All Rights Reserved.
- *
- * This software is the proprietary information of Politecnico di Milano.
- * Use is subject to license terms.
- *
- * @(#) $Id$
- */
 
+import java.util.Observable;
+
+import com.hp.hpl.jena.vocabulary.RDF;
 
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
-import eu.larkc.csparql.common.streams.format.GenericObservable;
 import eu.larkc.csparql.core.ResultFormatter;
 
 public class ConsoleFormatter extends ResultFormatter {
 
 
-	@Override
-	public void update(final GenericObservable<RDFTable> observed, final RDFTable q) {
+//	@Override
+//	public void update(final GenericObservable<RDFTable> observed, final RDFTable q) {
+//
+//		System.out.println();
+//		System.out.println("-------"+ q.size() + " results at SystemTime=["+System.currentTimeMillis()+"]--------");
+//		for (final RDFTuple t : q) {
+//			System.out.println(t.toString());
+//		}
+//		System.out.println();
+//
+//	}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		RDFTable q = (RDFTable) arg;
+		
 		System.out.println();
 		System.out.println("-------"+ q.size() + " results at SystemTime=["+System.currentTimeMillis()+"]--------");
 		for (final RDFTuple t : q) {
 			System.out.println(t.toString());
 		}
 		System.out.println();
-
+		
 	}
 }

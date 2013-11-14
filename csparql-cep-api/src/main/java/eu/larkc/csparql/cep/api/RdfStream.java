@@ -19,9 +19,9 @@
  ******************************************************************************/
 package eu.larkc.csparql.cep.api;
 
-import eu.larkc.csparql.common.streams.format.GenericObservable;
+import java.util.Observable;
 
-public class RdfStream extends GenericObservable<RdfQuadruple> {
+public class RdfStream extends Observable {
 
 	private long lastUpdated = 0;
 
@@ -44,6 +44,7 @@ public class RdfStream extends GenericObservable<RdfQuadruple> {
 	public void put(final RdfQuadruple q) {
 
 		lastUpdated = System.nanoTime();
+		setChanged();
 		this.notifyObservers(q);
 	}
 

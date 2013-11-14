@@ -20,10 +20,9 @@
 package eu.larkc.csparql.cep.api;
 
 import java.util.Collection;
+import java.util.Observer;
 
-import eu.larkc.csparql.common.streams.format.GenericObserver;
-
-public interface CepEngine extends GenericObserver<RdfQuadruple> {
+public interface CepEngine extends Observer {
 
    /**
    */

@@ -25,6 +25,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +37,6 @@ import eu.larkc.csparql.cep.api.RdfSnapshot;
 import eu.larkc.csparql.cep.api.RdfStream;
 import eu.larkc.csparql.cep.esper.EsperEngine;
 import eu.larkc.csparql.common.RDFTable;
-import eu.larkc.csparql.common.streams.format.GenericObservable;
-import eu.larkc.csparql.common.streams.format.GenericObserver;
 import eu.larkc.csparql.core.Configuration;
 import eu.larkc.csparql.core.parser.StreamInfo;
 import eu.larkc.csparql.core.parser.Translator;
@@ -45,7 +45,7 @@ import eu.larkc.csparql.core.streams.formats.TranslationException;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.jena.JenaEngine;
 
-public class CsparqlEngineImpl implements GenericObserver<List<RdfQuadruple>>, CsparqlEngine {
+public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 	private Configuration configuration = null;
 	private Collection<CSparqlQuery> queries = null;
@@ -260,12 +260,85 @@ public class CsparqlEngineImpl implements GenericObserver<List<RdfQuadruple>>, C
 
 
 	// Snapshot received
-	public void update(final GenericObservable<List<RdfQuadruple>> observed,
-			final List<RdfQuadruple> quads) {
+//	public void update(final GenericObservable<List<RdfQuadruple>> observed,
+//			final List<RdfQuadruple> quads) {
+//
+//		long starttime = System.nanoTime();
+//
+//		final RdfSnapshot r = (RdfSnapshot) observed;
+//
+//		final CSparqlQuery csparqlquery = this.getQueryByID(r.getId());
+//
+//		final RdfSnapshot augmentedSnapshot = this.reasoner.augment(r);
+//
+//		this.snapshots.put(csparqlquery, augmentedSnapshot);
+//
+//		this.sparqlEngine.clean();
+//
+//		long count = 0;
+//
+//		for (final RdfQuadruple q : quads) {
+//			if (isStreamUsedInQuery(csparqlquery, q.getStreamName()))
+//			{
+//				this.sparqlEngine.addStatement(q.getSubject(), q.getPredicate(), q.getObject(), q.getTimestamp());
+//				count++;
+//			}
+//		}
+//
+//		if (count == 0)
+//			return;
+//
+//		final RDFTable result = this.sparqlEngine.evaluateQuery(csparqlquery.getSparqlQuery());
+//
+//		timestamp(result, csparqlquery);
+//
+//		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
+//
+//		this.notifySubscribers(csparqlquery, result);
+//
+//
+//	}
 
+	private void timestamp(RDFTable r, CSparqlQuery q) {
+		if (q.getQueryCommand().toLowerCase().contains("register stream"))
+			r.add("timestamp", "0");
+		//TODO: da aggiungere il campo on the fly
+
+	}
+
+	private boolean isStreamUsedInQuery(CSparqlQuery csparqlquery, String streamName) {
+		for (StreamInfo si : csparqlquery.getStreams()) {
+			if (si.getIri().equalsIgnoreCase(streamName))
+				return true;
+		}
+
+		return false;
+	}
+
+
+	private void notifySubscribers(final CSparqlQuery csparqlquery, final RDFTable result) {
+
+		final CsparqlQueryResultProxy res = this.results.get(csparqlquery);
+		
+		res.notify(result);
+	}
+
+	public RdfStream getStreamByIri(final String iri) {
+
+		if (this.streams.containsKey(iri)) {
+			return this.streams.get(iri);
+		}
+
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void update(Observable o, Object arg) {
 		long starttime = System.nanoTime();
 
-		final RdfSnapshot r = (RdfSnapshot) observed;
+		final RdfSnapshot r = (RdfSnapshot) o;
+		List<RdfQuadruple> quads = (List<RdfQuadruple>) arg;
 
 		final CSparqlQuery csparqlquery = this.getQueryByID(r.getId());
 
@@ -295,41 +368,7 @@ public class CsparqlEngineImpl implements GenericObserver<List<RdfQuadruple>>, C
 		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
 
 		this.notifySubscribers(csparqlquery, result);
-
-
-	}
-
-	private void timestamp(RDFTable r, CSparqlQuery q) {
-		if (q.getQueryCommand().toLowerCase().contains("register stream"))
-			r.add("timestamp", "0");
-		//TODO: da aggiungere il campo on the fly
-
-	}
-
-	private boolean isStreamUsedInQuery(CSparqlQuery csparqlquery, String streamName) {
-		for (StreamInfo si : csparqlquery.getStreams()) {
-			if (si.getIri().equalsIgnoreCase(streamName))
-				return true;
-		}
-
-		return false;
-	}
-
-
-	private void notifySubscribers(final CSparqlQuery csparqlquery, final RDFTable result) {
-
-		final CsparqlQueryResultProxy res = this.results.get(csparqlquery);
-
-		res.notifyObservers(result);
-	}
-
-	public RdfStream getStreamByIri(final String iri) {
-
-		if (this.streams.containsKey(iri)) {
-			return this.streams.get(iri);
-		}
-
-		return null;
+		
 	}
 
 }
