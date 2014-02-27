@@ -1,21 +1,25 @@
 /*******************************************************************************
- * Copyright 2013 Davide Barbieri, Emanuele Della Valle, Marco Balduini
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- * Acknowledgements:
- * 
- * This work was partially supported by the European project LarKC (FP7-215535)
+ * Copyright 2014 DEIB -Politecnico di Milano
+ *   
+ *  Marco Balduini (marco.balduini@polimi.it)
+ *  Emanuele Della Valle (emanuele.dellavalle@polimi.it)
+ *  Davide Barbieri
+ *   
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *   
+ *  	http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *   
+ *  Acknowledgements:
+ *  
+ *  This work was partially supported by the European project LarKC (FP7-215535)
  ******************************************************************************/
 package eu.larkc.csparql.sparql.jena;
 
@@ -173,7 +177,7 @@ public class JenaEngine implements SparqlEngine {
 		//		ambiguousResources.clear();
 
 
-		final Query q = QueryFactory.create(query.getQueryCommand(), Syntax.syntaxARQ);
+		final Query q = QueryFactory.create(query.getQueryCommand(), Syntax.syntaxSPARQL_11);
 
 		//		long actualTs = System.currentTimeMillis();
 		//
@@ -185,6 +189,8 @@ public class JenaEngine implements SparqlEngine {
 			if(!jds.containsNamedModel(s)){
 				Model m = ModelFactory.createDefaultModel();
 				m.read(s);
+				System.out.println(">>>>>>>>>>>>>>>---------------");
+				m.write(System.out);
 				jds.putNamedModel(s, modelToTupleList(m));
 				this.model.add(m);
 			} else {
@@ -193,10 +199,7 @@ public class JenaEngine implements SparqlEngine {
 					addStatement(t.get(0), t.get(1), t.get(2));
 
 			}
-
-
 		}
-
 
 		//		for(String s: q.getGraphURIs())
 		//		{
@@ -418,6 +421,14 @@ public class JenaEngine implements SparqlEngine {
 	@Override
 	public void setInferenceRulesFilePath(String path) {
 		inferenceRulesFilePath = path;		
+	}
+
+	@SuppressWarnings("unused")
+	@Override
+	public void parseSparqlQuery(SparqlQuery query) {
+		System.out.println(query.getQueryCommand());
+		Query spQuery = QueryFactory.create(query.getQueryCommand(), Syntax.syntaxSPARQL_11);
+		
 	}
 
 

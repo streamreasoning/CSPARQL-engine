@@ -1,0 +1,292 @@
+options
+{
+  STATIC = false ;
+}
+
+PARSER_BEGIN(CsparqlParser)
+
+package eu.larkc.csparql.core.new_parser ;
+
+import java.io.StringReader;
+import eu.larkc.csparql.core.new_parser.utility_files.*;
+
+public class CsparqlParser extends CsparqlParserBase
+{
+
+public static CsparqlParser createAndParse(String queryString) throws ParseException{
+    CsparqlParser parser = new CsparqlParser(new StringReader(TextUtilities.queryTextEnhancer(queryString)));
+    System.out.println(TextUtilities.queryTextEnhancer(queryString));
+    parser.Query();
+    return parser;
+  }
+   
+}
+
+PARSER_END(CsparqlParser)
+
+void Query() : { }
+{
+RegisterClause()  
+(Prologue())*
+((LOOKAHEAD(5)
+	SelectClause()
+	| ConstructClause()
+	| DescribeClause()
+	| AskClause())
+ (LOOKAHEAD(5)
+	FromClause()
+	| FromStreamClause())*
+ (WhereClause())?)
+ {setSparqlQuery(sparqlQuery) ; }
+<EOF>
+}
+
+void Prologue() : { Token t;} {
+  (LOOKAHEAD(2)    
+  	  (
+   		 t = <PREFIX> { sparqlQuery = sparqlQuery + t.image ; }
+  		(LOOKAHEAD(2)
+          t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
+  	  		| t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
+          | t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
+  		)+
+  		(t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; })*
+  		t = < IRIref > { sparqlQuery = sparqlQuery + t.image ; }
+  	  )
+ 	| (
+        t = <BASE> { sparqlQuery = sparqlQuery + t.image ; }
+  		t = < IRIref > { sparqlQuery = sparqlQuery + t.image ; }
+  	  )
+   )   
+  	
+  (t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; })*
+  { sparqlQuery = sparqlQuery + "\n"; }
+  
+}
+
+void RegisterClause() : {  Token t ; String queryName ="";}
+{
+    (LOOKAHEAD(3)
+    <REGISTERSTREAM > {setOutputIsStream(true);}|
+    < REGISTERQUERY > {setOutputIsStream(false);})
+    (t = <SINGLELETTERTEXT> { queryName = queryName + t.image ; } | t = <NUMBERS> { queryName = queryName + t.image ; })+ <SPACE> < AS >
+  	{ setCsparqlQueryName(queryName.trim()); }
+    (<SPACE>)*
+}
+
+void AddClause() : { Token t;} {
+  t = <ADD> { sparqlQuery = sparqlQuery + t.image ; }
+  ((LOOKAHEAD(2)
+    t = <AS> { sparqlQuery = sparqlQuery + t.image ; }
+    | t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
+    | t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
+    | t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; })+
+    t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; })+ 
+  { sparqlQuery = sparqlQuery + "\n"; }
+   
+}
+
+void DescribeClause() : { Token t;} {
+  t = <DESCRIBE> { sparqlQuery = sparqlQuery + t.image ; }
+  //t = " " { s = s + t.image ; }
+  ((
+    t = <ADD> { sparqlQuery = sparqlQuery + t.image ; }
+  | t = <CONSTRUCT> { sparqlQuery = sparqlQuery + t.image ; }
+  | t = <SELECT> { sparqlQuery = sparqlQuery + t.image ; } | t = <AS> { sparqlQuery = sparqlQuery + t.image ; }
+  | t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
+  | t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
+  | t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; })+
+  t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; })+
+   (t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; })*
+  { sparqlQuery = sparqlQuery + "\n"; }
+   
+}
+
+void AskClause() : { Token t;} {
+  t = <ASK> { sparqlQuery = sparqlQuery + t.image ; }
+  { sparqlQuery = sparqlQuery + "\n"; }
+   
+}
+
+void SelectClause() : { Token t;} {
+  t = <SELECT> { sparqlQuery = sparqlQuery + t.image ; }
+ (LOOKAHEAD(3)
+   	      t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
+   	      | t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
+   	      | t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
+   	      | t = < IRIref > { sparqlQuery = sparqlQuery + t.image ;}
+   	      | t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
+   	      | t = <AS> { sparqlQuery = sparqlQuery + t.image ; }
+      )*  
+  { sparqlQuery = sparqlQuery + "\n"; }
+   
+}
+
+void ConstructClause() : { Token t;} {
+    t = <CONSTRUCT> { sparqlQuery = sparqlQuery + t.image ; }
+   	  (LOOKAHEAD(3)
+   	      t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
+   	      | t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
+   	      | t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
+   	      | t = < IRIref > { sparqlQuery = sparqlQuery + t.image ;}
+   	      | t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
+      )*  
+  { sparqlQuery = sparqlQuery + "\n"; }
+   
+}
+
+void FromClause() : { Token t;} {
+  t = <FROM> { sparqlQuery = sparqlQuery + t.image ; }
+  //t = " " { s = s + t.image ; }
+  //((t = <SINGLELETTERTEXT> { s = s + t.image ; } | t = <SYMBOL> { s = s + t.image ; })+ t = " " { s = s + t.image ; })+
+   t = < IRIref > { sparqlQuery = sparqlQuery + t.image ; }
+   (t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; })*
+  { sparqlQuery = sparqlQuery + "\n"; }
+}
+
+void FromStreamClause() : {  Token t ; String streamName =""; String s1 =""; }
+{
+  { Window window;}
+    <FROM>
+    (<NAMED>)*
+    <STREAM>
+    t = < IRIref > { streamName = t.image ; }
+    <SPACE>
+    (<SPACE>)*
+    <RANGE>
+    window = Window()
+    <SYMBOL> 
+    (<SPACE>)*
+    { StreamInfo si = new StreamInfo(streamName,window) ;
+	  addStreams(si);
+   	}
+}
+
+Window Window():{}
+{
+  {Window window; }
+  (LOOKAHEAD(2)
+  window = LogicalWindow() {return window;}
+  | window = PhysicalWindow() {return window;})
+}
+
+TimeUnit TimeUnit():{Token t; String timeunit = "";}
+{
+  	(t = < SPACE > { timeunit = timeunit + t.image ; })*
+	t = <SINGLELETTERTEXT>
+	{timeunit = timeunit + t.image ;
+	if(!timeunit.equals("ms") && !timeunit.equals("s") && !timeunit.equals("m") && !timeunit.equals("h") && !timeunit.equals("d"))
+		throw new ParseException();
+	}
+	{return TimeUnit.getUnitOfMeasure(timeunit); }
+}
+
+TimeIntervalDescription WindowOverlap():{Token t; String tempStepValue = "";}
+{
+  {TimeIntervalDescription stepDescription = new TimeIntervalDescription();
+  TimeUnit tm; }
+  (t = < SPACE >)*
+  (LOOKAHEAD(2)
+    (
+     t = < STEP >
+     (t = <NUMBERS> { tempStepValue = tempStepValue + t.image ; })+
+     tm = TimeUnit(){ stepDescription.setTimeUnit(tm) ; stepDescription.setValue(Integer.parseInt(tempStepValue)); return stepDescription; }
+    )
+  | t = < TUMBLING > { return null; })
+}
+
+LogicalWindow LogicalWindow():{Token t; String tempRangeValue = "";}
+{
+  (< SPACE >)*
+  {TimeIntervalDescription rangeDescription = new TimeIntervalDescription();
+   TimeIntervalDescription stepDescription = new TimeIntervalDescription();
+   TimeUnit tm;
+   boolean isTumbling;	
+  }
+  (t = <NUMBERS> { tempRangeValue = tempRangeValue + t.image ; })+ tm = TimeUnit() stepDescription = WindowOverlap()
+  {rangeDescription.setTimeUnit(tm) ;
+   rangeDescription.setValue(Integer.parseInt(tempRangeValue));
+   if(stepDescription == null)    
+   		isTumbling = true;
+   else
+        isTumbling = false;
+   
+  return new LogicalWindow(rangeDescription,stepDescription,isTumbling) ; } 
+}
+
+PhysicalWindow PhysicalWindow():{Token t; String windowRange = "";}
+{
+  (t = < SPACE >)*
+  t = <TRIPLES> (t = <NUMBERS> { windowRange = windowRange + t.image ; })+
+  { return new PhysicalWindow(Integer.parseInt(windowRange))  ; }
+ }
+
+void WhereClause() : { Token t;} {
+  t = <WHERE> { sparqlQuery = sparqlQuery + t.image ; }
+  (LOOKAHEAD(5)
+    (LOOKAHEAD(5)
+   		t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
+    	(t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = < IRIref > { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <SELECT> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <AS> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <WHERE> { sparqlQuery = sparqlQuery + t.image ; }
+   		 )+
+  		| t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
+  	)+
+    | t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
+   	  (t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = < IRIref > { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <SELECT> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <AS> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <WHERE> { sparqlQuery = sparqlQuery + t.image ; }
+    	 | t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
+   	  )*
+  )
+  { sparqlQuery = sparqlQuery + "\n"; }
+}
+
+
+
+// ------------------------------------------
+// Tokens
+
+SKIP : { "\t" | "\n" | "\r" | "\f" }
+
+TOKEN [IGNORE_CASE] :
+{
+  <PREFIX: "prefix ">
+| <BASE: "base ">  
+|  <SELECT: "select ">
+| <DESCRIBE: "describe ">
+| < ADD: "add " >
+|   <ASK: "ask ">
+|  <CONSTRUCT: "construct ">
+|  <FROM: " from ">
+|  <WHERE: "where {">
+|  <SINGLELETTERTEXT: ["a"-"z","A"-"Z"] >
+|  <NUMBERS: ["0"-"9"] >
+|  <SYMBOL: ["$"-"/",":"-"?","{"-"~","!","\"","^","_","'","[","]","#","@","(",")"] >
+|  <IRIref: "<" (~["\"", "{", "}", "^", "\\", "|", "`","\u0000"-"\u0020"])* ">" >
+|  <SPACE: " ">
+}
+
+// C-SPARQL TOKEN */
+
+TOKEN [IGNORE_CASE] :
+{
+  <REGISTERSTREAM: "register stream ">
+|  <REGISTERQUERY: "register query ">
+|  <STREAM: "stream ">
+|  <AS: "as ">
+|  <NAMED: "named ">
+|  <RANGE: "[range ">
+|  <STEP: "step ">
+|  <TUMBLING: "tumbling ">
+|  <TRIPLES: "triples "> 
+}
+

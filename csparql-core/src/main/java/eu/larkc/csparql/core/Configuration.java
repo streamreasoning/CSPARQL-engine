@@ -1,21 +1,25 @@
 /*******************************************************************************
- * Copyright 2013 Davide Barbieri, Emanuele Della Valle, Marco Balduini
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- * Acknowledgements:
- * 
- * This work was partially supported by the European project LarKC (FP7-215535)
+ * Copyright 2014 DEIB -Politecnico di Milano
+ *   
+ *  Marco Balduini (marco.balduini@polimi.it)
+ *  Emanuele Della Valle (emanuele.dellavalle@polimi.it)
+ *  Davide Barbieri
+ *   
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *   
+ *  	http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *   
+ *  Acknowledgements:
+ *  
+ *  This work was partially supported by the European project LarKC (FP7-215535)
  ******************************************************************************/
 package eu.larkc.csparql.core;
 
@@ -26,7 +30,7 @@ import eu.larkc.csparql.cep.api.CepEngine;
 import eu.larkc.csparql.cep.api.CepQuery;
 import eu.larkc.csparql.core.engine.CsparqlEngine;
 import eu.larkc.csparql.core.engine.Reasoner;
-import eu.larkc.csparql.core.parser.Translator;
+import eu.larkc.csparql.core.new_parser.utility_files.Translator;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.api.SparqlQuery;
 
@@ -40,7 +44,7 @@ public class Configuration {
    private final String sparqlEngineName = "eu.larkc.csparql.sparql.jena.JenaEngine";
    private final String cepQueryName = "eu.larkc.csparql.cep.esper.EsperQuery";
    private final String sparqlQueryName = "eu.larkc.csparql.sparql.sesame.SesameQuery";
-   private final String translatorName = "eu.larkc.csparql.core.parser.CSparqlTranslator";
+   private final String translatorName = "eu.larkc.csparql.core.new_parser.utility_files.CSparqlTranslator";
 
    public static Configuration getCurrentConfiguration() {
       if (Configuration.instance == null) {

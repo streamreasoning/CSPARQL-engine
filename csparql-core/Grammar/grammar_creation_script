@@ -1,0 +1,2 @@
+ DIR="../src/main/java/eu/larkc/csparql/core/new_parser"
+ javacc -OUTPUT_DIRECTORY=$DIR  -JDK_VERSION=1.5 master.jj
