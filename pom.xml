@@ -27,7 +27,7 @@
 
 	<groupId>eu.larkc.csparql</groupId>
 	<artifactId>CSPARQL-engine</artifactId>
-	<version>0.9.3</version>
+	<version>0.9.3.1</version>
 	<packaging>pom</packaging>
 	<name>Multi Module CSPARQL Parent Project</name>
 	<description>This is a mult module project called CSparql: handles continuous streaming data</description>
@@ -172,4 +172,21 @@
 			</properties>
 		</contributor>
 	</contributors>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
 </project>

@@ -27,6 +27,7 @@ import java.util.Map;
 
 import com.hp.hpl.jena.datatypes.RDFDatatype;
 import com.hp.hpl.jena.datatypes.TypeMapper;
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -63,14 +64,20 @@ public class timestamp extends FunctionBase3 {
 		if(arg2.isLiteral()){
 			String[] objectParts = arg2.asString().split("\\^\\^");
 			TypeMapper tm = TypeMapper.getInstance();
-			RDFDatatype d = tm.getTypeByName(objectParts[1]);
+			//			RDFDatatype d = tm.getTypeByName(objectParts[1]);
+			RDFDatatype d = null;
+			if (objectParts.length > 1) {
+				d = tm.getTypeByName(objectParts[1]);
+			} else {
+				d = XSDDatatype.XSDstring;
+			}
 			Model model = ModelFactory.createDefaultModel();
 			Literal lObject = model.createTypedLiteral(objectParts[0].replaceAll("\"", ""),d);
 			key = new StatementImpl(new ResourceImpl(arg0.asString()), new PropertyImpl(arg1.asString()), lObject); 
-			
+
 			lObject = null;
 			model = null;
-			
+
 		} else {
 			key = new StatementImpl(new ResourceImpl(arg0.asString()), new PropertyImpl(arg1.asString()), new ResourceImpl(arg2.asString())); 
 
@@ -78,7 +85,7 @@ public class timestamp extends FunctionBase3 {
 
 		if (timestamps.containsKey(key)) {
 			NodeValue ts=NodeValue.makeInteger(timestamps.get(key));
-					
+
 			return ts;
 		} else {
 			return NodeValue.makeBoolean(false);
