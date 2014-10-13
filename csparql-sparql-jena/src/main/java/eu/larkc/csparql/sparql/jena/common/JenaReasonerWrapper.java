@@ -1,4 +1,4 @@
-package wu.larkc.csparql.sparql.jena.common;
+package eu.larkc.csparql.sparql.jena.common;
 
 import com.hp.hpl.jena.reasoner.Reasoner;
 
