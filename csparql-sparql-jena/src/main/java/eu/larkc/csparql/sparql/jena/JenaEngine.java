@@ -36,8 +36,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import wu.larkc.csparql.sparql.jena.common.JenaReasonerWrapper;
-
 import com.hp.hpl.jena.datatypes.RDFDatatype;
 import com.hp.hpl.jena.datatypes.TypeMapper;
 import com.hp.hpl.jena.query.Query;
@@ -75,6 +73,7 @@ import eu.larkc.csparql.common.data_source.Datasource;
 import eu.larkc.csparql.common.hardware_resource.Memory;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.api.SparqlQuery;
+import eu.larkc.csparql.sparql.jena.common.JenaReasonerWrapper;
 import eu.larkc.csparql.sparql.jena.data_source.JenaDatasource;
 import eu.larkc.csparql.sparql.jena.ext.timestamp;
 

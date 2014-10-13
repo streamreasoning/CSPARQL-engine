@@ -32,7 +32,7 @@
 		<repository>
 			<id>streamreasoning_repository</id>
 			<name>streamreasoning repository</name>
-			<url>http://131.175.59.106:8080/repository/streamreasoning_repository/</url>
+			<url>http://streamreasoning.org/maven/</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
