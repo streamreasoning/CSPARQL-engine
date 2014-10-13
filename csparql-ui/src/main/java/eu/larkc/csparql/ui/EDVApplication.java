@@ -77,7 +77,7 @@ public final class EDVApplication {
 
       try {
          c1 = engine
-     	.registerQuery("REGISTER QUERY PIPPO AS SELECT ?S ?P ?O FROM STREAM <http://myexample.org/stream> [RANGE TRIPLES 100] WHERE { ?S ?P ?O . ?S ?P ?Y . FILTER (?O = ?Y) }");
+     	.registerQuery("REGISTER QUERY PIPPO AS SELECT ?S ?P ?O FROM STREAM <http://myexample.org/stream> [RANGE TRIPLES 100] WHERE { ?S ?P ?O . ?S ?P ?Y . FILTER (?O = ?Y) }", false);
 //        .registerQuery("REGISTER QUERY PIPPO AS SELECT ?S ?P ?O FROM STREAM <http://myexample.org/stream> [RANGE TRIPLES 1000] WHERE { ?S ?P ?O }");
 //         .registerQuery(queryCountLogicalWindow);
       } catch (final ParseException ex) {

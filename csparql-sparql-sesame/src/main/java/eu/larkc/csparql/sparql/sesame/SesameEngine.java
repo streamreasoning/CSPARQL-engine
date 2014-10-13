@@ -46,6 +46,7 @@ import org.openrdf.sail.memory.model.MemURI;
 
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
+import eu.larkc.csparql.common.data_source.Datasource;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.api.SparqlQuery;
 
@@ -272,18 +273,75 @@ public class SesameEngine implements SparqlEngine {
 	}
 
 	@Override
-	public void activateInference() {
-		
-	}
-
-	@Override
-	public void setInferenceRulesFilePath(String path) {
+	public void parseSparqlQuery(SparqlQuery query) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parseSparqlQuery(SparqlQuery query) {
+	public void putStaticNamedModel(String iri, String location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeStaticNamedModel(String iri) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Datasource getDataSource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getInferenceStatus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setReasonerMap(Object reasonerMap) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void arrestInference(String queryId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addReasonerToReasonerMap(String queryId, Object reasoner) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void restartInference(String queryId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateReasoner(String queryId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateReasoner(String queryId, String rulesFile,
+			String entailmentRegimeType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateReasoner(String queryId, String rulesFile,
+			String entailmentRegimeType, String tBoxFile) {
 		// TODO Auto-generated method stub
 		
 	}

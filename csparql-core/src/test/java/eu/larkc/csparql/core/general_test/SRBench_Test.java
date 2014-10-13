@@ -21,12 +21,11 @@
  *  
  *  This work was partially supported by the European project LarKC (FP7-215535)
  ******************************************************************************/
-package it.polimi.deib.csparql.test;
+package eu.larkc.csparql.core.general_test;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 

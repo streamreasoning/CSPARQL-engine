@@ -25,7 +25,6 @@ package eu.larkc.csparql.core.new_parser;
 
 import eu.larkc.csparql.core.engine.CsparqlEngine;
 import eu.larkc.csparql.core.streams.formats.CSparqlQuery;
-import eu.larkc.csparql.core.streams.formats.TranslationException;
 
 public abstract class Translator {
 

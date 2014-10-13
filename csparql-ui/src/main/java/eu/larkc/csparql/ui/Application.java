@@ -91,7 +91,7 @@ public final class Application {
       final CsparqlQueryResultProxy c2 = null;
 
       try {
-         c1 = engine.registerQuery(queryGetAll);
+         c1 = engine.registerQuery(queryGetAll, false);
       } catch (final ParseException ex) {
          System.out.println("errore di parsing: " + ex.getMessage());
       }

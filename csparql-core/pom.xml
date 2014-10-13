@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>eu.larkc.csparql</groupId>
 		<artifactId>CSPARQL-engine</artifactId>
-		<version>0.9.4</version>
+		<version>0.9.5</version>
 	</parent>
 	<artifactId>csparql-core</artifactId>
 	<packaging>jar</packaging>
@@ -23,15 +23,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>streamreasoning_repository</id>
-			<name>Csparql server repository</name>
-			<url>http://streamreasoning.org/maven/</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
 
 	<dependencies>
 		<dependency>

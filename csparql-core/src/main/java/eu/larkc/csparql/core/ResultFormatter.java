@@ -25,8 +25,6 @@ package eu.larkc.csparql.core;
 
 import java.util.Observer;
 
-import eu.larkc.csparql.common.RDFTable;
-
 public abstract class ResultFormatter implements Observer {
 
 }
