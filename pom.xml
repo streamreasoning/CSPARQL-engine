@@ -14,7 +14,7 @@
 
 	<groupId>eu.larkc.csparql</groupId>
 	<artifactId>CSPARQL-engine</artifactId>
-	<version>0.9.4</version>
+	<version>0.9.5</version>
 	<packaging>pom</packaging>
 	<name>Multi Module CSPARQL Parent Project</name>
 	<description>This is a mult module project called CSparql: handles continuous streaming data</description>
@@ -31,8 +31,8 @@
 	<repositories>
 		<repository>
 			<id>streamreasoning_repository</id>
-			<name>Csparql server repository</name>
-			<url>http://streamreasoning.org/maven/</url>
+			<name>streamreasoning repository</name>
+			<url>http://131.175.59.106:8080/repository/streamreasoning_repository/</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
@@ -57,43 +57,43 @@
 			<dependency>
 				<groupId>eu.larkc.csparql</groupId>
 				<artifactId>csparql-cep-api</artifactId>
-				<version>0.9.4</version>
+				<version>0.9.5</version>
 			</dependency>
 			<dependency>
 				<groupId>eu.larkc.csparql</groupId>
 				<artifactId>csparql-cep-esper</artifactId>
-				<version>0.9.4</version>
+				<version>0.9.5</version>
 			</dependency>
 			<dependency>
 				<groupId>eu.larkc.csparql</groupId>
 				<artifactId>csparql-common</artifactId>
-				<version>0.9.4</version>
+				<version>0.9.5</version>
 			</dependency>
 			<dependency>
 				<groupId>eu.larkc.csparql</groupId>
 				<artifactId>csparql-core</artifactId>
-				<version>0.9.4</version>
+				<version>0.9.5</version>
 			</dependency>
 			<dependency>
 				<groupId>eu.larkc.csparql</groupId>
 				<artifactId>csparql-sparql-api</artifactId>
-				<version>0.9.4</version>
+				<version>0.9.5</version>
 			</dependency>
 
 			<dependency>
 				<groupId>eu.larkc.csparql</groupId>
 				<artifactId>csparql-sparql-jena</artifactId>
-				<version>0.9.4</version>
+				<version>0.9.5</version>
 			</dependency>
 			<dependency>
 				<groupId>eu.larkc.csparql</groupId>
 				<artifactId>csparql-sparql-sesame</artifactId>
-				<version>0.9.4</version>
+				<version>0.9.5</version>
 			</dependency>
 			<dependency>
 				<groupId>eu.larkc.csparql</groupId>
 				<artifactId>csparql-ui</artifactId>
-				<version>0.9.4</version>
+				<version>0.9.5</version>
 			</dependency>
 
 			<dependency>

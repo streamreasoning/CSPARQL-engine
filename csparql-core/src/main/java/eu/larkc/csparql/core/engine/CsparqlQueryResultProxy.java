@@ -30,14 +30,25 @@ import eu.larkc.csparql.common.RDFTable;
 
 public class CsparqlQueryResultProxy extends Observable implements NamedObject {
 
-	private final String id;
+	private String id;
+	private String sparqlQueryId;
+	private String cepQueryId;
+
 
 	public String getId() {
 		return this.id;
 	}
 
-	public CsparqlQueryResultProxy(final String id) {
+	public CsparqlQueryResultProxy(String id) {
 		this.id = id;
+	}
+	
+	public CsparqlQueryResultProxy(String id, String sparqlQueryId,
+			String cepQueryId) {
+		super();
+		this.id = id;
+		this.sparqlQueryId = sparqlQueryId;
+		this.cepQueryId = cepQueryId;
 	}
 
 	public void notify(Object result) {
@@ -49,6 +60,23 @@ public class CsparqlQueryResultProxy extends Observable implements NamedObject {
 
 	}
 
+	public String getSparqlQueryId() {
+		return sparqlQueryId;
+	}
 
+	public void setSparqlQueryId(String sparqlQueryId) {
+		this.sparqlQueryId = sparqlQueryId;
+	}
 
+	public String getCepQueryId() {
+		return cepQueryId;
+	}
+
+	public void setCepQueryId(String cepQueryId) {
+		this.cepQueryId = cepQueryId;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

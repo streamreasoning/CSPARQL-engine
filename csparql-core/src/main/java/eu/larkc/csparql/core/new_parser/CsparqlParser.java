@@ -25,13 +25,14 @@
 package eu.larkc.csparql.core.new_parser ;
 
 import java.io.StringReader;
+
 import eu.larkc.csparql.core.new_parser.utility_files.*;
 
 public class CsparqlParser extends CsparqlParserBase implements CsparqlParserConstants {
 
 public static CsparqlParser createAndParse(String queryString) throws ParseException{
     CsparqlParser parser = new CsparqlParser(new StringReader(TextUtilities.queryTextEnhancer(queryString)));
-    System.out.println(TextUtilities.queryTextEnhancer(queryString));
+//    System.out.println(TextUtilities.queryTextEnhancer(queryString));
     parser.Query();
     return parser;
   }
@@ -1401,7 +1402,7 @@ public static CsparqlParser createAndParse(String queryString) throws ParseExcep
     throw generateParseException();
   }
 
-  static private final class LookaheadSuccess extends java.lang.Error { }
+static private final class LookaheadSuccess extends java.lang.Error { }
   final private LookaheadSuccess jj_ls = new LookaheadSuccess();
   private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
