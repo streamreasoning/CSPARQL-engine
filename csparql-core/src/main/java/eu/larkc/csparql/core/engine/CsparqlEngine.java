@@ -31,47 +31,65 @@ import eu.larkc.csparql.core.streams.formats.CSparqlQuery;
 
 public interface CsparqlEngine {
 
-   /**
-   */
-   CsparqlQueryResultProxy registerQuery(String command) throws ParseException;
+	/**
+	 */
+//	CsparqlQueryResultProxy registerQuery(String command) throws ParseException;
 
-   /**
-   */
-   void initialize();
-   
-   void initialize(int queueDimension);
-   
-   void initialize(boolean performTimestampFunction);
+	CsparqlQueryResultProxy registerQuery(String command, boolean activateInference) throws ParseException;
 
-   void initialize(int queueDimension, boolean performTimestampFunction);
+	CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFile, String entailmentRegimeType) throws ParseException;
 
-   void execUpdateQueryOverDatasource(String queryBody);
+	CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFile,	String entailmentRegimeType, String tBoxFile) throws ParseException;
 
-   void destroy();
+	/**
+	 */
+	void initialize();
 
-   /**
-   */
-   RdfStream registerStream(RdfStream stream);
+	void initialize(int queueDimension);
 
-   /**
-   */
-   Collection<CSparqlQuery> getAllQueries();
+	void initialize(boolean performTimestampFunction);
 
-   /**
-    */
-   void unregisterQuery(String id);
+	void initialize(int queueDimension, boolean performTimestampFunction);
 
-   /**
-    */
-   void unregisterStream(String iri);
+	void execUpdateQueryOverDatasource(String queryBody);
 
-   void startQuery(final String id);
+	void putStaticNamedModel(String iri, String serialization);
 
-   void stopQuery(final String id);
+	void removeStaticNamedModel(String iri);
 
-   RdfStream getStreamByIri(String iri);
-   
-   void activateInference();
-   
-   void setInferenceRulesFilePath(String path);
+	void destroy();
+
+	/**
+	 */
+	RdfStream registerStream(RdfStream stream);
+
+	/**
+	 */
+	Collection<CSparqlQuery> getAllQueries();
+
+	/**
+	 */
+	void unregisterQuery(String id);
+
+	/**
+	 */
+	void unregisterStream(String iri);
+
+	void startQuery(final String id);
+
+	void stopQuery(final String id);
+
+	RdfStream getStreamByIri(String iri);
+
+//	void activateInference();
+//
+//	void activateInference(String rulesFilePath, String entailmentRegimeType);
+//
+//	void activateInference(String rulesFilePath, String entailmentRegimeType, String tBoxFilePath);
+	
+	void arrestInference(String queryId);
+	void restartInference(String queryId);
+
+	boolean getInferenceStatus();
+
 }

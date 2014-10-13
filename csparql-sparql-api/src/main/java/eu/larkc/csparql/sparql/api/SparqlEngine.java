@@ -23,7 +23,10 @@
  ******************************************************************************/
 package eu.larkc.csparql.sparql.api;
 
+import java.text.ParseException;
+
 import eu.larkc.csparql.common.RDFTable;
+import eu.larkc.csparql.common.data_source.Datasource;
 
 public interface SparqlEngine {
 
@@ -31,7 +34,7 @@ public interface SparqlEngine {
 
 	void destroy();
 	
-	void parseSparqlQuery(final SparqlQuery query);
+	void parseSparqlQuery(final SparqlQuery query) throws ParseException;
 
 	RDFTable evaluateQuery(final SparqlQuery query);
 
@@ -43,10 +46,27 @@ public interface SparqlEngine {
 	
 	void execUpdateQueryOverDatasource(String queryBody);
 	
+	void putStaticNamedModel(String iri, String serialization);
+	
+	void removeStaticNamedModel(String iri);
+	
+	Datasource getDataSource();
+		
 	String getEngineType();
 	
-	void activateInference();
+//	void activateInference();
+//		
+//	void activateInference(String rulesFileSerialization, String entailmentRegimeType);
+//	
+//	void activateInference(String rulesFileSerialization, String entailmentRegimeType, String tBoxFileSerialization);
 	
-	void setInferenceRulesFilePath(String path);
+	public void setReasonerMap(Object reasonerMap);
+	public void addReasonerToReasonerMap(String queryId, Object reasoner);
+	void arrestInference(String queryId);
+	void restartInference(String queryId);
+	void updateReasoner(String queryId);
+	void updateReasoner(String queryId, String rulesFile, String entailmentRegimeType);
+	void updateReasoner(String queryId, String rulesFile, String entailmentRegimeType, String tBoxFile);
 
+	boolean getInferenceStatus();
 }

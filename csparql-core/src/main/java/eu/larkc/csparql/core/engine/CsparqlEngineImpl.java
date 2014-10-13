@@ -23,6 +23,8 @@
  ******************************************************************************/
 package eu.larkc.csparql.core.engine;
 
+import java.io.BufferedReader;
+import java.io.StringReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,6 +36,13 @@ import java.util.Observer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
+import com.hp.hpl.jena.reasoner.rulesys.RDFSRuleReasonerFactory;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 import eu.larkc.csparql.cep.api.CepEngine;
 import eu.larkc.csparql.cep.api.RdfQuadruple;
@@ -83,7 +92,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		this.setUpInjecter(0);
 
 	}
-	
+
 	public void initialize(int queueDimension) {
 		this.configuration = Configuration.getCurrentConfiguration();
 		this.queries = new ArrayList<CSparqlQuery>();
@@ -135,28 +144,57 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 			je.setPerformTimestampFunctionVariable(value);
 		}
 	}
-	
+
 	public void setUpInjecter(int queueDimension){
 		if(cepEngine.getCepEngineType().equals("esper")){
 			EsperEngine ee = (EsperEngine) cepEngine;
 			ee.setUpInjecter(queueDimension);
 		}
 	}
-	
+
+//	@Override
+//	public void activateInference() {
+//		sparqlEngine.activateInference();		
+//	}
+//
+//	@Override
+//	public void activateInference(String rulesFile, String entailmentRegimeType) {
+//		sparqlEngine.activateInference(rulesFile, entailmentRegimeType);	
+//	}
+//
+//	@Override
+//	public void activateInference(String rulesFile,	String entailmentRegimeType, String tBoxFile) {
+//		sparqlEngine.activateInference(rulesFile, entailmentRegimeType, tBoxFile);	
+//	}
+
 	@Override
-	public void activateInference() {
-		sparqlEngine.activateInference();		
+	public boolean getInferenceStatus() {
+		return sparqlEngine.getInferenceStatus();
+	}
+
+	@Override
+	public void arrestInference(String queryId) {
+		sparqlEngine.arrestInference(queryId);		
 	}
 	
 	@Override
-	public void setInferenceRulesFilePath(String path){
-		sparqlEngine.setInferenceRulesFilePath(path);
+	public void restartInference(String queryId) {
+		sparqlEngine.restartInference(queryId);		
 	}
-	
+
 	@Override
 	public void execUpdateQueryOverDatasource(String queryBody){
-		JenaEngine je = (JenaEngine) sparqlEngine;
-		je.execUpdateQueryOverDatasource(queryBody);
+		sparqlEngine.execUpdateQueryOverDatasource(queryBody);
+	}
+
+	@Override
+	public void putStaticNamedModel(String iri, String serialization) {
+		sparqlEngine.putStaticNamedModel(iri, serialization);
+	}
+
+	@Override
+	public void removeStaticNamedModel(String iri) {
+		sparqlEngine.removeStaticNamedModel(iri);
 	}
 
 	private CSparqlQuery getQueryByID(final String id) {
@@ -222,12 +260,14 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		this.streams.remove(iri);
 	}
 
-	public CsparqlQueryResultProxy registerQuery(final String command) throws ParseException {
+	@Override
+	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference) throws ParseException {
 
 		final Translator t = Configuration.getCurrentConfiguration().createTranslator(this);
-		
+
 		CSparqlQuery query = null;
 
+		//Split continuous part from static part
 		try {
 			query = t.translate(command);
 		} catch (final TranslationException e) {
@@ -235,31 +275,139 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		sparqlEngine.parseSparqlQuery(query.getSparqlQuery());
-		
-		System.out.println(query.getSparqlQuery().getQueryCommand());
-		System.out.println(query.getCepQuery().getQueryCommand());
 
-		final RdfSnapshot s = this.cepEngine.registerQuery(query.getCepQuery()
-				.getQueryCommand(), query.getId());
+		logger.debug("CEP query: {}", query.getCepQuery().getQueryCommand());
+		logger.debug("SPARQL query: {}", query.getSparqlQuery().getQueryCommand().replace("\n", "").replace("\r", ""));
+
+		//Parse sparql(static) query
+		sparqlEngine.parseSparqlQuery(query.getSparqlQuery());
+
+		final RdfSnapshot s = this.cepEngine.registerQuery(query.getCepQuery().getQueryCommand(), query.getId());
 
 		final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
+		result.setSparqlQueryId(query.getSparqlQuery().getId());
+		result.setCepQueryId(query.getCepQuery().getId());
 
 		this.queries.add(query);
 		this.snapshots.put(query, s);
 		this.results.put(query, result);
-		      
-//		      System.out.println();
-//		      System.out.println("<CSPARQL----------------------------------->");
-//		      System.out.println(System.currentTimeMillis());
-//		      System.out.println(query.getCepQuery().getQueryCommand());
-//		      System.out.println(query.getSparqlQuery().getQueryCommand());
-//		      System.out.println("<CSPARQL----------------------------------->");
-//		      System.out.println();
-		
+
 		s.addObserver(this);
+
+		if(activateInference){
+			logger.debug("RDFS reasoner");
+			Resource config = ModelFactory.createDefaultModel()
+					.createResource()
+					.addProperty(ReasonerVocabulary.PROPsetRDFSLevel, "simple");
+			com.hp.hpl.jena.reasoner.Reasoner reasoner = RDFSRuleReasonerFactory.theInstance().create(config);
+			sparqlEngine.addReasonerToReasonerMap(query.getSparqlQuery().getId(), reasoner);
+		}
+
+		return result;
+	}
+
+	@Override
+	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFile, String entailmentRegimeType) throws ParseException {
+
+		final Translator t = Configuration.getCurrentConfiguration().createTranslator(this);
+
+		CSparqlQuery query = null;
+
+		//Split continuous part from static part
+		try {
+			query = t.translate(command);
+		} catch (final TranslationException e) {
+			throw new ParseException(e.getMessage(), 0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		logger.debug("CEP query: {}", query.getCepQuery().getQueryCommand());
+		logger.debug("SPARQL query: {}", query.getSparqlQuery().getQueryCommand().replace("\n", "").replace("\r", ""));
+
+		//Parse sparql(static) query
+		sparqlEngine.parseSparqlQuery(query.getSparqlQuery());
+
+		final RdfSnapshot s = this.cepEngine.registerQuery(query.getCepQuery().getQueryCommand(), query.getId());
+
+		final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
+		result.setSparqlQueryId(query.getSparqlQuery().getId());
+		result.setCepQueryId(query.getCepQuery().getId());
 		
+		this.queries.add(query);
+		this.snapshots.put(query, s);
+		this.results.put(query, result);
+
+		s.addObserver(this);
+
+		if(activateInference){
+			logger.debug("Generic Rule Engine");
+			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFile)))));
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, entailmentRegimeType);
+			sparqlEngine.addReasonerToReasonerMap(query.getSparqlQuery().getId(), reasoner);
+		}
+
+		return result;
+	
+	}
+
+	@Override
+	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFile, String entailmentRegimeType, String tBoxFile) throws ParseException {
+		final Translator t = Configuration.getCurrentConfiguration().createTranslator(this);
+
+		CSparqlQuery query = null;
+
+		//Split continuous part from static part
+		try {
+			query = t.translate(command);
+		} catch (final TranslationException e) {
+			throw new ParseException(e.getMessage(), 0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		logger.debug("CEP query: {}", query.getCepQuery().getQueryCommand());
+		logger.debug("SPARQL query: {}", query.getSparqlQuery().getQueryCommand().replace("\n", "").replace("\r", ""));
+
+		//Parse sparql(static) query
+		sparqlEngine.parseSparqlQuery(query.getSparqlQuery());
+
+		final RdfSnapshot s = this.cepEngine.registerQuery(query.getCepQuery().getQueryCommand(), query.getId());
+
+		final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
+		result.setSparqlQueryId(query.getSparqlQuery().getId());
+		result.setCepQueryId(query.getCepQuery().getId());
+		
+		this.queries.add(query);
+		this.snapshots.put(query, s);
+		this.results.put(query, result);
+
+		s.addObserver(this);
+
+		if(activateInference){
+			logger.debug("Generic Rule Engine");
+			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFile)))));
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, entailmentRegimeType);
+			try{
+				reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null , "RDF/XML"));
+			} catch (Exception e) {
+				try{
+					reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null, "N-TRIPLE"));
+				} catch (Exception e1) {
+					try{
+						reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null, "TURTLE"));
+					} catch (Exception e2) {
+						try{
+							reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null, "RDF/JSON"));
+						} catch (Exception e3) {
+							logger.error(e.getMessage(), e3);
+						}
+					}
+				}
+			}			
+			sparqlEngine.addReasonerToReasonerMap(query.getSparqlQuery().getId(), reasoner);
+		}
+
 		return result;
 	}
 
@@ -271,44 +419,44 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 
 	// Snapshot received
-//	public void update(final GenericObservable<List<RdfQuadruple>> observed,
-//			final List<RdfQuadruple> quads) {
-//
-//		long starttime = System.nanoTime();
-//
-//		final RdfSnapshot r = (RdfSnapshot) observed;
-//
-//		final CSparqlQuery csparqlquery = this.getQueryByID(r.getId());
-//
-//		final RdfSnapshot augmentedSnapshot = this.reasoner.augment(r);
-//
-//		this.snapshots.put(csparqlquery, augmentedSnapshot);
-//
-//		this.sparqlEngine.clean();
-//
-//		long count = 0;
-//
-//		for (final RdfQuadruple q : quads) {
-//			if (isStreamUsedInQuery(csparqlquery, q.getStreamName()))
-//			{
-//				this.sparqlEngine.addStatement(q.getSubject(), q.getPredicate(), q.getObject(), q.getTimestamp());
-//				count++;
-//			}
-//		}
-//
-//		if (count == 0)
-//			return;
-//
-//		final RDFTable result = this.sparqlEngine.evaluateQuery(csparqlquery.getSparqlQuery());
-//
-//		timestamp(result, csparqlquery);
-//
-//		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
-//
-//		this.notifySubscribers(csparqlquery, result);
-//
-//
-//	}
+	//	public void update(final GenericObservable<List<RdfQuadruple>> observed,
+	//			final List<RdfQuadruple> quads) {
+	//
+	//		long starttime = System.nanoTime();
+	//
+	//		final RdfSnapshot r = (RdfSnapshot) observed;
+	//
+	//		final CSparqlQuery csparqlquery = this.getQueryByID(r.getId());
+	//
+	//		final RdfSnapshot augmentedSnapshot = this.reasoner.augment(r);
+	//
+	//		this.snapshots.put(csparqlquery, augmentedSnapshot);
+	//
+	//		this.sparqlEngine.clean();
+	//
+	//		long count = 0;
+	//
+	//		for (final RdfQuadruple q : quads) {
+	//			if (isStreamUsedInQuery(csparqlquery, q.getStreamName()))
+	//			{
+	//				this.sparqlEngine.addStatement(q.getSubject(), q.getPredicate(), q.getObject(), q.getTimestamp());
+	//				count++;
+	//			}
+	//		}
+	//
+	//		if (count == 0)
+	//			return;
+	//
+	//		final RDFTable result = this.sparqlEngine.evaluateQuery(csparqlquery.getSparqlQuery());
+	//
+	//		timestamp(result, csparqlquery);
+	//
+	//		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
+	//
+	//		this.notifySubscribers(csparqlquery, result);
+	//
+	//
+	//	}
 
 	private void timestamp(RDFTable r, CSparqlQuery q) {
 		if (q.getQueryCommand().toLowerCase().contains("register stream"))
@@ -330,7 +478,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	private void notifySubscribers(final CSparqlQuery csparqlquery, final RDFTable result) {
 
 		final CsparqlQueryResultProxy res = this.results.get(csparqlquery);
-		
+
 		res.notify(result);
 	}
 
@@ -346,7 +494,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable o, Object arg) {
-		long starttime = System.nanoTime();
+		//		long starttime = System.nanoTime();
 
 		final RdfSnapshot r = (RdfSnapshot) o;
 		List<RdfQuadruple> quads = (List<RdfQuadruple>) arg;
@@ -376,10 +524,10 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		timestamp(result, csparqlquery);
 
-		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
+		//		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
 
 		this.notifySubscribers(csparqlquery, result);
-		
+
 	}
 
 }
