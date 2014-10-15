@@ -42,8 +42,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
-
-
 public class RDFStreamFormatter extends RdfStream implements  Observer {
 
 	public RDFStreamFormatter(String iri) {

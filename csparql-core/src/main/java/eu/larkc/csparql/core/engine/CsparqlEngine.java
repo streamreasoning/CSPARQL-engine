@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.util.Collection;
 
 import eu.larkc.csparql.cep.api.RdfStream;
+import eu.larkc.csparql.common.utils.ReasonerChainingType;
 import eu.larkc.csparql.core.streams.formats.CSparqlQuery;
 
 public interface CsparqlEngine {
@@ -37,9 +38,9 @@ public interface CsparqlEngine {
 
 	CsparqlQueryResultProxy registerQuery(String command, boolean activateInference) throws ParseException;
 
-	CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFile, String entailmentRegimeType) throws ParseException;
+	CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFileSerialization, ReasonerChainingType chainingType) throws ParseException;
 
-	CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFile,	String entailmentRegimeType, String tBoxFile) throws ParseException;
+	CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFileSerialization,	ReasonerChainingType chainingType, String tBoxFileSerialization) throws ParseException;
 
 	/**
 	 */

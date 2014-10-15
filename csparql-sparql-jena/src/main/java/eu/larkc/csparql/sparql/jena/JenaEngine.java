@@ -289,7 +289,7 @@ public class JenaEngine implements SparqlEngine {
 			else
 				m = qexec.execConstruct();
 
-			table = new RDFTable("Subject", "Predicate", "Object", "Timestamp");
+			table = new RDFTable("Subject", "Predicate", "Object");
 
 			StringWriter w = new StringWriter();
 			m.write(w,"RDF/JSON");

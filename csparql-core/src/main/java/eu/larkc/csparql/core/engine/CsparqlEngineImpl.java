@@ -50,6 +50,7 @@ import eu.larkc.csparql.cep.api.RdfSnapshot;
 import eu.larkc.csparql.cep.api.RdfStream;
 import eu.larkc.csparql.cep.esper.EsperEngine;
 import eu.larkc.csparql.common.RDFTable;
+import eu.larkc.csparql.common.utils.ReasonerChainingType;
 import eu.larkc.csparql.core.Configuration;
 import eu.larkc.csparql.core.new_parser.utility_files.StreamInfo;
 import eu.larkc.csparql.core.new_parser.utility_files.Translator;
@@ -152,20 +153,20 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		}
 	}
 
-//	@Override
-//	public void activateInference() {
-//		sparqlEngine.activateInference();		
-//	}
-//
-//	@Override
-//	public void activateInference(String rulesFile, String entailmentRegimeType) {
-//		sparqlEngine.activateInference(rulesFile, entailmentRegimeType);	
-//	}
-//
-//	@Override
-//	public void activateInference(String rulesFile,	String entailmentRegimeType, String tBoxFile) {
-//		sparqlEngine.activateInference(rulesFile, entailmentRegimeType, tBoxFile);	
-//	}
+	//	@Override
+	//	public void activateInference() {
+	//		sparqlEngine.activateInference();		
+	//	}
+	//
+	//	@Override
+	//	public void activateInference(String rulesFile, String entailmentRegimeType) {
+	//		sparqlEngine.activateInference(rulesFile, entailmentRegimeType);	
+	//	}
+	//
+	//	@Override
+	//	public void activateInference(String rulesFile,	String entailmentRegimeType, String tBoxFile) {
+	//		sparqlEngine.activateInference(rulesFile, entailmentRegimeType, tBoxFile);	
+	//	}
 
 	@Override
 	public boolean getInferenceStatus() {
@@ -176,7 +177,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	public void arrestInference(String queryId) {
 		sparqlEngine.arrestInference(queryId);		
 	}
-	
+
 	@Override
 	public void restartInference(String queryId) {
 		sparqlEngine.restartInference(queryId);		
@@ -307,7 +308,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	}
 
 	@Override
-	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFile, String entailmentRegimeType) throws ParseException {
+	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFileSerialization, ReasonerChainingType chainingType) throws ParseException {
 
 		final Translator t = Configuration.getCurrentConfiguration().createTranslator(this);
 
@@ -333,7 +334,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
 		result.setSparqlQueryId(query.getSparqlQuery().getId());
 		result.setCepQueryId(query.getCepQuery().getId());
-		
+
 		this.queries.add(query);
 		this.snapshots.put(query, s);
 		this.results.put(query, result);
@@ -342,17 +343,30 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		if(activateInference){
 			logger.debug("Generic Rule Engine");
-			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFile)))));
-			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, entailmentRegimeType);
+			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFileSerialization)))));
+			switch (chainingType) {
+			case BACKWARD:
+				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "backward");
+				break;
+			case FORWARD:
+				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
+				break;
+			case HYBRID:
+				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "hybrid");
+				break;
+			default:
+				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
+				break;
+			}
 			sparqlEngine.addReasonerToReasonerMap(query.getSparqlQuery().getId(), reasoner);
 		}
 
 		return result;
-	
+
 	}
 
 	@Override
-	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFile, String entailmentRegimeType, String tBoxFile) throws ParseException {
+	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFileSerialization, ReasonerChainingType chainingType, String tBoxFileSerialization) throws ParseException {
 		final Translator t = Configuration.getCurrentConfiguration().createTranslator(this);
 
 		CSparqlQuery query = null;
@@ -377,7 +391,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
 		result.setSparqlQueryId(query.getSparqlQuery().getId());
 		result.setCepQueryId(query.getCepQuery().getId());
-		
+
 		this.queries.add(query);
 		this.snapshots.put(query, s);
 		this.results.put(query, result);
@@ -386,19 +400,32 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		if(activateInference){
 			logger.debug("Generic Rule Engine");
-			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFile)))));
-			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, entailmentRegimeType);
+			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFileSerialization)))));
+			switch (chainingType) {
+			case BACKWARD:
+				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "backward");
+				break;
+			case FORWARD:
+				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
+				break;
+			case HYBRID:
+				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "hybrid");
+				break;
+			default:
+				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
+				break;
+			}
 			try{
-				reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null , "RDF/XML"));
+				reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization),null , "RDF/XML"));
 			} catch (Exception e) {
 				try{
-					reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null, "N-TRIPLE"));
+					reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization),null, "N-TRIPLE"));
 				} catch (Exception e1) {
 					try{
-						reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null, "TURTLE"));
+						reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization),null, "TURTLE"));
 					} catch (Exception e2) {
 						try{
-							reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null, "RDF/JSON"));
+							reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization),null, "RDF/JSON"));
 						} catch (Exception e3) {
 							logger.error(e.getMessage(), e3);
 						}
@@ -458,12 +485,12 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	//
 	//	}
 
-	private void timestamp(RDFTable r, CSparqlQuery q) {
-		if (q.getQueryCommand().toLowerCase().contains("register stream"))
-			r.add("timestamp", "0");
-		//TODO: da aggiungere il campo on the fly
-
-	}
+//	private void timestamp(RDFTable r, CSparqlQuery q) {
+//		if (q.getQueryCommand().toLowerCase().contains("register stream"))
+//			r.add("timestamp", "0");
+//		//TODO: da aggiungere il campo on the fly
+//
+//	}
 
 	private boolean isStreamUsedInQuery(CSparqlQuery csparqlquery, String streamName) {
 		for (StreamInfo si : csparqlquery.getStreams()) {
@@ -522,7 +549,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		final RDFTable result = this.sparqlEngine.evaluateQuery(csparqlquery.getSparqlQuery());
 
-		timestamp(result, csparqlquery);
+//		timestamp(result, csparqlquery);
 
 		//		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
 
