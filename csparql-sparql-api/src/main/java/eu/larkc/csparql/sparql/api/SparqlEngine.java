@@ -28,6 +28,7 @@ import java.text.ParseException;
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.data_source.Datasource;
 import eu.larkc.csparql.common.exceptions.ReasonerException;
+import eu.larkc.csparql.common.utils.ReasonerChainingType;
 
 public interface SparqlEngine {
 
@@ -66,8 +67,8 @@ public interface SparqlEngine {
 	void arrestInference(String queryId) throws ReasonerException ;
 	void restartInference(String queryId) throws ReasonerException ;
 	void updateReasoner(String queryId);
-	void updateReasoner(String queryId, String rulesFile, String entailmentRegimeType);
-	void updateReasoner(String queryId, String rulesFile, String entailmentRegimeType, String tBoxFile);
+	void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType);
+	void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType, String tBoxFile);
 
 	boolean getInferenceStatus();
 }

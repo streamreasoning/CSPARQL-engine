@@ -47,6 +47,7 @@ import org.openrdf.sail.memory.model.MemURI;
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
 import eu.larkc.csparql.common.data_source.Datasource;
+import eu.larkc.csparql.common.utils.ReasonerChainingType;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.api.SparqlQuery;
 
@@ -334,14 +335,14 @@ public class SesameEngine implements SparqlEngine {
 
 	@Override
 	public void updateReasoner(String queryId, String rulesFile,
-			String entailmentRegimeType) {
+			ReasonerChainingType chainingType) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void updateReasoner(String queryId, String rulesFile,
-			String entailmentRegimeType, String tBoxFile) {
+			ReasonerChainingType chainingType, String tBoxFile) {
 		// TODO Auto-generated method stub
 		
 	}
