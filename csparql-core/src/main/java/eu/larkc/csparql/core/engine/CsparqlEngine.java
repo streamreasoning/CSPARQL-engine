@@ -90,6 +90,10 @@ public interface CsparqlEngine {
 	
 	void arrestInference(String queryId);
 	void restartInference(String queryId);
+	
+	void updateReasoner(String queryId);
+	void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType);
+	void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType, String tBoxFile);
 
 	boolean getInferenceStatus();
 

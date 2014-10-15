@@ -72,6 +72,7 @@ import eu.larkc.csparql.common.RDFTuple;
 import eu.larkc.csparql.common.data_source.Datasource;
 import eu.larkc.csparql.common.exceptions.ReasonerException;
 import eu.larkc.csparql.common.hardware_resource.Memory;
+import eu.larkc.csparql.common.utils.ReasonerChainingType;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.api.SparqlQuery;
 import eu.larkc.csparql.sparql.jena.common.JenaReasonerWrapper;
@@ -471,16 +472,42 @@ public class JenaEngine implements SparqlEngine {
 	}
 
 	@Override
-	public void updateReasoner(String queryId, String rulesFile, String entailmentRegimeType) {
+	public void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType) {
 		Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFile)))));
-		reasoner.setParameter(ReasonerVocabulary.PROPruleMode, entailmentRegimeType);
+		switch (chainingType) {
+		case BACKWARD:
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "backward");
+			break;
+		case FORWARD:
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
+			break;
+		case HYBRID:
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "hybrid");
+			break;
+		default:
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
+			break;
+		}
 		addReasonerToReasonerMap(queryId, reasoner);
 	}
 
 	@Override
-	public void updateReasoner(String queryId, String rulesFile, String entailmentRegimeType, String tBoxFile) {
+	public void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType, String tBoxFile) {
 		Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFile)))));
-		reasoner.setParameter(ReasonerVocabulary.PROPruleMode, entailmentRegimeType);
+		switch (chainingType) {
+		case BACKWARD:
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "backward");
+			break;
+		case FORWARD:
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
+			break;
+		case HYBRID:
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "hybrid");
+			break;
+		default:
+			reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
+			break;
+		}
 		try{
 			reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFile),null , "RDF/XML"));
 		} catch (Exception e) {

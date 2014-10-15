@@ -193,6 +193,22 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	}
 
 	@Override
+	public void updateReasoner(String queryId) {
+		sparqlEngine.updateReasoner(queryId);
+	}
+
+	@Override
+	public void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType) {
+		sparqlEngine.updateReasoner(queryId, rulesFile, chainingType);		
+	}
+
+	@Override
+	public void updateReasoner(String queryId, String rulesFile,
+			ReasonerChainingType chainingType, String tBoxFile) {
+		sparqlEngine.updateReasoner(queryId, rulesFile, chainingType, tBoxFile);		
+	}
+
+	@Override
 	public void execUpdateQueryOverDatasource(String queryBody){
 		sparqlEngine.execUpdateQueryOverDatasource(queryBody);
 	}
@@ -494,12 +510,12 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	//
 	//	}
 
-//	private void timestamp(RDFTable r, CSparqlQuery q) {
-//		if (q.getQueryCommand().toLowerCase().contains("register stream"))
-//			r.add("timestamp", "0");
-//		//TODO: da aggiungere il campo on the fly
-//
-//	}
+	//	private void timestamp(RDFTable r, CSparqlQuery q) {
+	//		if (q.getQueryCommand().toLowerCase().contains("register stream"))
+	//			r.add("timestamp", "0");
+	//		//TODO: da aggiungere il campo on the fly
+	//
+	//	}
 
 	private boolean isStreamUsedInQuery(CSparqlQuery csparqlquery, String streamName) {
 		for (StreamInfo si : csparqlquery.getStreams()) {
@@ -558,12 +574,11 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		final RDFTable result = this.sparqlEngine.evaluateQuery(csparqlquery.getSparqlQuery());
 
-//		timestamp(result, csparqlquery);
+		//		timestamp(result, csparqlquery);
 
 		//		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
 
 		this.notifySubscribers(csparqlquery, result);
 
 	}
-
 }
