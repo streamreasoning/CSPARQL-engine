@@ -50,6 +50,7 @@ import eu.larkc.csparql.cep.api.RdfSnapshot;
 import eu.larkc.csparql.cep.api.RdfStream;
 import eu.larkc.csparql.cep.esper.EsperEngine;
 import eu.larkc.csparql.common.RDFTable;
+import eu.larkc.csparql.common.exceptions.ReasonerException;
 import eu.larkc.csparql.common.utils.ReasonerChainingType;
 import eu.larkc.csparql.core.Configuration;
 import eu.larkc.csparql.core.new_parser.utility_files.StreamInfo;
@@ -175,12 +176,20 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 	@Override
 	public void arrestInference(String queryId) {
-		sparqlEngine.arrestInference(queryId);		
+		try {
+			sparqlEngine.arrestInference(queryId);
+		} catch (ReasonerException e) {
+			logger.error(e.getMessage(), e);
+		}		
 	}
 
 	@Override
 	public void restartInference(String queryId) {
-		sparqlEngine.restartInference(queryId);		
+		try {
+			sparqlEngine.restartInference(queryId);
+		} catch (ReasonerException e) {
+			logger.error(e.getMessage(), e);
+		}		
 	}
 
 	@Override
