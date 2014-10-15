@@ -70,6 +70,7 @@ import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
 import eu.larkc.csparql.common.data_source.Datasource;
+import eu.larkc.csparql.common.exceptions.ReasonerException;
 import eu.larkc.csparql.common.hardware_resource.Memory;
 import eu.larkc.csparql.sparql.api.SparqlEngine;
 import eu.larkc.csparql.sparql.api.SparqlQuery;
@@ -438,19 +439,27 @@ public class JenaEngine implements SparqlEngine {
 	}
 
 	@Override
-	public void arrestInference(String queryId) {
+	public void arrestInference(String queryId) throws ReasonerException { 
 		JenaReasonerWrapper jrw = this.reasonerMap.get(queryId);
-		jrw.setActive(false);
-		this.reasonerMap.put(queryId, jrw);
+		if(jrw == null)
+			throw new ReasonerException("No reasoner for the specified query. Please add new reasoner using the updateReasoner method");
+		else {
+			jrw.setActive(false);
+			this.reasonerMap.put(queryId, jrw);
+		}
 	}
-	
+
 	@Override
-	public void restartInference(String queryId) {
+	public void restartInference(String queryId) throws ReasonerException {
 		JenaReasonerWrapper jrw = this.reasonerMap.get(queryId);
-		jrw.setActive(true);
-		this.reasonerMap.put(queryId, jrw);
+		if(jrw == null)
+			throw new ReasonerException("No reasoner for the specified query. Please add new reasoner using the updateReasoner method");
+		else {
+			jrw.setActive(true);
+			this.reasonerMap.put(queryId, jrw);
+		}
 	}
-	
+
 	@Override
 	public void updateReasoner(String queryId) {
 		Resource config = ModelFactory.createDefaultModel()
@@ -491,7 +500,7 @@ public class JenaEngine implements SparqlEngine {
 		}
 		addReasonerToReasonerMap(queryId, reasoner);
 	}
-	
+
 	@Override
 	public boolean getInferenceStatus() {
 		return this.activateInference;
