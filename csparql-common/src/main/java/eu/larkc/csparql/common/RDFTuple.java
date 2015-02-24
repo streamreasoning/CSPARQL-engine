@@ -41,8 +41,8 @@ public class RDFTuple {
 
       StringBuffer sb = new StringBuffer();
 
-      for (final String v : this.fields) {
-         sb = sb.append(v);
+      for (final String proj : this.fields) {
+         sb = sb.append(proj);
          sb = sb.append("\t");
       }
 
@@ -50,7 +50,7 @@ public class RDFTuple {
 
    }
    public String get(final int i) {
-        return this.fields.get(i);
+	   return this.fields.get(i);
     }
 
 }
