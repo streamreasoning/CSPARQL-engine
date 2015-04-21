@@ -5,3 +5,7 @@ mvn-install-csparql
 *.jar
 *.war
 *.ear
+
+.settings
+.project
+.classpath
