@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>eu.larkc.csparql</groupId>
 		<artifactId>CSPARQL-engine</artifactId>
-		<version>0.9.5</version>
+		<version>0.9.5.1</version>
 	</parent>
 	<artifactId>csparql-sparql-jena</artifactId>
 	<packaging>jar</packaging>
