@@ -371,7 +371,6 @@ public class JenaEngine implements SparqlEngine {
 		jds.execUpdateQuery(queryBody);
 	}
 
-
 	@Override
 	public void putStaticNamedModel(String iri, String serialization) {
 		Model m = ModelFactory.createDefaultModel();

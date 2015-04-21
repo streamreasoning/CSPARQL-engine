@@ -581,4 +581,10 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		this.notifySubscribers(csparqlquery, result);
 
 	}
+
+	@Override
+	public RDFTable evaluateQueryOverDatasource(String queryBody) {
+		return sparqlEngine.evaluateQuery(
+				Configuration.getCurrentConfiguration().createSparqlQuery(queryBody));
+	}
 }

@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.util.Collection;
 
 import eu.larkc.csparql.cep.api.RdfStream;
+import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.utils.ReasonerChainingType;
 import eu.larkc.csparql.core.streams.formats.CSparqlQuery;
 
@@ -96,5 +97,7 @@ public interface CsparqlEngine {
 	void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType, String tBoxFile);
 
 	boolean getInferenceStatus();
+
+	RDFTable evaluateQueryOverDatasource(String queryBody);
 
 }
