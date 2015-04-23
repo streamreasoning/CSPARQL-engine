@@ -272,6 +272,12 @@ public class SesameEngine implements SparqlEngine {
 	public void execUpdateQueryOverDatasource(String queryBody) {
 		
 	}
+	
+	@Override
+	public RDFTable evaluateGeneralQueryOverDatasource(String queryBody) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public void parseSparqlQuery(SparqlQuery query) {

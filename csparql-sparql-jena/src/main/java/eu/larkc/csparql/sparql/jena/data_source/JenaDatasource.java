@@ -23,6 +23,8 @@
  ******************************************************************************/
 package eu.larkc.csparql.sparql.jena.data_source;
 
+import java.io.ByteArrayOutputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,15 @@ import com.hp.hpl.jena.datatypes.RDFDatatype;
 import com.hp.hpl.jena.datatypes.TypeMapper;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.DatasetFactory;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFactory;
+import com.hp.hpl.jena.query.ResultSetFormatter;
+import com.hp.hpl.jena.query.ResultSetRewindable;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -46,6 +57,7 @@ import com.hp.hpl.jena.update.UpdateAction;
 import com.hp.hpl.jena.update.UpdateFactory;
 import com.hp.hpl.jena.update.UpdateRequest;
 
+import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
 import eu.larkc.csparql.common.data_source.Datasource;
 
@@ -97,9 +109,66 @@ public class JenaDatasource implements Datasource{
 	}
 	
 	@Override
-	public List<RDFTuple> evaluateGeneralQuery(String queryBody) {
-		// TODO Auto-generated method stub
-		return null;
+	public RDFTable evaluateGeneralQuery(String queryBody) {
+		// TODO this code is taken from JenaEngine class, some refactoring is required
+		Query query = QueryFactory.create(queryBody, Syntax.syntaxSPARQL_11);
+		QueryExecution qexec = QueryExecutionFactory.create(query, dataSource);
+		RDFTable table = null;
+		if (query.isAskType()){
+			table = new RDFTable("Answer");
+			final RDFTuple tuple = new RDFTuple();
+			tuple.addFields("" + qexec.execAsk());
+			table.add(tuple);
+		} else if (query.isConstructType() || query.isDescribeType()){
+			Model m = null;
+			if (query.isDescribeType())
+				m = qexec.execDescribe();
+			else
+				m = qexec.execConstruct();
+
+			table = new RDFTable("Subject", "Predicate", "Object");
+
+			StringWriter w = new StringWriter();
+			m.write(w,"RDF/JSON");
+			table.setJsonSerialization(w.toString());
+
+			StmtIterator it = m.listStatements();
+			while (it.hasNext())
+			{
+				final RDFTuple tuple = new RDFTuple();
+				Statement stm = it.next();
+				tuple.addFields(formatSubject(stm.getSubject()),formatPredicate(stm.getPredicate()), format(stm.getObject())); 
+				table.add(tuple);
+			}
+		} else {
+			final ResultSet resultSet = qexec.execSelect();
+
+			table = new RDFTable(resultSet.getResultVars());
+
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+			ResultSetRewindable tempResultSet = ResultSetFactory.makeRewindable(resultSet);
+
+			ResultSetFormatter.outputAsJSON(bos, tempResultSet);
+			table.setJsonSerialization(bos.toString());
+
+			tempResultSet.reset();
+
+			for (; tempResultSet.hasNext();) {
+				final RDFTuple tuple = new RDFTuple();
+				QuerySolution soln = tempResultSet.nextSolution();
+
+				for (String s : table.getNames()) {
+					RDFNode n = soln.get(s);
+					if (n == null)
+						tuple.addFields("");
+					else
+						tuple.addFields(format(n));
+				}
+				table.add(tuple);
+			}
+		}
+		return table;
 	}
 	
 	@Override

@@ -98,6 +98,6 @@ public interface CsparqlEngine {
 
 	boolean getInferenceStatus();
 
-	RDFTable evaluateQueryOverDatasource(String queryBody);
+	RDFTable evaluateGeneralQueryOverDatasource(String queryBody);
 
 }

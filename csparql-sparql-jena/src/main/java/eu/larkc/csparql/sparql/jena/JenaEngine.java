@@ -365,6 +365,11 @@ public class JenaEngine implements SparqlEngine {
 		}
 		return list;
 	}
+	
+	@Override
+	public RDFTable evaluateGeneralQueryOverDatasource(String queryBody){
+		return jds.evaluateGeneralQuery(queryBody);
+	}
 
 	@Override
 	public void execUpdateQueryOverDatasource(String queryBody){

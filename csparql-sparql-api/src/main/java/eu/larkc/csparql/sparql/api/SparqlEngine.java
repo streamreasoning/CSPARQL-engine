@@ -25,8 +25,6 @@ package eu.larkc.csparql.sparql.api;
 
 import java.text.ParseException;
 
-import com.hp.hpl.jena.rdf.model.Model;
-
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.data_source.Datasource;
 import eu.larkc.csparql.common.exceptions.ReasonerException;
@@ -49,6 +47,8 @@ public interface SparqlEngine {
 	void clean();
 	
 	void execUpdateQueryOverDatasource(String queryBody);
+	
+	RDFTable evaluateGeneralQueryOverDatasource(String queryBody);
 	
 	void putStaticNamedModel(String iri, String serialization);
 	

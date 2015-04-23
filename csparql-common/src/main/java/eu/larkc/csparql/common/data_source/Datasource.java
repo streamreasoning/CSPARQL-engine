@@ -25,6 +25,7 @@ package eu.larkc.csparql.common.data_source;
 
 import java.util.List;
 
+import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
 
 public interface Datasource {
@@ -37,7 +38,7 @@ public interface Datasource {
 	
 	void execUpdateQuery(String queryBody);
 	
-	List<RDFTuple> evaluateGeneralQuery(String queryBody);
+	RDFTable evaluateGeneralQuery(String queryBody);
 	
 	boolean containsNamedModel(String namedModelURI);
 
