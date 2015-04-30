@@ -110,6 +110,7 @@ public class SesameEngine implements SparqlEngine {
 					final TupleQueryResult tqr = tq.evaluate();
 
 					final RDFTable table = new RDFTable(tqr.getBindingNames());
+					table.setGraph(false);
 
 					while (tqr.hasNext()) {
 
@@ -138,6 +139,7 @@ public class SesameEngine implements SparqlEngine {
 					final GraphQueryResult gqr = gq.evaluate();
 
 					final RDFTable table = new RDFTable(names);
+					table.setGraph(true);
 
 					while (gqr.hasNext()) {
 

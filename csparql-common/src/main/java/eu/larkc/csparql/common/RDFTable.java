@@ -33,6 +33,7 @@ public class RDFTable implements Collection<RDFTuple> {
 	private final List<String> names = new ArrayList<String>();
 	private final List<RDFTuple> tuples = new ArrayList<RDFTuple>();
 	private String jsonSerialization = new String();
+	private boolean isGraph = true;
 	
 	public String getJsonSerialization() {
 		return jsonSerialization;
@@ -41,10 +42,13 @@ public class RDFTable implements Collection<RDFTuple> {
 	public void setJsonSerialization(String jsonSerialization) {
 		this.jsonSerialization = jsonSerialization;
 	}
+	
+	public void setGraph(boolean isGraph) {
+		this.isGraph = isGraph;
+	}
 
 	public boolean isGraph() {
-		// TODO: fix this fake implementation
-		return true;
+		return isGraph;
 	}
 
 	public RDFTable(final String... fieldsNames) {

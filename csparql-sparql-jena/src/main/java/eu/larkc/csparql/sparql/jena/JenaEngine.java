@@ -252,6 +252,7 @@ public class JenaEngine implements SparqlEngine {
 			final ResultSet resultSet = qexec.execSelect();
 
 			table = new RDFTable(resultSet.getResultVars());
+			table.setGraph(false);
 
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -279,6 +280,7 @@ public class JenaEngine implements SparqlEngine {
 		else if (q.isAskType())
 		{
 			table = new RDFTable("Answer");
+			table.setGraph(false);
 			final RDFTuple tuple = new RDFTuple();
 			tuple.addFields("" + qexec.execAsk());
 			table.add(tuple);
@@ -292,6 +294,7 @@ public class JenaEngine implements SparqlEngine {
 				m = qexec.execConstruct();
 
 			table = new RDFTable("Subject", "Predicate", "Object");
+			table.setGraph(true);
 
 			StringWriter w = new StringWriter();
 			m.write(w,"RDF/JSON");
