@@ -201,8 +201,8 @@ public class EsperEngine implements CepEngine {
 				}
 			}
 		}
-		q = null;
-		System.gc();
+		// Huge performance bottleneck was caused by this call
+//		System.gc();
 		
 	}
 }
