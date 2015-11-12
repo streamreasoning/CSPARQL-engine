@@ -35,21 +35,21 @@ public class Config {
 	public static final Config INSTANCE = new Config();
 
 	private final Logger logger = LoggerFactory.getLogger(Config.class);
-	
+
 	private Configuration config;
-	
-	private Config(){
+
+	private Config() {
 		try {
 			config = new PropertiesConfiguration("application.properties");
 			logger.debug("Configuration file successfully lodead");
 		} catch (ConfigurationException e) {
-			logger.error("Error while lading the configuration file; default config will be used", e); 
+			logger.error("Error while lading the configuration file; default config will be used", e);
 			config = new BaseConfiguration();
 			config.addProperty("esper.externaltime", false);
 		}
 	}
-	
-	public boolean isEsperUsingExternalTimestamp(){
+
+	public boolean isEsperUsingExternalTimestamp() {
 		return config.getBoolean("esper.externaltime");
 	}
 }

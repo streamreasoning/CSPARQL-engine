@@ -57,4 +57,10 @@ public interface CepEngine extends Observer {
    void stopQuery(String id);
    
    String getCepEngineType();
+
+   Long setCurrentTimeAndSentEvent(RdfQuadruple q);
+
+   Long getCurrentTime();
+
+   Long getLastSlideTime();
 }
