@@ -55,8 +55,8 @@ public class EsperEngine implements CepEngine {
 	private ArrayBlockingQueue<RdfQuadruple> queue;
 	private boolean enableInjecter;
 	private Long currentSystemTime;
-	private Long lastSlideTime;
-	private boolean initSysteTime = false;
+	//private Long lastSlideTime;
+	//private boolean initSysteTime = false;
 
 	public Collection<CepQuery> getAllQueries() {
 		return this.queries.values();
@@ -203,7 +203,7 @@ public class EsperEngine implements CepEngine {
 		q.setStreamName(s.getIRI());
 
 		if(!enableInjecter){
-			this.epService.getEPRuntime().sendEvent(q);
+			this.currentSystemTime = this.setCurrentTimeAndSentEvent(q);
 		} else {
 			synchronized(queue){
 				try{
@@ -221,58 +221,76 @@ public class EsperEngine implements CepEngine {
 	public Long getCurrentTime() {
 		return this.currentSystemTime;
 	}
-	@Override
-	public Long getLastSlideTime() {
-		return this.lastSlideTime;
-	}
 	
-	public Long setInitialTime(Long inputTime) {
+//	@Override
+//	public Long getLastSlideTime() {
+//		return this.lastSlideTime;
+//	}
+	
+//	public Long setInitialTime(Long inputTime) {
 		//long slide = CacheAcquaMN.INSTANCE.getSlideLength() * 1000L;
-		long slide = 1000; 
-		if (!this.initSysteTime) {
+//		long slide = 1000; 
+//		if (!this.initSysteTime) {
 			// using the slide that before current input time as initial time
-			Long tempTime = inputTime / slide * slide;
-			this.currentSystemTime = tempTime;
-			this.lastSlideTime = tempTime;
-			CurrentTimeEvent timeEvent = new CurrentTimeEvent(tempTime);
-			this.epService.getEPRuntime().sendEvent(timeEvent);
-			this.initSysteTime = true;
-		}
-		return this.currentSystemTime;
-	}
+//			Long tempTime = inputTime / slide * slide;
+//			this.currentSystemTime = tempTime;
+//			this.lastSlideTime = tempTime;
+//			CurrentTimeEvent timeEvent = new CurrentTimeEvent(inputTime);
+//			this.epService.getEPRuntime().sendEvent(timeEvent);
+//			this.initSysteTime = true;
+//		}
+//		return this.currentSystemTime;
+//	}
+	
+//	public Long setInitialTime(Long inputTime) {
+//		if (!this.initSysteTime) {
+//			CurrentTimeEvent timeEvent = new CurrentTimeEvent(inputTime);
+//			this.epService.getEPRuntime().sendEvent(timeEvent);
+//			this.initSysteTime = true;
+//		}
+//		return this.currentSystemTime;
+//	}
 	
 	@Override
 	public Long setCurrentTimeAndSentEvent(RdfQuadruple q) {
-
 		long inputTime = q.getTimestamp();
-		long slide = 1000; //CacheAcquaMN.INSTANCE.getSlideLength() * 1000L;
-		
-		setInitialTime(inputTime);
-
-		while (inputTime >= this.lastSlideTime + slide) {
-			this.lastSlideTime += slide;
-			this.currentSystemTime = this.lastSlideTime;
-			if (inputTime == this.lastSlideTime) {
-				// in case of empty slide (no data arrived during slide), the slide still needs to be triggered.
-				// logger.debug(" in setTimeStamp equal input {},  new Time {}",inputTime,
-				// this.currentSystemTime);
-				// slide include (lastSlide  currentTime]
-				this.epService.getEPRuntime().sendEvent(q);
-				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
-				return this.currentSystemTime;
-			}
-			// inputTime > this.lastSlideTime + slide
-			CurrentTimeEvent timeEvent = new CurrentTimeEvent(this.currentSystemTime);
-			this.epService.getEPRuntime().sendEvent(timeEvent);
-		}
-		if (inputTime > this.currentSystemTime) {
-			// logger.debug(" in setTimeStamp last if input {}, new Time {}",inputTime,
-			// this.currentSystemTime);
-			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
-			this.currentSystemTime = inputTime;
-		}
+		this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
+		this.currentSystemTime = inputTime;
 		this.epService.getEPRuntime().sendEvent(q);
 		return this.currentSystemTime;
-
 	}
+
+//	@Override
+//	public Long setCurrentTimeAndSentEvent(RdfQuadruple q) {
+//		long inputTime = q.getTimestamp();
+//		//long slide = 1000; //CacheAcquaMN.INSTANCE.getSlideLength() * 1000L;
+//		
+//		setInitialTime(inputTime);
+//
+//		while (inputTime >= this.lastSlideTime + slide) {
+//			this.lastSlideTime += slide;
+//			this.currentSystemTime = this.lastSlideTime;
+//			if (inputTime == this.lastSlideTime) {
+//				// in case of empty slide (no data arrived during slide), the slide still needs to be triggered.
+//				// logger.debug(" in setTimeStamp equal input {},  new Time {}",inputTime,
+//				// this.currentSystemTime);
+//				// slide include (lastSlide  currentTime]
+//				this.epService.getEPRuntime().sendEvent(q);
+//				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
+//				return this.currentSystemTime;
+//			}
+//			// inputTime > this.lastSlideTime + slide
+//			CurrentTimeEvent timeEvent = new CurrentTimeEvent(this.currentSystemTime);
+//			this.epService.getEPRuntime().sendEvent(timeEvent);
+//		}
+//		if (inputTime > this.currentSystemTime) {
+//			// logger.debug(" in setTimeStamp last if input {}, new Time {}",inputTime,
+//			// this.currentSystemTime);
+//			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
+//			this.currentSystemTime = inputTime;
+//		}
+//		this.epService.getEPRuntime().sendEvent(q);
+//		return this.currentSystemTime;
+//
+//	}
 }
