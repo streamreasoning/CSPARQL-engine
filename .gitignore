@@ -10,7 +10,7 @@ mvn-install-csparql
 .classpath
 .project
 .settings
-
+.metadata
 # temporary files
 *.*~
 
