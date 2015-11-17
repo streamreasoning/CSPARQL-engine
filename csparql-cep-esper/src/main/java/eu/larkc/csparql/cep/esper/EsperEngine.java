@@ -4,6 +4,8 @@
  *  Marco Balduini (marco.balduini@polimi.it)
  *  Emanuele Della Valle (emanuele.dellavalle@polimi.it)
  *  Davide Barbieri
+ *  Shen Gao (shengao@ifi.uzh.ch)
+ *  Daniele Dell'Aglio (daniele.dellaglio@polimi.it)
  *   
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -30,6 +32,9 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.espertech.esper.client.Configuration;
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
@@ -43,7 +48,6 @@ import eu.larkc.csparql.cep.api.RdfQuadruple;
 import eu.larkc.csparql.cep.api.RdfSnapshot;
 import eu.larkc.csparql.cep.api.RdfStream;
 import eu.larkc.csparql.common.config.Config;
-import eu.larkc.csparql.common.utils.CsparqlUtils;
 
 public class EsperEngine implements CepEngine {
 
@@ -57,6 +61,10 @@ public class EsperEngine implements CepEngine {
 	private Long currentSystemTime;
 	//private Long lastSlideTime;
 	//private boolean initSysteTime = false;
+	
+	protected final Logger logger = LoggerFactory
+			.getLogger(EsperEngine.class);	
+
 
 	public Collection<CepQuery> getAllQueries() {
 		return this.queries.values();
@@ -69,7 +77,8 @@ public class EsperEngine implements CepEngine {
 	public void initialize() {
 
 		// if using external timestamp
-		configuration.getEngineDefaults().getThreading().setInternalTimerEnabled(!Config.INSTANCE.isEsperUsingExternalTimestamp());
+		this.configuration.getEngineDefaults().getThreading().setInternalTimerEnabled(!Config.INSTANCE.isEsperUsingExternalTimestamp());
+		
 		// Obtain an engine instance
 		this.epService = EPServiceProviderManager.getDefaultProvider(this.configuration);
 		// ...and initialize it
@@ -201,7 +210,7 @@ public class EsperEngine implements CepEngine {
 		RdfStream s = (RdfStream) o;
 		RdfQuadruple q = (RdfQuadruple) arg;
 		q.setStreamName(s.getIRI());
-
+		
 		if(!enableInjecter){
 			this.currentSystemTime = this.setCurrentTimeAndSentEvent(q);
 		} else {
@@ -257,7 +266,15 @@ public class EsperEngine implements CepEngine {
 		this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
 		this.currentSystemTime = inputTime;
 		this.epService.getEPRuntime().sendEvent(q);
+		//this.logger.debug("set time and send event at: "+ currentSystemTime);
+		//System.out.println("in esper \t" + inputTime);
 		return this.currentSystemTime;
+	}
+
+	@Override
+	public Long getLastSlideTime() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //	@Override

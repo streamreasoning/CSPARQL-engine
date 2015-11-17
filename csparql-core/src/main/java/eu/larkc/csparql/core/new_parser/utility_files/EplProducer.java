@@ -70,7 +70,7 @@ public class EplProducer {
 
 		for (StreamInfo si : streams) {
 			final StringBuffer s = new StringBuffer(
-					"select * from ");
+					"select irstream * from ");
 			String iri = si.getIri();
 			// Apply the name conversion
 

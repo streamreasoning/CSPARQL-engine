@@ -24,6 +24,8 @@
 
 package eu.larkc.csparql.common.config;
 
+import java.io.IOException;
+
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -40,7 +42,7 @@ public class Config {
 
 	private Config() {
 		try {
-			config = new PropertiesConfiguration("application.properties");
+			config = new PropertiesConfiguration("../csparql.properties");
 			logger.debug("Configuration file successfully lodead");
 		} catch (ConfigurationException e) {
 			logger.error("Error while lading the configuration file; default config will be used", e);
