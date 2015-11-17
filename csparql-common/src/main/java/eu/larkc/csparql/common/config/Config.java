@@ -24,8 +24,6 @@
 
 package eu.larkc.csparql.common.config;
 
-import java.io.IOException;
-
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
