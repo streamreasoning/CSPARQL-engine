@@ -49,7 +49,7 @@ public final class Application {
 		// "REGISTER QUERY PIPPO AS SELECT ?S ?P ?O FROM STREAM <http://myexample.com/stream> [RANGE 10s STEP 5s] WHERE { ?S ?P ?O }";
 		// final String queryGetAll =
 		// "REGISTER QUERY PIPPO AS SELECT ?S ?P ?O FROM STREAM <http://myexample.org/stream> [RANGE TRIPLES 10] WHERE { ?S ?P ?O }";
-		final String queryGetAll = "REGISTER QUERY PIPPO AS SELECT * FROM STREAM <http://myexample.org/stream> [RANGE 5s STEP 2s]  WHERE { ?S ?P ?O SERVICE <http://localhost:3030/test/sparql> {?S ?P2 ?O2}}";
+		final String queryGetAll = "REGISTER QUERY PIPPO AS SELECT * FROM STREAM <http://myexample.org/stream> [RANGE 1s STEP 1s]  WHERE { ?S ?P ?O SERVICE <http://localhost:3030/test/sparql> {?S ?P2 ?O2}}";
 //		final String queryGetAll = "REGISTER QUERY PIPPO AS SELECT (COUNT(*) AS ?tot) FROM STREAM <http://myexample.org/stream> [RANGE 5s STEP 2s]  WHERE { ?S ?P ?O }";
 
 		final String queryGetEverythingFromBothStream = "REGISTER QUERY PIPPO AS SELECT ?S ?P ?O FROM STREAM <http://www.glue.com/stream> [RANGE TRIPLES 1] FROM STREAM <http://myexample.org/stream> [RANGE TRIPLES 1] WHERE { ?S ?P ?O }";
