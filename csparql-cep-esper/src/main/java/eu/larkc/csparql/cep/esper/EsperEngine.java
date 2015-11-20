@@ -25,9 +25,13 @@
  ******************************************************************************/
 package eu.larkc.csparql.cep.esper;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Observable;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -63,6 +67,7 @@ public class EsperEngine implements CepEngine {
 	// private Long lastSlideTime;
 	private boolean isSysTimeInit = false;
 	private long timeStampTick = 1000L;
+	private List<RdfQuadruple> quadAtBoundary = new ArrayList<RdfQuadruple>();
 
 	protected final Logger logger = LoggerFactory.getLogger(EsperEngine.class);
 
@@ -246,27 +251,41 @@ public class EsperEngine implements CepEngine {
 			this.currentSystemTime = inputTime;
 			// the order of the initial event is very important
 			// it must be sending the event first and then the timestamp
+			// this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(initTime+1));
 			this.epService.getEPRuntime().sendEvent(q);
 			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
 			return this.currentSystemTime;
 		}
 
-		
-		while(inputTime > (this.currentSystemLastTickTime + this.timeStampTick)) {
+		while (inputTime > (this.currentSystemLastTickTime + this.timeStampTick)) {
 			this.currentSystemLastTickTime += this.timeStampTick;
 			this.currentSystemTime = this.currentSystemLastTickTime;
 			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(this.currentSystemTime));
 		}
-		if (inputTime == this.currentSystemLastTickTime + this.timeStampTick) {
-			this.currentSystemTime = inputTime;
+		if (inputTime == (this.currentSystemLastTickTime + this.timeStampTick)) {
+			// this.currentSystemTime = inputTime;
 			this.currentSystemLastTickTime += this.timeStampTick;
+			this.quadAtBoundary.add(q);
+			// this.epService.getEPRuntime().sendEvent(q);
+			// this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
+		} else if (inputTime == this.currentSystemLastTickTime) {
+			this.quadAtBoundary.add(q);
+		} else if (inputTime < (this.currentSystemLastTickTime + this.timeStampTick) && inputTime > this.currentSystemLastTickTime) {
+			if (this.quadAtBoundary.size() > 0) {
+				long boundayTime = this.quadAtBoundary.get(0).getTimestamp();
+				for (RdfQuadruple tempQ : this.quadAtBoundary) {
+					this.epService.getEPRuntime().sendEvent(tempQ);
+				}
+				this.currentSystemTime = boundayTime;
+				this.quadAtBoundary = new ArrayList<RdfQuadruple>();
+				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(boundayTime));
+			}
+			if( this.currentSystemTime != inputTime) {
+				this.currentSystemTime = inputTime;
+				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
+			}
 			this.epService.getEPRuntime().sendEvent(q);
-			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
-		} else if (inputTime < this.currentSystemLastTickTime + this.timeStampTick) {
-			this.currentSystemTime = inputTime;
-			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
-			this.epService.getEPRuntime().sendEvent(q);
-		} 
+		}
 		return this.currentSystemTime;
 	}
 }
