@@ -25,6 +25,7 @@
 package eu.larck.csparql.ui;
 
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
@@ -33,9 +34,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import static org.junit.Assert.*;
 
+import eu.larkc.csparql.cep.api.RdfQuadruple;
+import eu.larkc.csparql.cep.api.RdfStream;
 import eu.larkc.csparql.cep.api.TestGeneratorFromFile;
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
@@ -45,40 +50,87 @@ import eu.larkc.csparql.core.engine.CsparqlEngine;
 import eu.larkc.csparql.core.engine.CsparqlEngineImpl;
 import eu.larkc.csparql.core.engine.CsparqlQueryResultProxy;
 
-public final class ExternalTimestampTests {
+@RunWith(Parameterized.class)
+public class ExternalTimestampTests {
 	private CsparqlEngine engine;
+	private TestGeneratorFromInput streamGenerator;
 	
+	private long[] input;
+	private int width, slide;
+	private int[] expected;
+	
+	public ExternalTimestampTests(long[] input, int width, int slide, int[] expected){
+		this.input = input;
+		this.width = width;
+		this.slide = slide;
+		this.expected = expected;
+	}
+	
+	/*
+	 * PROBLEMS:
+	 * In tumbling case, the first element is lost
+	 * 
+	 * The contemporaneity at the edge of the windows is badly managed
+	 * [6:34:46 PM] Daniele Dell'Aglio: first event at x000 is added
+	 * [6:34:50 PM] Daniele Dell'Aglio: the evaluation is performed
+	 * [6:35:01 PM] Daniele Dell'Aglio: then, the second event at x000 does not trigger anything
+	 * [6:35:18 PM] Daniele Dell'Aglio: and then is discarded at the next (tumbling) window
+	 */
+	
+	 @Parameterized.Parameters
+	    public static Iterable data() {
+	        return Arrays.asList(
+	                new Object[][]{
+                        {
+                        	new long[]{1000, 1340, 2000, 2020, 3000, 3001}, 
+                        	1, 
+                        	1, 
+                        	new int[]{2, 2}
+                        },
+                        {
+                        	new long[]{600, 1000, 1340, 2000, 2020, 3000, 3001}, 
+                        	1, 
+                        	1, 
+                        	new int[]{1, 2, 2}
+                        },
+                        {
+                        	new long[]{600, 1000, 1340, 1340, 2000, 2020, 3000, 3001}, 
+                        	1, 
+                        	1, 
+                        	new int[]{1, 3, 2}
+                        },
+                        {
+                        	new long[]{600, 1000, 1340, 1340, 2000, 2020, 3000, 3001}, 
+                        	1, 
+                        	1, 
+                        	new int[]{1, 3, 2}
+                        },
+	                }
+	        );
+	    }
+
 	@BeforeClass public static void startup(){
 		
 	}
+	
 	
 	@Before public void setup(){
 		assertEquals(true, Config.INSTANCE.isEsperUsingExternalTimestamp());
 		engine = new CsparqlEngineImpl();
 		engine.initialize();
+		streamGenerator = new TestGeneratorFromInput("http://myexample.org/stream", input);
 	}
 	
 	@After public void destroy(){
-		engine.destroy();
+		//FIXME: concurrent exception
+//		engine.destroy();
 	}
 	
-	/*
-	 * Note! C-SPARQL seems bugged, so the result is not the one that should be really expected. First windows are badly computed
-	 * */
 	@Test public void shouldCountSlidingWindowContents(){
-		String queryGetAll = "REGISTER QUERY PIPPO AS SELECT (COUNT(*) AS ?tot) FROM STREAM <http://myexample.org/stream> [RANGE 5s STEP 2s]  WHERE { ?S ?P ?O }";
-		Integer[] expected = {11,25,38,	33,	33,	33,	34,	34,	34,	35,	35,	35,	35,	35,	35,	34};
-		
-		
-		/* The real one should be the following one: 
-		 * Integer[] expected = {17, 29, 34, 35, 35, 36, 36, 36, 36, 36, 37, 37, 36, 37, 37, 36, 36}; <- bug first complete window fixed
-		 * Integer[] expected = {34, 35, 35, 36, 36, 36, 36, 36, 37, 37, 36, 37, 37, 36, 36}; <- incomplete windows bug fix
-		 * Integer[] expected = {11,25,38,	33,	33,	33,	34,	34,	34,	35,	35,	35,	35,	35,	35,	34}; <- window starts with the beginning of the first second. with ticking parameter help 
-		 */
+		String queryGetAll = "REGISTER QUERY PIPPO AS SELECT (COUNT(*) AS ?tot) FROM STREAM <http://myexample.org/stream> [RANGE "+width+"s STEP "+slide+"s]  WHERE { ?S ?P ?O }";
+		System.out.println(queryGetAll);
 
-	
-		TestGeneratorFromFile tg = new TestGeneratorFromFile("http://myexample.org/stream", "src/test/resources/sample_input.txt");
-		engine.registerStream(tg);
+		engine.registerStream(streamGenerator);
 		CsparqlQueryResultProxy c1 = null;
 
 		try {
@@ -86,47 +138,15 @@ public final class ExternalTimestampTests {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		
 		Counter formatter = new Counter();
 		c1.addObserver(formatter);
-		tg.read_trace();
+		streamGenerator.run();
 		
 		List<Integer> actual = formatter.getResults();
 		System.out.println(actual);
 		int i = 0;
-		for(Integer a : actual){
-			assertEquals(expected[i++], a);
-		}
-		
-		System.out.println(formatter.getResults());
-		
-	}
-	
-	@Test public void shouldCountTumblingWindowContents(){
-		String queryGetAll = "REGISTER QUERY PIPPO AS SELECT (COUNT(*) AS ?tot) FROM STREAM <http://myexample.org/stream> [RANGE 4s STEP 4s]  WHERE { ?S ?P ?O }";
-
-		Integer[] expected = {28, 27, 28, 28, 28, 29, 29, 28};
-		/* The real one should be the following one: 
-		 * Integer[] expected = {29, 27, 28, 28, 28, 28, 29, 29, 28}; <- bug first complete window fixed
-		 */
-
-	
-		TestGeneratorFromFile tg = new TestGeneratorFromFile("http://myexample.org/stream", "src/test/resources/sample_input.txt");
-		engine.registerStream(tg);
-		CsparqlQueryResultProxy c1 = null;
-
-		try {
-			c1 = engine.registerQuery(queryGetAll, false);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		Counter formatter = new Counter();
-		c1.addObserver(formatter);
-		tg.read_trace();
-		
-		List<Integer> actual = formatter.getResults();
-		System.out.println(actual);
-		int i = 0;
-		for(Integer a : actual){
+		for(int a : actual){
 			assertEquals(expected[i++], a);
 		}
 		
@@ -135,16 +155,20 @@ public final class ExternalTimestampTests {
 	}
 	
 	//for manual checking purposes
-	public void shouldPrint(){
-		engine = new CsparqlEngineImpl();
+	public static void shouldPrint(){
+		CsparqlEngine engine = new CsparqlEngineImpl();
 		engine.initialize();
 		
+		TestGeneratorFromInput streamGenerator = new TestGeneratorFromInput("http://myexample.org/stream", new long[]{600, 1000, 1000, 1340, 2000, 2020, 3000, 3001});
+		
 		String queryGetAll = 
-				"REGISTER QUERY PIPPO AS SELECT ?O FROM STREAM <http://myexample.org/stream> [RANGE 5s STEP 2s]  WHERE { ?S ?P ?O } ORDER BY ?O";
+				"REGISTER QUERY PIPPO AS SELECT ?S FROM STREAM <http://myexample.org/stream> "
+				+ "[RANGE 1s STEP 1s]  "
+				+ "WHERE { ?S ?P ?O }";
 //				"REGISTER QUERY PIPPO AS SELECT ?O FROM STREAM <http://myexample.org/stream> [RANGE 4s STEP 4s]  WHERE { ?S ?P ?O } ORDER BY ?O";
 	
-		TestGeneratorFromFile tg = new TestGeneratorFromFile("http://myexample.org/stream", "src/test/resources/sample_input.txt");
-		engine.registerStream(tg);
+//		TestGeneratorFromFile tg = new TestGeneratorFromFile("http://myexample.org/stream", "src/test/resources/sample_input.txt");
+		engine.registerStream(streamGenerator);
 		CsparqlQueryResultProxy c1 = null;
 
 		try {
@@ -163,13 +187,11 @@ public final class ExternalTimestampTests {
 				System.out.println();
 			}
 		});
-		tg.read_trace();
+		streamGenerator.run();
 		
 	}
 	
 	public static void main(String[] args) {
-		new ExternalTimestampTests().shouldPrint();
+		shouldPrint();
 	}
-	
-
 }
