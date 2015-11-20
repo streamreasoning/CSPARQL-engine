@@ -24,6 +24,10 @@
 
 package eu.larkc.csparql.common.config;
 
+import java.io.File;
+
+import javax.management.RuntimeErrorException;
+
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -52,4 +56,31 @@ public class Config {
 	public boolean isEsperUsingExternalTimestamp() {
 		return config.getBoolean("esper.externaltime");
 	}
+
+	public String getExternalTraceFile() {
+		if (isEsperUsingExternalTimestamp()) {
+			File f = new File(config.getString("esper.externaltracefile"));
+			if (f.exists() && !f.isDirectory()) {
+				return config.getString("esper.externaltracefile");
+			} else {
+				throw new RuntimeException("using external timestamp, but no trace file found");
+			}
+		} else {
+			throw new RuntimeException("not using external timestamp");
+		}
+	}
+	
+	public long getTimeStampTick() {
+		if (isEsperUsingExternalTimestamp()) {
+			File f = new File(config.getString("esper.externaltracefile"));
+			if (f.exists() && !f.isDirectory()) {
+				return config.getLong("esper.externaltimetick");
+			} else {
+				return 1000L;
+			}
+		} else {
+			throw new RuntimeException("not using external timestamp");
+		}
+	}
+	
 }

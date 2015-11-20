@@ -67,10 +67,13 @@ public final class ExternalTimestampTests {
 	 * */
 	@Test public void shouldCountSlidingWindowContents(){
 		String queryGetAll = "REGISTER QUERY PIPPO AS SELECT (COUNT(*) AS ?tot) FROM STREAM <http://myexample.org/stream> [RANGE 5s STEP 2s]  WHERE { ?S ?P ?O }";
-		Integer[] expected = {17, 29, 33, 35, 35, 36, 36, 36, 36, 36, 37, 37, 36, 37, 37, 36, 36};
+		Integer[] expected = {11,25,38,	33,	33,	33,	34,	34,	34,	35,	35,	35,	35,	35,	35,	34};
+		
+		
 		/* The real one should be the following one: 
 		 * Integer[] expected = {17, 29, 34, 35, 35, 36, 36, 36, 36, 36, 37, 37, 36, 37, 37, 36, 36}; <- bug first complete window fixed
 		 * Integer[] expected = {34, 35, 35, 36, 36, 36, 36, 36, 37, 37, 36, 37, 37, 36, 36}; <- incomplete windows bug fix
+		 * Integer[] expected = {11,25,38,	33,	33,	33,	34,	34,	34,	35,	35,	35,	35,	35,	35,	34}; <- window starts with the beginning of the first second. with ticking parameter help 
 		 */
 
 	

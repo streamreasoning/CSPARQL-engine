@@ -61,6 +61,4 @@ public interface CepEngine extends Observer {
    Long setCurrentTimeAndSentEvent(RdfQuadruple q);
 
    Long getCurrentTime();
-
-   Long getLastSlideTime();
 }

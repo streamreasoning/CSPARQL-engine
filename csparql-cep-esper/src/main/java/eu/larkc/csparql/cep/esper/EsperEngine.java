@@ -59,12 +59,12 @@ public class EsperEngine implements CepEngine {
 	private ArrayBlockingQueue<RdfQuadruple> queue;
 	private boolean enableInjecter;
 	private Long currentSystemTime;
-	//private Long lastSlideTime;
-	//private boolean initSysteTime = false;
-	
-	protected final Logger logger = LoggerFactory
-			.getLogger(EsperEngine.class);	
+	private Long currentSystemLastTickTime;
+	// private Long lastSlideTime;
+	private boolean isSysTimeInit = false;
+	private long timeStampTick = 1000L;
 
+	protected final Logger logger = LoggerFactory.getLogger(EsperEngine.class);
 
 	public Collection<CepQuery> getAllQueries() {
 		return this.queries.values();
@@ -77,8 +77,11 @@ public class EsperEngine implements CepEngine {
 	public void initialize() {
 
 		// if using external timestamp
-		this.configuration.getEngineDefaults().getThreading().setInternalTimerEnabled(!Config.INSTANCE.isEsperUsingExternalTimestamp());
-		
+		if (Config.INSTANCE.isEsperUsingExternalTimestamp()) {
+			this.configuration.getEngineDefaults().getThreading().setInternalTimerEnabled(!Config.INSTANCE.isEsperUsingExternalTimestamp());
+			timeStampTick = Config.INSTANCE.getTimeStampTick();
+		}
+
 		// Obtain an engine instance
 		this.epService = EPServiceProviderManager.getDefaultProvider(this.configuration);
 		// ...and initialize it
@@ -90,9 +93,9 @@ public class EsperEngine implements CepEngine {
 		this.statements = new HashMap<String, EPStatement>();
 	}
 
-	public void setUpInjecter(int queueDimension){
+	public void setUpInjecter(int queueDimension) {
 
-		if(queueDimension == 0){
+		if (queueDimension == 0) {
 			enableInjecter = false;
 		} else {
 
@@ -115,14 +118,11 @@ public class EsperEngine implements CepEngine {
 
 	public void registerStream(final RdfStream p) {
 		String un = p.uniqueName();
-		//this.epService.getEPAdministrator().getConfiguration().addImport(RdfQuadruple.class);
+		// this.epService.getEPAdministrator().getConfiguration().addImport(RdfQuadruple.class);
 		/*
-		 * there are two problems need to be fixed with using external time stamp.
-		 * 1. how to get range and step here
-		 * 2. how to take care the steps of mutli queries. like, there is an empty slide.  
+		 * there are two problems need to be fixed with using external time stamp. 1. how to get range and step here 2. how to take care the steps of mutli queries. like, there is an empty slide.
 		 */
-		this.epService.getEPAdministrator().getConfiguration().addEventType(un,
-				RdfQuadruple.class);
+		this.epService.getEPAdministrator().getConfiguration().addEventType(un, RdfQuadruple.class);
 		p.addObserver(this);
 		this.streams.add(p);
 	}
@@ -133,12 +133,13 @@ public class EsperEngine implements CepEngine {
 
 	public RdfSnapshot registerQuery(final String query, final String id) {
 
-		//		String tempQuery = query;
-		//		tempQuery = tempQuery.replace("time", "time_batch");
-		//		tempQuery = tempQuery.replace(")", " , \"FORCE_UPDATE , START_EAGER\")");
-		//		tempQuery = tempQuery.substring(0, tempQuery.indexOf(")"));
-		//		tempQuery = tempQuery + ") output snapshot every 3 seconds";
-		//		System.out.println(tempQuery);
+		// String tempQuery = query;
+		// tempQuery = tempQuery.replace("time", "time_batch");
+		// tempQuery = tempQuery.replace(")",
+		// " , \"FORCE_UPDATE , START_EAGER\")");
+		// tempQuery = tempQuery.substring(0, tempQuery.indexOf(")"));
+		// tempQuery = tempQuery + ") output snapshot every 3 seconds";
+		// System.out.println(tempQuery);
 		final EsperQuery qry = new EsperQuery(query);
 		this.queries.put(id, qry);
 		final EPStatement stmt = this.epService.getEPAdministrator().createEPL(query);
@@ -153,22 +154,23 @@ public class EsperEngine implements CepEngine {
 		this.epService.destroy();
 	}
 
-//	public void update(final GenericObservable<RdfQuadruple> observed, final RdfQuadruple q) {
-//		RdfStream s = (RdfStream) observed;
-//		q.setStreamName(s.getIRI());
-//
-//		if(!enableInjecter){
-//			this.epService.getEPRuntime().sendEvent(q);
-//		} else {
-//			synchronized(queue){
-//				try{
-//					queue.add(q);
-//				} catch(IllegalStateException e){
-//					System.out.println("Queue Full");
-//				}
-//			}
-//		}
-//	}
+	// public void update(final GenericObservable<RdfQuadruple> observed, final
+	// RdfQuadruple q) {
+	// RdfStream s = (RdfStream) observed;
+	// q.setStreamName(s.getIRI());
+	//
+	// if(!enableInjecter){
+	// this.epService.getEPRuntime().sendEvent(q);
+	// } else {
+	// synchronized(queue){
+	// try{
+	// queue.add(q);
+	// } catch(IllegalStateException e){
+	// System.out.println("Queue Full");
+	// }
+	// }
+	// }
+	// }
 
 	public void startQuery(final String id) {
 		final EPStatement s = this.getStatementById(id);
@@ -206,18 +208,18 @@ public class EsperEngine implements CepEngine {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 		RdfStream s = (RdfStream) o;
 		RdfQuadruple q = (RdfQuadruple) arg;
 		q.setStreamName(s.getIRI());
-		
-		if(!enableInjecter){
+
+		if (!enableInjecter) {
 			this.currentSystemTime = this.setCurrentTimeAndSentEvent(q);
 		} else {
-			synchronized(queue){
-				try{
+			synchronized (queue) {
+				try {
 					queue.add(q);
-				} catch(IllegalStateException e){
+				} catch (IllegalStateException e) {
 					System.out.println("Queue Full");
 				}
 			}
@@ -225,89 +227,46 @@ public class EsperEngine implements CepEngine {
 		q = null;
 		System.gc();
 	}
-	
+
 	@Override
 	public Long getCurrentTime() {
 		return this.currentSystemTime;
 	}
-	
-//	@Override
-//	public Long getLastSlideTime() {
-//		return this.lastSlideTime;
-//	}
-	
-//	public Long setInitialTime(Long inputTime) {
-		//long slide = CacheAcquaMN.INSTANCE.getSlideLength() * 1000L;
-//		long slide = 1000; 
-//		if (!this.initSysteTime) {
-			// using the slide that before current input time as initial time
-//			Long tempTime = inputTime / slide * slide;
-//			this.currentSystemTime = tempTime;
-//			this.lastSlideTime = tempTime;
-//			CurrentTimeEvent timeEvent = new CurrentTimeEvent(inputTime);
-//			this.epService.getEPRuntime().sendEvent(timeEvent);
-//			this.initSysteTime = true;
-//		}
-//		return this.currentSystemTime;
-//	}
-	
-//	public Long setInitialTime(Long inputTime) {
-//		if (!this.initSysteTime) {
-//			CurrentTimeEvent timeEvent = new CurrentTimeEvent(inputTime);
-//			this.epService.getEPRuntime().sendEvent(timeEvent);
-//			this.initSysteTime = true;
-//		}
-//		return this.currentSystemTime;
-//	}
-	
+
 	@Override
 	public Long setCurrentTimeAndSentEvent(RdfQuadruple q) {
 		long inputTime = q.getTimestamp();
-		this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
-		this.currentSystemTime = inputTime;
-		this.epService.getEPRuntime().sendEvent(q);
-		//this.logger.debug("set time and send event at: "+ currentSystemTime);
-		//System.out.println("in esper \t" + inputTime);
+		if (!isSysTimeInit) {
+			// Using the beginning of the current tick as the the window boundary
+			long initTime = inputTime / this.timeStampTick * this.timeStampTick;
+			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(initTime));
+			isSysTimeInit = true;
+			this.currentSystemTime = initTime;
+			this.currentSystemLastTickTime = initTime;
+			this.currentSystemTime = inputTime;
+			// the order of the initial event is very important
+			// it must be sending the event first and then the timestamp
+			this.epService.getEPRuntime().sendEvent(q);
+			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
+			return this.currentSystemTime;
+		}
+
+		
+		while(inputTime > (this.currentSystemLastTickTime + this.timeStampTick)) {
+			this.currentSystemLastTickTime += this.timeStampTick;
+			this.currentSystemTime = this.currentSystemLastTickTime;
+			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(this.currentSystemTime));
+		}
+		if (inputTime == this.currentSystemLastTickTime + this.timeStampTick) {
+			this.currentSystemTime = inputTime;
+			this.currentSystemLastTickTime += this.timeStampTick;
+			this.epService.getEPRuntime().sendEvent(q);
+			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
+		} else if (inputTime < this.currentSystemLastTickTime + this.timeStampTick) {
+			this.currentSystemTime = inputTime;
+			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
+			this.epService.getEPRuntime().sendEvent(q);
+		} 
 		return this.currentSystemTime;
 	}
-
-	@Override
-	public Long getLastSlideTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-//	@Override
-//	public Long setCurrentTimeAndSentEvent(RdfQuadruple q) {
-//		long inputTime = q.getTimestamp();
-//		//long slide = 1000; //CacheAcquaMN.INSTANCE.getSlideLength() * 1000L;
-//		
-//		setInitialTime(inputTime);
-//
-//		while (inputTime >= this.lastSlideTime + slide) {
-//			this.lastSlideTime += slide;
-//			this.currentSystemTime = this.lastSlideTime;
-//			if (inputTime == this.lastSlideTime) {
-//				// in case of empty slide (no data arrived during slide), the slide still needs to be triggered.
-//				// logger.debug(" in setTimeStamp equal input {},  new Time {}",inputTime,
-//				// this.currentSystemTime);
-//				// slide include (lastSlide  currentTime]
-//				this.epService.getEPRuntime().sendEvent(q);
-//				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
-//				return this.currentSystemTime;
-//			}
-//			// inputTime > this.lastSlideTime + slide
-//			CurrentTimeEvent timeEvent = new CurrentTimeEvent(this.currentSystemTime);
-//			this.epService.getEPRuntime().sendEvent(timeEvent);
-//		}
-//		if (inputTime > this.currentSystemTime) {
-//			// logger.debug(" in setTimeStamp last if input {}, new Time {}",inputTime,
-//			// this.currentSystemTime);
-//			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
-//			this.currentSystemTime = inputTime;
-//		}
-//		this.epService.getEPRuntime().sendEvent(q);
-//		return this.currentSystemTime;
-//
-//	}
 }
