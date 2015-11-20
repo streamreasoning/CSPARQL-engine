@@ -256,31 +256,34 @@ public class EsperEngine implements CepEngine {
 			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
 			return this.currentSystemTime;
 		}
-
 		while (inputTime > (this.currentSystemLastTickTime + this.timeStampTick)) {
-			this.currentSystemLastTickTime += this.timeStampTick;
-			this.currentSystemTime = this.currentSystemLastTickTime;
-			this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(this.currentSystemTime));
-		}
-		if (inputTime == (this.currentSystemLastTickTime + this.timeStampTick)) {
-			// this.currentSystemTime = inputTime;
-			this.currentSystemLastTickTime += this.timeStampTick;
-			this.quadAtBoundary.add(q);
-			// this.epService.getEPRuntime().sendEvent(q);
-			// this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
-		} else if (inputTime == this.currentSystemLastTickTime) {
-			this.quadAtBoundary.add(q);
-		} else if (inputTime < (this.currentSystemLastTickTime + this.timeStampTick) && inputTime > this.currentSystemLastTickTime) {
 			if (this.quadAtBoundary.size() > 0) {
 				long boundayTime = this.quadAtBoundary.get(0).getTimestamp();
 				for (RdfQuadruple tempQ : this.quadAtBoundary) {
 					this.epService.getEPRuntime().sendEvent(tempQ);
 				}
-				this.currentSystemTime = boundayTime;
 				this.quadAtBoundary = new ArrayList<RdfQuadruple>();
-				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(boundayTime));
+				this.currentSystemTime = boundayTime;
+				this.currentSystemLastTickTime += this.timeStampTick;
+				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(this.currentSystemTime));
+				this.currentSystemTime += 1;
+				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(this.currentSystemTime));
+
+			} else {
+				this.currentSystemLastTickTime += this.timeStampTick;
+				this.currentSystemTime = this.currentSystemLastTickTime + 1;
+				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(this.currentSystemTime));
 			}
-			if( this.currentSystemTime != inputTime) {
+		}
+		if (inputTime == (this.currentSystemLastTickTime + this.timeStampTick)) {
+			this.quadAtBoundary.add(q);
+		} else if (inputTime < (this.currentSystemLastTickTime + this.timeStampTick)) {
+			if (this.quadAtBoundary.size() > 0) {
+				long boundayTime = this.quadAtBoundary.get(0).getTimestamp();
+				if (inputTime < boundayTime)
+					throw new RuntimeException("unordered stream");
+			}
+			if (this.currentSystemTime != inputTime) {
 				this.currentSystemTime = inputTime;
 				this.epService.getEPRuntime().sendEvent(new CurrentTimeEvent(inputTime));
 			}
