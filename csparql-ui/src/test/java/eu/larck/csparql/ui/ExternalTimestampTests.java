@@ -39,9 +39,6 @@ import org.junit.runners.Parameterized;
 
 import static org.junit.Assert.*;
 
-import eu.larkc.csparql.cep.api.RdfQuadruple;
-import eu.larkc.csparql.cep.api.RdfStream;
-import eu.larkc.csparql.cep.api.TestGeneratorFromFile;
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
 import eu.larkc.csparql.common.config.Config;
@@ -78,7 +75,7 @@ public class ExternalTimestampTests {
 	 */
 	
 	 @Parameterized.Parameters
-	    public static Iterable data() {
+	    public static Iterable<?> data() {
 	        return Arrays.asList(
 	                new Object[][]{
                         {
@@ -104,6 +101,12 @@ public class ExternalTimestampTests {
                         	1, 
                         	1, 
                         	new int[]{1, 3, 2}
+                        },
+                        {
+                        	new long[]{600, 1000, 1340, 1340, 2000, 2000, 2020, 3000, 3001}, 
+                        	1, 
+                        	1, 
+                        	new int[]{1, 4, 2}
                         },
 	                }
 	        );
@@ -144,13 +147,13 @@ public class ExternalTimestampTests {
 		streamGenerator.run();
 		
 		List<Integer> actual = formatter.getResults();
-		System.out.println(actual);
+//		System.out.println(actual);
 		int i = 0;
 		for(int a : actual){
 			assertEquals(expected[i++], a);
 		}
 		
-		System.out.println(formatter.getResults());
+//		System.out.println(formatter.getResults());
 		
 	}
 	
