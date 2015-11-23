@@ -54,7 +54,7 @@ public interface CsparqlEngine {
 
 	void execUpdateQueryOverDatasource(String queryBody);
 
-	void putStaticNamedModel(String iri, String serialization);
+	void putStaticNamedModel(String iri, String modelReference);
 
 	void removeStaticNamedModel(String iri);
 
