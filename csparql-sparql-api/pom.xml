@@ -27,7 +27,7 @@
 	<parent>
 		<groupId>eu.larkc.csparql</groupId>
 		<artifactId>CSPARQL-engine</artifactId>
-		<version>0.9.5.2-SNAPSHOT</version>
+		<version>0.9.7-SNAPSHOT</version>
 	</parent>
 	<artifactId>csparql-sparql-api</artifactId>
 	<packaging>jar</packaging>

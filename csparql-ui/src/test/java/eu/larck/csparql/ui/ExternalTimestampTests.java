@@ -127,7 +127,7 @@ public class ExternalTimestampTests {
 	
 	@BeforeClass public static void initialConfig(){
 		Properties prop = new Properties();
-		prop.put("esper.externaltime", true);
+		prop.put("esper.externaltime.enabled", true);
 		Config.INSTANCE.setConfigParams(prop);
 	}
 

@@ -15,7 +15,7 @@
 
 	<groupId>eu.larkc.csparql</groupId>
 	<artifactId>CSPARQL-engine</artifactId>
-	<version>0.9.5.2-SNAPSHOT</version>
+	<version>0.9.7-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Multi Module CSPARQL Parent Project</name>
 	<description>This is a multi-module project called CSparql: handles continuous streaming data</description>
@@ -54,49 +54,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-<!-- 
-			<dependency>
-				<groupId>eu.larkc.csparql</groupId>
-				<artifactId>csparql-cep-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>eu.larkc.csparql</groupId>
-				<artifactId>csparql-cep-esper</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>eu.larkc.csparql</groupId>
-				<artifactId>csparql-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>eu.larkc.csparql</groupId>
-				<artifactId>csparql-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>eu.larkc.csparql</groupId>
-				<artifactId>csparql-sparql-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>eu.larkc.csparql</groupId>
-				<artifactId>csparql-sparql-jena</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>eu.larkc.csparql</groupId>
-				<artifactId>csparql-sparql-sesame</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>eu.larkc.csparql</groupId>
-				<artifactId>csparql-ui</artifactId>
-				<version>${project.version}</version>
-			</dependency>
- -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

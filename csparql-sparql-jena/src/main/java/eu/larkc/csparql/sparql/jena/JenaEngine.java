@@ -373,28 +373,31 @@ public class JenaEngine implements SparqlEngine {
 
 
 	@Override
-	public void putStaticNamedModel(String iri, String serialization) {
+	public void putStaticNamedModel(String iri, String modelReference) {
 		Model m = ModelFactory.createDefaultModel();
-		StringReader sr = new StringReader(serialization);
-
 		try{
-			m.read(sr, null, "RDF/XML");
+			m.read(iri);
 		} catch(Exception e){
+			StringReader sr = new StringReader(modelReference);
 			try{
-				sr = new StringReader(serialization);
-				m.read(sr, null, "TURTLE");
+				m.read(sr, null, "RDF/XML");
 			} catch(Exception e1){
 				try{
-					sr = new StringReader(serialization);
-					m.read(sr, null, "N-TRIPLE");
+					sr = new StringReader(modelReference);
+					m.read(sr, null, "TURTLE");
 				} catch(Exception e2){
-					sr = new StringReader(serialization);
-					m.read(sr, null, "RDF/JSON");
+					try{
+						sr = new StringReader(modelReference);
+						m.read(sr, null, "N-TRIPLE");
+					} catch(Exception e3){
+						sr = new StringReader(modelReference);
+						m.read(sr, null, "RDF/JSON");
+					}
 				}
 			}
+			sr.close();
 		}
 		jds.putNamedModel(iri, modelToTupleList(m));
-		sr.close();
 	}
 
 	@Override

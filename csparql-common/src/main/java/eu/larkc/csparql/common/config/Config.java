@@ -24,7 +24,6 @@
 
 package eu.larkc.csparql.common.config;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
@@ -81,11 +80,11 @@ public class Config {
 	}
 
 	public boolean isEsperUsingExternalTimestamp() {
-		return config.getBoolean("esper.externaltime");
+		return config.getBoolean("esper.externaltime.enabled");
 	}
 
 	public long getTimeStampTick() {
-		return config.getLong("esper.externaltimetick");
+		return config.getLong("esper.externaltime.tick");
 	}
 	
 	//mainly for test purposes
