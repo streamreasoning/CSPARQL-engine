@@ -1,4 +1,4 @@
-package eu.larck.csparql.ui;
+package eu.larkc.csparql.utils;
 
 import java.util.ArrayList;
 import java.util.List;

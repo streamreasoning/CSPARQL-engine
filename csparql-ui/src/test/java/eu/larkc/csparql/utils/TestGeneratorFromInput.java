@@ -1,4 +1,4 @@
-package eu.larck.csparql.ui;
+package eu.larkc.csparql.utils;
 
 import eu.larkc.csparql.cep.api.RdfQuadruple;
 import eu.larkc.csparql.cep.api.RdfStream;
@@ -10,7 +10,7 @@ public class TestGeneratorFromInput extends RdfStream{
 	private final String pred = "http://example.org/p";
 	private final String obj = "http://example.org/o";
 	
-	TestGeneratorFromInput(String iri, long[] timestamps){
+	public TestGeneratorFromInput(String iri, long[] timestamps){
 		super(iri);
 		this.timestamps = timestamps;
 	}

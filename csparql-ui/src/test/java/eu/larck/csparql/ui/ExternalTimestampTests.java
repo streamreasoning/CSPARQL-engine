@@ -48,6 +48,8 @@ import eu.larkc.csparql.core.ResultFormatter;
 import eu.larkc.csparql.core.engine.CsparqlEngine;
 import eu.larkc.csparql.core.engine.CsparqlEngineImpl;
 import eu.larkc.csparql.core.engine.CsparqlQueryResultProxy;
+import eu.larkc.csparql.utils.Counter;
+import eu.larkc.csparql.utils.TestGeneratorFromInput;
 
 @RunWith(Parameterized.class)
 public class ExternalTimestampTests {
