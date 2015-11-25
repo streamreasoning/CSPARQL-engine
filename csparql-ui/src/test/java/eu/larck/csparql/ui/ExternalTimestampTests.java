@@ -30,9 +30,11 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
+import java.util.Properties;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -119,6 +121,12 @@ public class ExternalTimestampTests {
 //						5, 5, new int[]{29, 33, 36, 35, 36, 35, 37}
 					}
 				});
+	}
+	
+	@BeforeClass public static void initialConfig(){
+		Properties prop = new Properties();
+		prop.put("esper.externaltime", true);
+		Config.INSTANCE.setConfigParams(prop);
 	}
 
 	@Before public void setup(){
