@@ -29,7 +29,8 @@ localrepository.url=local_repo
 
 # the window takes range of (startTime, endTime]
 # whether to use external time stamp
-esper.externaltime.enabled=false
+esper.externaltime.enabled=true
+
 # ethe tick is in millisecond, every tick, esper advance its timestamp
 # default is 1000, every 1 sec
 esper.externaltime.tick=1000

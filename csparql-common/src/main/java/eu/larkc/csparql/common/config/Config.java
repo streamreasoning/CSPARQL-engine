@@ -42,6 +42,7 @@ import org.apache.commons.configuration2.io.ClasspathLocationStrategy;
 import org.apache.commons.configuration2.io.CombinedLocationStrategy;
 import org.apache.commons.configuration2.io.FileLocationStrategy;
 import org.apache.commons.configuration2.io.FileSystemLocationStrategy;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,7 +75,8 @@ public class Config {
 		} catch (ConfigurationException e) {
 			logger.error("Error while lading the configuration file; default config will be used", e);
 			config = new BaseConfiguration();
-			config.addProperty("esper.externaltime", false);
+			config.addProperty("esper.externaltime.enabled", false);
+			config.addProperty("esper.externaltime.tick", 0);
 		}
 	}
 
@@ -82,30 +84,8 @@ public class Config {
 		return config.getBoolean("esper.externaltime");
 	}
 
-	public String getExternalTraceFile() {
-		if (isEsperUsingExternalTimestamp()) {
-			File f = new File(config.getString("esper.externaltracefile"));
-			if (f.exists() && !f.isDirectory()) {
-				return config.getString("esper.externaltracefile");
-			} else {
-				throw new RuntimeException("using external timestamp, but no trace file found");
-			}
-		} else {
-			throw new RuntimeException("not using external timestamp");
-		}
-	}
-	
 	public long getTimeStampTick() {
-		if (isEsperUsingExternalTimestamp()) {
-			File f = new File(config.getString("esper.externaltracefile"));
-			if (f.exists() && !f.isDirectory()) {
-				return config.getLong("esper.externaltimetick");
-			} else {
-				return 1000L;
-			}
-		} else {
-			throw new RuntimeException("not using external timestamp");
-		}
+		return config.getLong("esper.externaltimetick");
 	}
 	
 	//mainly for test purposes
