@@ -31,6 +31,6 @@ localrepository.url=local_repo
 # whether to use external time stamp
 esper.externaltime.enabled=true
 
-# ethe tick is in millisecond, every tick, esper advance its timestamp
+# the unit of the tick is in millisecond. Every tick, esper sents an extra timestamp event to the engine.
 # default is 1000, every 1 sec
 esper.externaltime.tick=1000

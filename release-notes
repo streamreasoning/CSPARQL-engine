@@ -17,4 +17,10 @@ Fixed bugs (from previous release)
 
 Known Issues
 ------------
- * TBD(Shen)
+ * When using the external timestamp, the first timestamp in the stream trace file will be used to initial the window in query. E.g., if the first timestamp is 1447758441634 (in millisecond), then the window will start from 1447758441000. Only the first element will be counted as arrive before timestamp 1447758441000, the rest of the elements in the trace file will arrive at the system according to its timestamp.
+ * When using the external timestamp, we assume the timestamps of each element in the trace file are non-descending. E.g., there could be two events with the same timestamp. 
+ * The implementation logic behind external timestamp: generally, for each event in the trace file, we first feed Esper a CurrentTimeEvent to set the current system time; second, we send the event. However, for those events in the boundary of a window, we need to take extra effort. By default, each window is in the unit of second, therefore, for events exactly arrived at 1XXXXXXXXX000 millisecond, we first send the event and then the CurrentTimeEvent to trigger the window. We have also taken care of several events arrive at the same time of a window boundary. 
+ * When using the external timestamp, dynamically register/unregister new query and new stream during runtime could lead to missing the events arrive at window boundary.
+
+
+

@@ -550,10 +550,10 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		List<RdfQuadruple> quads = (List<RdfQuadruple>) arg;
 
 		logger.debug("current time: {}", this.cepEngine.getCurrentTime());
-		for (final RdfQuadruple q : quads) {
-			//logger.debug(q.getSubject() + "\t" + q.getPredicate() + "\t" + q.getObject() + "\t" + (q.getTimestamp()));
-			logger.debug(q.getTimestamp()+"");
-		}
+//		for (final RdfQuadruple q : quads) {
+//			//logger.debug(q.getSubject() + "\t" + q.getPredicate() + "\t" + q.getObject() + "\t" + (q.getTimestamp()));
+//			logger.debug(q.getTimestamp()+"");
+//		}
 		
 		final CSparqlQuery csparqlquery = this.getQueryByID(r.getId());
 
