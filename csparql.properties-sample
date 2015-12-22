@@ -1,9 +1,12 @@
 #-------------------------------------------------------------------------------
-# Copyright 2014
+# Copyright 2014, DEIB - Politecnico di Milano
 # 
 # Marco Balduini (marco.balduini@polimi.it)
 # Emanuele Della Valle (emanuele.dellavalle@polimi.it)
 # Davide Barbieri
+# Soheila Dehghanzadeh (soheila.dehghanzadeh@insight-centre.org)
+# Shen Gao (shengao@ifi.uzh.ch)
+# Daniele Dell'Aglio (daniele.dellaglio@polimi.it)
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,4 +24,13 @@
 # 
 # This work was partially supported by the European project LarKC (FP7-215535)
 #-------------------------------------------------------------------------------
+
 localrepository.url=local_repo
+
+# the window takes range of (startTime, endTime]
+# whether to use external time stamp
+esper.externaltime.enabled=true
+
+# the unit of the tick is in millisecond. Every tick, esper sents an extra timestamp event to the engine.
+# default is 1000, every 1 sec
+esper.externaltime.tick=1000
