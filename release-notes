@@ -1,0 +1,26 @@
+version 0.9.7
+=================
+
+New features
+------------
+ * Configuration file: it has been introduced a configuration file, namely csparql.properties. The file contains setting to enable/disable features of the C-SPARQL engine. At the moment, it is used for the External time clock feature (see next point). There is a default configuration that is loaded by default. Users interested in using a different configuration, should place the csparql.properties file in the folder where C-SPARQL is executed.
+ * External time clock: the clock of C-SPARQL can now be controlled externally, i.e., it can use the time instants in the streams instead of the internal clock of Esper. The functionality is disabled by default, but it can be enabled through the csparql.properties file (an example file is provided). The feature inherits some open bugs from C-SPARQL (see Known Issues section)
+
+Notes
+-----
+ * POM files: POM files have been restructured. Now the parent POM does not depend anymore on its modules. 
+ * The CSPARQL-ui project has been extended in order to generate a jar with all dependencies. By default, the eu.larkc.csparql.ui.Application class is run
+ * Licensing: updated the licence files
+
+Fixed bugs (from previous release)
+----------------------------------
+
+Known Issues
+------------
+ * When using the external timestamp, the first timestamp in the stream trace file will be used to initial the window in query. E.g., if the first timestamp is 1447758441634 (in millisecond), then the window will start from 1447758441000. Only the first element will be counted as arrive before timestamp 1447758441000, the rest of the elements in the trace file will arrive at the system according to its timestamp.
+ * When using the external timestamp, we assume the timestamps of each element in the trace file are non-descending. E.g., there could be two events with the same timestamp. 
+ * The implementation logic behind external timestamp: generally, for each event in the trace file, we first feed Esper a CurrentTimeEvent to set the current system time; second, we send the event. However, for those events in the boundary of a window, we need to take extra effort. By default, each window is in the unit of second, therefore, for events exactly arrived at 1XXXXXXXXX000 millisecond, we first send the event and then the CurrentTimeEvent to trigger the window. We have also taken care of several events arrive at the same time of a window boundary. 
+ * When using the external timestamp, dynamically register/unregister new query and new stream during runtime could lead to missing the events arrive at window boundary.
+
+
+

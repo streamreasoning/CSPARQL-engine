@@ -5,3 +5,15 @@ mvn-install-csparql
 *.jar
 *.war
 *.ear
+
+# Eclipse related files
+.classpath
+.project
+.settings
+.metadata
+# temporary files
+*.*~
+
+# output related files
+bin
+target
