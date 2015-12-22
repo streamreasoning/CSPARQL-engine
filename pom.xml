@@ -51,7 +51,7 @@
 
 	<groupId>eu.larkc.csparql</groupId>
 	<artifactId>CSPARQL-engine</artifactId>
-	<version>0.9.7-SNAPSHOT</version>
+	<version>0.9.7</version>
 	<packaging>pom</packaging>
 	<name>Multi Module CSPARQL Parent Project</name>
 	<description>This is a multi-module project called CSparql: handles continuous streaming data</description>
