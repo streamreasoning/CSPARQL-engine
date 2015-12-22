@@ -5,3 +5,7 @@ mvn-install-csparql
 *.jar
 *.war
 *.ear
+
+# IntelliJ
+.idea
+*.iml
