@@ -139,8 +139,8 @@
 			<name>Davide Barbieri</name>
 			<email>dbarbieri@elet.polimi.it</email>
 			<url />
-			<organization>Politecnico Di Milano - Dipartimento di Elettronica e Informazione</organization>
-			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<organization>DEIB, Politecnico di Milano</organization>
+			<organizationUrl>http://www.deib.polimi.it</organizationUrl>
 			<roles>
 				<role>developer</role>
 			</roles>
@@ -153,11 +153,10 @@
 			<name>Emanuele Della Valle</name>
 			<email>emanuele.dellavalle@polimi.it</email>
 			<url>http://emanueledellavalle.org/</url>
-			<organization>Politecnico di Milano - Dipartimento di Elettronica e Informazione</organization>
-			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<organization>DEIB, Politecnico di Milano</organization>
+			<organizationUrl>http://www.deib.polimi.it</organizationUrl>
 			<roles>
-				<role>Assistant Professor</role>
-				<role>developer</role>
+				<role>project manager</role>
 			</roles>
 			<timezone />
 			<properties>
@@ -167,8 +166,8 @@
 		<developer>
 			<name>Marco Balduini</name>
 			<email>marco.balduini@polimi.it</email>
-			<organization>Politecnico di Milano - Dipartimento di Elettronica e Informazione</organization>
-			<organizationUrl>http://www.dei.polimi.it</organizationUrl>
+			<organization>DEIB, Politecnico di Milano</organization>
+			<organizationUrl>http://www.deib.polimi.it</organizationUrl>
 			<roles>
 				<role>developer</role>
 			</roles>

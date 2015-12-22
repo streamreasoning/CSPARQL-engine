@@ -10,7 +10,7 @@ Notes
 -----
  * POM files: POM files have been restructured. Now the parent POM does not depend anymore on its modules. 
  * The CSPARQL-ui project has been extended in order to generate a jar with all dependencies. By default, the eu.larkc.csparql.ui.Application class is run
- * Licensing: TBD(dani)
+ * Licensing: updated the licence files
 
 Fixed bugs (from previous release)
 ----------------------------------
