@@ -1,26 +1,37 @@
-/*******************************************************************************
- * Copyright 2014 DEIB -Politecnico di Milano
- *   
- *  Marco Balduini (marco.balduini@polimi.it)
- *  Emanuele Della Valle (emanuele.dellavalle@polimi.it)
- *  Davide Barbieri
- *   
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *   
- *  	http://www.apache.org/licenses/LICENSE-2.0
- *  
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *   
- *  Acknowledgements:
- *  
- *  This work was partially supported by the European project LarKC (FP7-215535)
- ******************************************************************************/
+/**
+ * Copyright 2011-2015 DEIB - Politecnico di Milano
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Acknowledgements:
+ * We would like to thank Davide Barbieri, Emanuele Della Valle,
+ * Marco Balduini, Soheila Dehghanzadeh, Shen Gao, and
+ * Daniele Dell'Aglio for the effort in the development of the software.
+ *
+ * This work is partially supported by
+ * - the European LarKC project (FP7-215535) of DEIB, Politecnico di
+ * Milano
+ * - the ERC grant “Search Computing” awarded to prof. Stefano Ceri
+ * - the European ModaClouds project (FP7-ICT-2011-8-318484) of DEIB,
+ * Politecnico di Milano
+ * - the IBM Faculty Award 2013 grated to prof. Emanuele Della Valle;
+ * - the City Data Fusion for Event Management 2013 project funded
+ * by EIT Digital of DEIB, Politecnico di Milano
+ * - the Dynamic and Distributed Information Systems Group of the
+ * University of Zurich;
+ * - INSIGHT NUIG and Science Foundation Ireland (SFI) under grant
+ * No. SFI/12/RC/2289
+ */
 package eu.larkc.csparql.core.engine;
 
 import java.io.BufferedReader;
@@ -71,8 +82,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	private SparqlEngine sparqlEngine = null;
 	private Reasoner reasoner = null;
 
-	protected final Logger logger = LoggerFactory
-			.getLogger(CsparqlEngineImpl.class);	
+	protected final Logger logger = LoggerFactory.getLogger(CsparqlEngineImpl.class);
 
 	public Collection<CSparqlQuery> getAllQueries() {
 		return this.queries;
@@ -105,7 +115,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		this.cepEngine = this.configuration.createCepEngine();
 		this.reasoner = this.configuration.createReasoner();
 		this.cepEngine.initialize();
-		this.sparqlEngine.initialize();	
+		this.sparqlEngine.initialize();
 		this.setPerformTimestampFunctionVariable(false);
 		this.setUpInjecter(queueDimension);
 	}
@@ -120,7 +130,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		this.cepEngine = this.configuration.createCepEngine();
 		this.reasoner = this.configuration.createReasoner();
 		this.cepEngine.initialize();
-		this.sparqlEngine.initialize();	
+		this.sparqlEngine.initialize();
 		this.setPerformTimestampFunctionVariable(performTimestampFunction);
 		this.setUpInjecter(0);
 	}
@@ -135,39 +145,42 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		this.cepEngine = this.configuration.createCepEngine();
 		this.reasoner = this.configuration.createReasoner();
 		this.cepEngine.initialize();
-		this.sparqlEngine.initialize();	
+		this.sparqlEngine.initialize();
 		this.setPerformTimestampFunctionVariable(performTimestampFunction);
 		this.setUpInjecter(queueDimension);
 	}
 
-	public void setPerformTimestampFunctionVariable(boolean value){
-		if(sparqlEngine.getEngineType().equals("jena")){
+	public void setPerformTimestampFunctionVariable(boolean value) {
+		if (sparqlEngine.getEngineType().equals("jena")) {
 			JenaEngine je = (JenaEngine) sparqlEngine;
 			je.setPerformTimestampFunctionVariable(value);
 		}
 	}
 
-	public void setUpInjecter(int queueDimension){
-		if(cepEngine.getCepEngineType().equals("esper")){
+	public void setUpInjecter(int queueDimension) {
+		if (cepEngine.getCepEngineType().equals("esper")) {
 			EsperEngine ee = (EsperEngine) cepEngine;
 			ee.setUpInjecter(queueDimension);
 		}
 	}
 
-	//	@Override
-	//	public void activateInference() {
-	//		sparqlEngine.activateInference();		
-	//	}
+	// @Override
+	// public void activateInference() {
+	// sparqlEngine.activateInference();
+	// }
 	//
-	//	@Override
-	//	public void activateInference(String rulesFile, String entailmentRegimeType) {
-	//		sparqlEngine.activateInference(rulesFile, entailmentRegimeType);	
-	//	}
+	// @Override
+	// public void activateInference(String rulesFile, String
+	// entailmentRegimeType) {
+	// sparqlEngine.activateInference(rulesFile, entailmentRegimeType);
+	// }
 	//
-	//	@Override
-	//	public void activateInference(String rulesFile,	String entailmentRegimeType, String tBoxFile) {
-	//		sparqlEngine.activateInference(rulesFile, entailmentRegimeType, tBoxFile);	
-	//	}
+	// @Override
+	// public void activateInference(String rulesFile, String
+	// entailmentRegimeType, String tBoxFile) {
+	// sparqlEngine.activateInference(rulesFile, entailmentRegimeType,
+	// tBoxFile);
+	// }
 
 	@Override
 	public boolean getInferenceStatus() {
@@ -180,7 +193,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 			sparqlEngine.arrestInference(queryId);
 		} catch (ReasonerException e) {
 			logger.error(e.getMessage(), e);
-		}		
+		}
 	}
 
 	@Override
@@ -189,7 +202,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 			sparqlEngine.restartInference(queryId);
 		} catch (ReasonerException e) {
 			logger.error(e.getMessage(), e);
-		}		
+		}
 	}
 
 	@Override
@@ -199,17 +212,16 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 	@Override
 	public void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType) {
-		sparqlEngine.updateReasoner(queryId, rulesFile, chainingType);		
+		sparqlEngine.updateReasoner(queryId, rulesFile, chainingType);
 	}
 
 	@Override
-	public void updateReasoner(String queryId, String rulesFile,
-			ReasonerChainingType chainingType, String tBoxFile) {
-		sparqlEngine.updateReasoner(queryId, rulesFile, chainingType, tBoxFile);		
+	public void updateReasoner(String queryId, String rulesFile, ReasonerChainingType chainingType, String tBoxFile) {
+		sparqlEngine.updateReasoner(queryId, rulesFile, chainingType, tBoxFile);
 	}
 
 	@Override
-	public void execUpdateQueryOverDatasource(String queryBody){
+	public void execUpdateQueryOverDatasource(String queryBody) {
 		sparqlEngine.execUpdateQueryOverDatasource(queryBody);
 	}
 
@@ -261,8 +273,6 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 	public void stopQuery(final String id) {
 
-
-
 		this.cepEngine.stopQuery(id);
 	}
 
@@ -298,7 +308,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		CSparqlQuery query = null;
 
-		//Split continuous part from static part
+		// Split continuous part from static part
 		try {
 			query = t.translate(command);
 		} catch (final TranslationException e) {
@@ -310,7 +320,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		logger.debug("CEP query: {}", query.getCepQuery().getQueryCommand());
 		logger.debug("SPARQL query: {}", query.getSparqlQuery().getQueryCommand().replace("\n", "").replace("\r", ""));
 
-		//Parse sparql(static) query
+		// Parse sparql(static) query
 		sparqlEngine.parseSparqlQuery(query.getSparqlQuery());
 
 		final RdfSnapshot s = this.cepEngine.registerQuery(query.getCepQuery().getQueryCommand(), query.getId());
@@ -325,11 +335,9 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		s.addObserver(this);
 
-		if(activateInference){
+		if (activateInference) {
 			logger.debug("RDFS reasoner");
-			Resource config = ModelFactory.createDefaultModel()
-					.createResource()
-					.addProperty(ReasonerVocabulary.PROPsetRDFSLevel, "simple");
+			Resource config = ModelFactory.createDefaultModel().createResource().addProperty(ReasonerVocabulary.PROPsetRDFSLevel, "simple");
 			com.hp.hpl.jena.reasoner.Reasoner reasoner = RDFSRuleReasonerFactory.theInstance().create(config);
 			sparqlEngine.addReasonerToReasonerMap(query.getSparqlQuery().getId(), reasoner);
 		}
@@ -344,7 +352,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		CSparqlQuery query = null;
 
-		//Split continuous part from static part
+		// Split continuous part from static part
 		try {
 			query = t.translate(command);
 		} catch (final TranslationException e) {
@@ -356,7 +364,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		logger.debug("CEP query: {}", query.getCepQuery().getQueryCommand());
 		logger.debug("SPARQL query: {}", query.getSparqlQuery().getQueryCommand().replace("\n", "").replace("\r", ""));
 
-		//Parse sparql(static) query
+		// Parse sparql(static) query
 		sparqlEngine.parseSparqlQuery(query.getSparqlQuery());
 
 		final RdfSnapshot s = this.cepEngine.registerQuery(query.getCepQuery().getQueryCommand(), query.getId());
@@ -371,7 +379,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		s.addObserver(this);
 
-		if(activateInference){
+		if (activateInference) {
 			logger.debug("Generic Rule Engine");
 			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFileSerialization)))));
 			switch (chainingType) {
@@ -396,12 +404,13 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	}
 
 	@Override
-	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFileSerialization, ReasonerChainingType chainingType, String tBoxFileSerialization) throws ParseException {
+	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFileSerialization, ReasonerChainingType chainingType, String tBoxFileSerialization)
+			throws ParseException {
 		final Translator t = Configuration.getCurrentConfiguration().createTranslator(this);
 
 		CSparqlQuery query = null;
 
-		//Split continuous part from static part
+		// Split continuous part from static part
 		try {
 			query = t.translate(command);
 		} catch (final TranslationException e) {
@@ -413,7 +422,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		logger.debug("CEP query: {}", query.getCepQuery().getQueryCommand());
 		logger.debug("SPARQL query: {}", query.getSparqlQuery().getQueryCommand().replace("\n", "").replace("\r", ""));
 
-		//Parse sparql(static) query
+		// Parse sparql(static) query
 		sparqlEngine.parseSparqlQuery(query.getSparqlQuery());
 
 		final RdfSnapshot s = this.cepEngine.registerQuery(query.getCepQuery().getQueryCommand(), query.getId());
@@ -428,7 +437,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		s.addObserver(this);
 
-		if(activateInference){
+		if (activateInference) {
 			logger.debug("Generic Rule Engine");
 			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFileSerialization)))));
 			switch (chainingType) {
@@ -445,23 +454,23 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forward");
 				break;
 			}
-			try{
-				reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization),null , "RDF/XML"));
+			try {
+				reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization), null, "RDF/XML"));
 			} catch (Exception e) {
-				try{
-					reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization),null, "N-TRIPLE"));
+				try {
+					reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization), null, "N-TRIPLE"));
 				} catch (Exception e1) {
-					try{
-						reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization),null, "TURTLE"));
+					try {
+						reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization), null, "TURTLE"));
 					} catch (Exception e2) {
-						try{
-							reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization),null, "RDF/JSON"));
+						try {
+							reasoner = reasoner.bindSchema(ModelFactory.createDefaultModel().read(new StringReader(tBoxFileSerialization), null, "RDF/JSON"));
 						} catch (Exception e3) {
 							logger.error(e.getMessage(), e3);
 						}
 					}
 				}
-			}			
+			}
 			sparqlEngine.addReasonerToReasonerMap(query.getSparqlQuery().getId(), reasoner);
 		}
 
@@ -474,53 +483,55 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		this.cepEngine.destroy();
 	}
 
-
 	// Snapshot received
-	//	public void update(final GenericObservable<List<RdfQuadruple>> observed,
-	//			final List<RdfQuadruple> quads) {
+	// public void update(final GenericObservable<List<RdfQuadruple>> observed,
+	// final List<RdfQuadruple> quads) {
 	//
-	//		long starttime = System.nanoTime();
+	// long starttime = System.nanoTime();
 	//
-	//		final RdfSnapshot r = (RdfSnapshot) observed;
+	// final RdfSnapshot r = (RdfSnapshot) observed;
 	//
-	//		final CSparqlQuery csparqlquery = this.getQueryByID(r.getId());
+	// final CSparqlQuery csparqlquery = this.getQueryByID(r.getId());
 	//
-	//		final RdfSnapshot augmentedSnapshot = this.reasoner.augment(r);
+	// final RdfSnapshot augmentedSnapshot = this.reasoner.augment(r);
 	//
-	//		this.snapshots.put(csparqlquery, augmentedSnapshot);
+	// this.snapshots.put(csparqlquery, augmentedSnapshot);
 	//
-	//		this.sparqlEngine.clean();
+	// this.sparqlEngine.clean();
 	//
-	//		long count = 0;
+	// long count = 0;
 	//
-	//		for (final RdfQuadruple q : quads) {
-	//			if (isStreamUsedInQuery(csparqlquery, q.getStreamName()))
-	//			{
-	//				this.sparqlEngine.addStatement(q.getSubject(), q.getPredicate(), q.getObject(), q.getTimestamp());
-	//				count++;
-	//			}
-	//		}
+	// for (final RdfQuadruple q : quads) {
+	// if (isStreamUsedInQuery(csparqlquery, q.getStreamName()))
+	// {
+	// this.sparqlEngine.addStatement(q.getSubject(), q.getPredicate(),
+	// q.getObject(), q.getTimestamp());
+	// count++;
+	// }
+	// }
 	//
-	//		if (count == 0)
-	//			return;
+	// if (count == 0)
+	// return;
 	//
-	//		final RDFTable result = this.sparqlEngine.evaluateQuery(csparqlquery.getSparqlQuery());
+	// final RDFTable result =
+	// this.sparqlEngine.evaluateQuery(csparqlquery.getSparqlQuery());
 	//
-	//		timestamp(result, csparqlquery);
+	// timestamp(result, csparqlquery);
 	//
-	//		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
+	// logger.info("results obtained in "+ (System.nanoTime()-starttime) +
+	// " nanoseconds");
 	//
-	//		this.notifySubscribers(csparqlquery, result);
+	// this.notifySubscribers(csparqlquery, result);
 	//
 	//
-	//	}
+	// }
 
-	//	private void timestamp(RDFTable r, CSparqlQuery q) {
-	//		if (q.getQueryCommand().toLowerCase().contains("register stream"))
-	//			r.add("timestamp", "0");
-	//		//TODO: da aggiungere il campo on the fly
+	// private void timestamp(RDFTable r, CSparqlQuery q) {
+	// if (q.getQueryCommand().toLowerCase().contains("register stream"))
+	// r.add("timestamp", "0");
+	// //TODO: da aggiungere il campo on the fly
 	//
-	//	}
+	// }
 
 	private boolean isStreamUsedInQuery(CSparqlQuery csparqlquery, String streamName) {
 		for (StreamInfo si : csparqlquery.getStreams()) {
@@ -530,7 +541,6 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		return false;
 	}
-
 
 	private void notifySubscribers(final CSparqlQuery csparqlquery, final RDFTable result) {
 
@@ -551,11 +561,16 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable o, Object arg) {
-		//		long starttime = System.nanoTime();
-
+		
 		final RdfSnapshot r = (RdfSnapshot) o;
 		List<RdfQuadruple> quads = (List<RdfQuadruple>) arg;
 
+		logger.debug("current time: {}", this.cepEngine.getCurrentTime());
+//		for (final RdfQuadruple q : quads) {
+//			//logger.debug(q.getSubject() + "\t" + q.getPredicate() + "\t" + q.getObject() + "\t" + (q.getTimestamp()));
+//			logger.debug(q.getTimestamp()+"");
+//		}
+		
 		final CSparqlQuery csparqlquery = this.getQueryByID(r.getId());
 
 		final RdfSnapshot augmentedSnapshot = this.reasoner.augment(r);
@@ -567,8 +582,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		long count = 0;
 
 		for (final RdfQuadruple q : quads) {
-			if (isStreamUsedInQuery(csparqlquery, q.getStreamName()))
-			{
+			if (isStreamUsedInQuery(csparqlquery, q.getStreamName())) {
 				this.sparqlEngine.addStatement(q.getSubject(), q.getPredicate(), q.getObject(), q.getTimestamp());
 				count++;
 			}
@@ -579,9 +593,10 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		final RDFTable result = this.sparqlEngine.evaluateQuery(csparqlquery.getSparqlQuery());
 
-		//		timestamp(result, csparqlquery);
+		// timestamp(result, csparqlquery);
 
-		//		logger.info("results obtained in "+ (System.nanoTime()-starttime) + " nanoseconds");
+		// logger.info("results obtained in "+ (System.nanoTime()-starttime) +
+		// " nanoseconds");
 
 		this.notifySubscribers(csparqlquery, result);
 

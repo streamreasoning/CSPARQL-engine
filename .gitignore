@@ -9,3 +9,15 @@ mvn-install-csparql
 # IntelliJ
 .idea
 *.iml
+
+# Eclipse related files
+.classpath
+.project
+.settings
+.metadata
+# temporary files
+*.*~
+
+# output related files
+bin
+target
