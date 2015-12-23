@@ -34,8 +34,6 @@
  */
 package eu.larkc.csparql.ui;
 
-import static org.junit.Assert.assertEquals;
-
 import java.text.ParseException;
 import java.util.Properties;
 
