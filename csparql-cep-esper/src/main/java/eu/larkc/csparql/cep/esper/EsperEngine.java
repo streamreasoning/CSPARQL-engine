@@ -239,7 +239,7 @@ public class EsperEngine implements CepEngine {
 			}
 		}
 		q = null;
-		System.gc();
+		// System.gc();
 	}
 
 	@Override

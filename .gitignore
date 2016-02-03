@@ -6,6 +6,10 @@ mvn-install-csparql
 *.war
 *.ear
 
+# IntelliJ
+.idea
+*.iml
+
 # Eclipse related files
 .classpath
 .project
