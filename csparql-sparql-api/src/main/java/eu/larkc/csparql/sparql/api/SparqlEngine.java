@@ -58,7 +58,9 @@ public interface SparqlEngine {
 	void clean();
 	
 	void execUpdateQueryOverDatasource(String queryBody);
-	
+
+	RDFTable evaluateGeneralQueryOverDatasource(String queryBody);
+
 	void putStaticNamedModel(String iri, String serialization);
 	
 	void removeStaticNamedModel(String iri);

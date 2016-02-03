@@ -226,6 +226,11 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 	}
 
 	@Override
+	public RDFTable evaluateGeneralQueryOverDatasource(String queryBody) {
+		return sparqlEngine.evaluateGeneralQueryOverDatasource(queryBody);
+	}
+
+	@Override
 	public void putStaticNamedModel(String iri, String serialization) {
 		sparqlEngine.putStaticNamedModel(iri, serialization);
 	}
