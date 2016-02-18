@@ -48,12 +48,12 @@ import java.util.Observer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
-import com.hp.hpl.jena.reasoner.rulesys.RDFSRuleReasonerFactory;
-import com.hp.hpl.jena.reasoner.rulesys.Rule;
-import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.reasoner.rulesys.GenericRuleReasoner;
+import org.apache.jena.reasoner.rulesys.RDFSRuleReasonerFactory;
+import org.apache.jena.reasoner.rulesys.Rule;
+import org.apache.jena.vocabulary.ReasonerVocabulary;
 
 import eu.larkc.csparql.cep.api.CepEngine;
 import eu.larkc.csparql.cep.api.RdfQuadruple;
@@ -338,7 +338,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		if (activateInference) {
 			logger.debug("RDFS reasoner");
 			Resource config = ModelFactory.createDefaultModel().createResource().addProperty(ReasonerVocabulary.PROPsetRDFSLevel, "simple");
-			com.hp.hpl.jena.reasoner.Reasoner reasoner = RDFSRuleReasonerFactory.theInstance().create(config);
+			org.apache.jena.reasoner.Reasoner reasoner = RDFSRuleReasonerFactory.theInstance().create(config);
 			sparqlEngine.addReasonerToReasonerMap(query.getSparqlQuery().getId(), reasoner);
 		}
 
@@ -381,7 +381,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		if (activateInference) {
 			logger.debug("Generic Rule Engine");
-			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFileSerialization)))));
+			org.apache.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFileSerialization)))));
 			switch (chainingType) {
 			case BACKWARD:
 				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "backward");
@@ -439,7 +439,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 
 		if (activateInference) {
 			logger.debug("Generic Rule Engine");
-			com.hp.hpl.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFileSerialization)))));
+			org.apache.jena.reasoner.Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(Rule.rulesParserFromReader(new BufferedReader(new StringReader(rulesFileSerialization)))));
 			switch (chainingType) {
 			case BACKWARD:
 				reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "backward");
