@@ -267,7 +267,7 @@ TOKEN [IGNORE_CASE] :
 | < ADD: "add " >
 |   <ASK: "ask ">
 |  <CONSTRUCT: "construct ">
-|  <FROM: " from ">
+|  <FROM: "from ">
 |  <WHERE: "where {">
 |  <SINGLELETTERTEXT: ["a"-"z","A"-"Z"] >
 |  <NUMBERS: ["0"-"9"] >
