@@ -34,7 +34,7 @@
  */
 package eu.larkc.csparql.sparql.jena.common;
 
-import com.hp.hpl.jena.reasoner.Reasoner;
+import org.apache.jena.reasoner.Reasoner;
 
 import eu.larkc.csparql.sparql.api.ReasonerWrapper;
 

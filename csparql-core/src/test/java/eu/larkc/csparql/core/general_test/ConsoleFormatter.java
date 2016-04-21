@@ -36,7 +36,7 @@ package eu.larkc.csparql.core.general_test;
 
 import java.util.Observable;
 
-import com.hp.hpl.jena.vocabulary.RDF;
+import org.apache.jena.vocabulary.RDF;
 
 import eu.larkc.csparql.common.RDFTable;
 import eu.larkc.csparql.common.RDFTuple;
