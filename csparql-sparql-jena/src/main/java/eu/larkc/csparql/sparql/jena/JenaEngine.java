@@ -49,6 +49,7 @@ import org.slf4j.LoggerFactory;
 
 import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.TypeMapper;
+import org.apache.jena.query.ARQ;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -121,6 +122,7 @@ public class JenaEngine implements SparqlEngine {
 
 	public JenaEngine() {
 		super();
+		ARQ.init(); // otherwise Context may not be present for FunctionRegistry
 		FunctionRegistry.get().put("http://larkc.eu/csparql/sparql/jena/ext#timestamp", timestamp.class) ;
 		timestamp.timestamps = timestamps;
 	}
