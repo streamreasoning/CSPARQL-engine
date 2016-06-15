@@ -345,6 +345,50 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		return result;
 	}
 
+    @Override
+    public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String tBoxFileSerialization) throws ParseException {
+
+        final Translator t = Configuration.getCurrentConfiguration().createTranslator(this);
+
+        CSparqlQuery query = null;
+
+        // Split continuous part from static part
+        try {
+            query = t.translate(command);
+        } catch (final TranslationException e) {
+            throw new ParseException(e.getMessage(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        logger.debug("CEP query: {}", query.getCepQuery().getQueryCommand());
+        logger.debug("SPARQL query: {}", query.getSparqlQuery().getQueryCommand().replace("\n", "").replace("\r", ""));
+
+        // Parse sparql(static) query
+        sparqlEngine.parseSparqlQuery(query.getSparqlQuery());
+
+        final RdfSnapshot s = this.cepEngine.registerQuery(query.getCepQuery().getQueryCommand(), query.getId());
+
+        final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
+        result.setSparqlQueryId(query.getSparqlQuery().getId());
+        result.setCepQueryId(query.getCepQuery().getId());
+
+        this.queries.add(query);
+        this.snapshots.put(query, s);
+        this.results.put(query, result);
+
+        s.addObserver(this);
+
+        if (activateInference) {
+            logger.debug("RDFS reasoner");
+            Resource config = ModelFactory.createDefaultModel().createResource().addProperty(ReasonerVocabulary.PROPsetRDFSLevel, "simple");
+            com.hp.hpl.jena.reasoner.Reasoner reasoner = RDFSRuleReasonerFactory.theInstance().create(config);
+            sparqlEngine.addReasonerToReasonerMap(query.getSparqlQuery().getId(), reasoner);
+        }
+
+        return result;
+    }
+
 	@Override
 	public CsparqlQueryResultProxy registerQuery(String command, boolean activateInference, String rulesFileSerialization, ReasonerChainingType chainingType) throws ParseException {
 

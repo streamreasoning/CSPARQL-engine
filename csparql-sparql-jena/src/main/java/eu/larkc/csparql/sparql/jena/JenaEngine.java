@@ -305,7 +305,7 @@ public class JenaEngine implements SparqlEngine {
 			table = new RDFTable("Subject", "Predicate", "Object");
 
 			StringWriter w = new StringWriter();
-			m.write(w,"RDF/JSON");
+			m.write(w,"JSON-LD");
 			table.setJsonSerialization(w.toString());
 
 			StmtIterator it = m.listStatements();

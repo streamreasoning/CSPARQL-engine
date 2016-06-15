@@ -34,10 +34,12 @@
  */
 package eu.larkc.csparql.core.engine;
 
+import java.util.Collection;
 import java.util.Observable;
 
 import eu.larkc.csparql.common.NamedObject;
 import eu.larkc.csparql.common.RDFTable;
+import eu.larkc.csparql.common.RDFTuple;
 
 public class CsparqlQueryResultProxy extends Observable implements NamedObject {
 
@@ -67,6 +69,12 @@ public class CsparqlQueryResultProxy extends Observable implements NamedObject {
 		RDFTable quads = (RDFTable) result;
 		
 		setChanged();
+
+//        Collection<RDFTuple> tuples = quads.getTuples();
+//        for (RDFTuple tuple : tuples){
+//            System.out.println(tuple.toString());
+//        }
+
 		this.notifyObservers(quads);
 
 	}
