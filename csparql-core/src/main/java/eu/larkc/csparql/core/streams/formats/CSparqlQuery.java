@@ -50,4 +50,6 @@ public interface CSparqlQuery extends NamedObject {
    SparqlQuery getSparqlQuery();
    
    Collection<StreamInfo> getStreams();
+   
+   String getName();
 }

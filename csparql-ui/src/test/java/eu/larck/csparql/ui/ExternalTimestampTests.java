@@ -187,7 +187,7 @@ public class ExternalTimestampTests {
 				new long[]{600, 1000, 1340, 1340, 2000, 2000, 2020, 3000, 3001});
 
 		String queryGetAll = 
-				"REGISTER QUERY PIPPO AS SELECT ?S FROM STREAM <http://myexample.org/stream> "
+				"REGISTER QUERY PIPPO AS SELECT FROM STREAM <http://myexample.org/stream> "
 						+ "[RANGE 2s STEP 1s]  "
 						+ "WHERE { ?S ?P ?O }";
 		//				"REGISTER QUERY PIPPO AS SELECT ?O FROM STREAM <http://myexample.org/stream> [RANGE 4s STEP 4s]  WHERE { ?S ?P ?O } ORDER BY ?O";

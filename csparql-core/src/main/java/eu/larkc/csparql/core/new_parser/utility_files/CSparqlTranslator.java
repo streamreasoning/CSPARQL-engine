@@ -63,7 +63,7 @@ public final class CSparqlTranslator extends Translator {
 
 		EplProducer ep = new EplProducer(this.getEngine(), parser.getStreams());
 		Set<String> epls = ep.produceEpl();
-		CSparqlQuery csq = new CSparqlQueryImpl(epls.toArray()[0].toString(), parser.getSparqlQuery(), queryCommand, parser.getStreams());
+		CSparqlQuery csq = new CSparqlQueryImpl(epls.toArray()[0].toString(), parser.getSparqlQuery(), queryCommand, parser.getStreams(), parser.getCsparqlQueryName());
 		return csq;	   
 
 		//REGISTER QUERY abc AS PREFIX ex:     <http://ex.org#> SELECT ?vm FROM STREAM <http://ex.org/stream> [RANGE 30s STEP 15s] WHERE { { SELECT ?vm (PERCENTILE(?resp_time, 0.95) AS ?perc) WHERE { ?vm <http://ex.org#response_time> ?resp_time } GROUP BY ?vm HAVING (?perc > 0) } }
