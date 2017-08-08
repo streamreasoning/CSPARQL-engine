@@ -173,7 +173,7 @@ Window Window():{}
 TimeUnit TimeUnit():{Token t; String timeunit = "";}
 {
   	(t = < SPACE > { timeunit = timeunit + t.image ; })*
-	t = <SINGLELETTERTEXT>
+	t = <SINGLELETTERTEXT>(<SINGLELETTERTEXT>)*
 	{timeunit = timeunit + t.image ;
 	if(!timeunit.equals("ms") && !timeunit.equals("s") && !timeunit.equals("m") && !timeunit.equals("h") && !timeunit.equals("d"))
 		throw new ParseException();
