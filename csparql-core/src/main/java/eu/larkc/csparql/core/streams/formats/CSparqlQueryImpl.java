@@ -50,15 +50,16 @@ public class CSparqlQueryImpl implements CSparqlQuery {
    private CepQuery cepQuery = null;
    private SparqlQuery sparqlQuery = null;
    private Collection<StreamInfo> streams;
+   private String name = null;
 
    public CSparqlQueryImpl(final String cepQuery, final String sparqlQuery,
-         final String cSparqlQuery, Collection<StreamInfo> streams) {
+         final String cSparqlQuery, Collection<StreamInfo> streams, String name) {
       this.id = this.generateID();
       this.command = cSparqlQuery;
-      this.sparqlQuery = Configuration.getCurrentConfiguration().createSparqlQuery(
-            sparqlQuery);
+      this.sparqlQuery = Configuration.getCurrentConfiguration().createSparqlQuery(sparqlQuery);
       this.cepQuery = Configuration.getCurrentConfiguration().createCepQuery(cepQuery);
       this.streams = streams;
+      this.name = name;
    }
 
    private String generateID() {
@@ -85,4 +86,8 @@ public class CSparqlQueryImpl implements CSparqlQuery {
    public Collection<StreamInfo> getStreams() {
 		return streams;
 	}
+   
+   public String getName(){
+	   return name;
+   }
 }

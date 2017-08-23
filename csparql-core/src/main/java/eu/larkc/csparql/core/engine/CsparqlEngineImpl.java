@@ -240,7 +240,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		sparqlEngine.removeStaticNamedModel(iri);
 	}
 
-	private CSparqlQuery getQueryByID(final String id) {
+	protected CSparqlQuery getQueryByID(final String id) {
 		for (final CSparqlQuery q : this.queries) {
 			if (q.getId().equalsIgnoreCase(id)) {
 				return q;
@@ -328,6 +328,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
 		result.setSparqlQueryId(query.getSparqlQuery().getId());
 		result.setCepQueryId(query.getCepQuery().getId());
+		result.setName(query.getName());
 
 		this.queries.add(query);
 		this.snapshots.put(query, s);
@@ -372,6 +373,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
         final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
         result.setSparqlQueryId(query.getSparqlQuery().getId());
         result.setCepQueryId(query.getCepQuery().getId());
+        result.setName(query.getName());
 
         this.queries.add(query);
         this.snapshots.put(query, s);
@@ -416,6 +418,8 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
 		result.setSparqlQueryId(query.getSparqlQuery().getId());
 		result.setCepQueryId(query.getCepQuery().getId());
+		result.setName(query.getName());
+
 
 		this.queries.add(query);
 		this.snapshots.put(query, s);
@@ -474,6 +478,7 @@ public class CsparqlEngineImpl implements Observer, CsparqlEngine {
 		final CsparqlQueryResultProxy result = new CsparqlQueryResultProxy(query.getId());
 		result.setSparqlQueryId(query.getSparqlQuery().getId());
 		result.setCepQueryId(query.getCepQuery().getId());
+		result.setName(query.getName());
 
 		this.queries.add(query);
 		this.snapshots.put(query, s);

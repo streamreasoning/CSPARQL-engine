@@ -44,6 +44,7 @@ import eu.larkc.csparql.common.RDFTuple;
 public class CsparqlQueryResultProxy extends Observable implements NamedObject {
 
 	private String id;
+	private String name;
 	private String sparqlQueryId;
 	private String cepQueryId;
 
@@ -97,5 +98,12 @@ public class CsparqlQueryResultProxy extends Observable implements NamedObject {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return name;
 	}
 }
