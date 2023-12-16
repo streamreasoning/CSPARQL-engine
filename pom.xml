@@ -69,7 +69,7 @@
 		<repository>
 			<id>streamreasoning_repository</id>
 			<name>streamreasoning repository</name>
-			<url>http://streamreasoning.org/maven/</url>
+			<url>https://streamreasoning.org/maven/</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
